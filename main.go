@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "run/routers"
+	_ "iReferral/routers"
 	"github.com/astaxie/beego"
 )
 

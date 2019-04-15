@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"run/controllers"
+	"iReferral/controllers"
 	"github.com/astaxie/beego"
 )
 

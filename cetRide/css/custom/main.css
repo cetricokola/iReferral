@@ -1,0 +1,40 @@
+@font-face {
+    font-family: product-sans;
+    src: url('../../font/product-sans.otf');
+}
+
+* {
+    font-family: 'product-sans' !important;
+    font-weight: 100 !important;
+}
+
+#navbar * {
+    letter-spacing: 2px;
+
+}
+
+.navbar-brand {
+    font-size: 30px;
+}
+
+.btn {
+    font-size: 15px;
+    letter-spacing: 2px;
+}
+
+body, html {
+    height: 100%;
+  }
+
+.background { 
+    /* The image used */
+    background-image: url("../../images/image1.jpg");
+  
+    /* Full height */
+    height: 100%; 
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
