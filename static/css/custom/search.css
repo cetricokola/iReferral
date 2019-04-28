@@ -1,0 +1,30 @@
+.form {
+  /* This bit sets up the horizontal layout */
+  display: flex;
+  flex-direction: row;
+}
+
+.form input {
+  color: #4285f4;
+  width: 100%;
+  padding-left: 10px;
+
+}
+
+.form button {
+  cursor: pointer;
+  border: solid rgb(196, 194, 194) 1px;
+  color: white;
+  margin: 0px;
+  background-color: whitesmoke;
+  border-left-style: none;
+}
+
+.form button:hover {
+  color: green;
+
+}
+
+.div {
+  width: 350px;
+}
