@@ -25,11 +25,13 @@ func (this *AccountController) Patients_login() {
 		//Extract the form data
 		hudumaNo := this.GetString("hudumaNo")
 		submittedPassword := this.GetString("pss")
+		
 		//Read user account from database
 		o := orm.NewOrm()
 		o.Using("default")
 		patient := models.Patient_account{HudumaNo: hudumaNo}
 		err := o.Read(&patient, "hudumaNo")
+		
 
 		if err == orm.ErrNoRows || err == orm.ErrMissPK {
 			fmt.Println("incorrect huduma number or password")
@@ -46,6 +48,7 @@ func (this *AccountController) Patients_login() {
 		//******** Compare submitted password with the saved hash
 		err = bcrypt.CompareHashAndPassword([]byte(patient.Password), []byte(submittedPassword))
 		if err != nil {
+			fmt.Println(err)
 			fmt.Println("Incorrect password")
 			flash.Error("You've entered incorrect password")
 			flash.Store(&this.Controller)
@@ -65,8 +68,8 @@ func (this *AccountController) Staff_login() {
 	if this.Ctx.Input.Method() == "POST" {
 		//Extract the form data
 		empId := this.GetString("empId")
-		submittedPassword := this.GetString("pss")
-
+		submittedPassword := this.GetString("pass")
+fmt.Println(submittedPassword)
 		//Read user account from database
 		o := orm.NewOrm()
 		o.Using("default")
@@ -88,6 +91,7 @@ func (this *AccountController) Staff_login() {
 		//******** Compare submitted password with the saved hash
 		err = bcrypt.CompareHashAndPassword([]byte(staff.Password), []byte(submittedPassword))
 		if err != nil {
+			fmt.Println(err)
 			fmt.Println("Incorrect password")
 			flash.Error("You've entered incorrect password")
 			flash.Store(&this.Controller)
@@ -216,6 +220,7 @@ func (this *AccountController) Staff_reg() {
 
 		_, err := o.Insert(&staff)
 		if err != nil {
+			fmt.Println(err)
 			flash.Error(phone + " already registered")
 			flash.Store(&this.Controller)
 			return

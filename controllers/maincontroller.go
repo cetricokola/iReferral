@@ -16,12 +16,16 @@ func (this *MainController) Prepare() {
 		"/static/css/mdb/style.min.css",
 		"/static/css/custom/main.css",
 		"/static/css/custom/search.css",
+		"/static/css/custom/jquery.datepick.css",
 	}
 	this.Data["HeadScripts"] = []string{
 		"/static/js/mdb-js/jquery-3.3.1.min.js",
 		"/static/js/mdb-js/mdb.min.js",
 		"/static/js/mdb-js/bootstrap.min.js",
 		"/static/js/mdb-js/popper.min.js",
+		"/static/js/custom/jquery.plugin.min.js",
+		"/static/js/custom/jquery.datepick.js",
+		"/static/js/custom/date.js",
 	}
 }
 
@@ -88,6 +92,16 @@ func (this *MainController) admin_signUp(view string) {
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName ="registration/"+ view + ".html"
+}
+
+func (this *MainController) AdminHome(){
+	this.Data["Title"] = "iReferral-myAdmin portal"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName ="auth/myadmin.html"
+
 }
 /*
 func (this *BaseController) hospital_reg(view string) {
