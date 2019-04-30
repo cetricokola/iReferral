@@ -106,19 +106,20 @@ fmt.Println(submittedPassword)
 
 //*ADMIN PORTAL LOG IN*//
 func (this *AccountController) Admin_login() {
-	this.admin_logIn("a_login")
+	this.admin_logIn("a-login")
 	if this.Ctx.Input.Method() == "POST" {
 		//Extract the form data
-		iD := this.GetString("id")
+		iD := this.GetString("nationalId")
 		submittedPassword := this.GetString("password")
 
 		//Read user account from database
 		o := orm.NewOrm()
 		o.Using("default")
 		admin := models.Admin_account{Id: iD}
-		err := o.Read(&admin, "empId")
+		err := o.Read(&admin, "Id")
 
 		if err == orm.ErrNoRows || err == orm.ErrMissPK {
+			fmt.Print(err)
 			fmt.Println("incorrect national id or password")
 			flash.Error("You've entered incorrect national id or password")
 			flash.Store(&this.Controller)
