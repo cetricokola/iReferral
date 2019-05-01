@@ -42,6 +42,70 @@ html {
     background-size: cover;
 }
 
+.hosregbg {
+    /* The image used */
+    background-image: url("../../img/ch.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.hosregbg1 {
+    /* The image used */
+    background-image: url("../../img/ch1.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pr {
+    /* The image used */
+    background-image: url("../../img/med.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pl {
+    /* The image used */
+    background-image: url("../../img/med1.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sl {
+    /* The image used */
+    background-image: url("../../img/doctor.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .text1 {
     color: #ffffff;
 }
