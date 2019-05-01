@@ -103,14 +103,13 @@ func (this *MainController) AdminHome(){
 	this.TplName ="auth/myadmin.html"
 
 }
-/*
-func (this *BaseController) hospital_reg(view string) {
+func (this *MainController) Hospital_reg(view string) {
 	this.Data["Title"] = "Create facility"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName ="registration/"+ view + ".html"
+	this.TplName ="hosreg.html"
 }
 
-*/
+
 

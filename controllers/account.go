@@ -141,7 +141,7 @@ func (this *AccountController) Admin_login() {
 		}
 
 		fmt.Println(admin.Id, ":successful log in ")
-		this.Redirect("/", 302)
+		this.Redirect("../hosreg", 302)
 
 	}
 
@@ -264,6 +264,6 @@ func (this *AccountController) Admin_reg() {
 			return
 		}
 
-		this.Redirect("/", 302)
+		this.Redirect("hosreg", 302)
 	}
 }
