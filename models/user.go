@@ -37,7 +37,22 @@ type Hospital_account struct {
 	District string
 }
 
+type Employee struct {
+	FirstName  string
+	LastName   string
+	Position   string
+	NationalId string `orm:"pk"`
+}
+
+type Services struct{
+	Code string `orm:"pk"`
+	Name string
+	Cost string
+	Slot string
+	Department string
+}
 /********/
 func init() {
-	orm.RegisterModel(new(Patient_account), new(Employee_account), new(Admin_account), new(Hospital_account))
+	orm.RegisterModel(new(Patient_account), new(Employee_account),
+	 new(Admin_account), new(Hospital_account), new(Services), new(Employee))
 }

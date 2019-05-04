@@ -15,7 +15,11 @@ func init() {
 	beego.Router("registration/s-signup", &controllers.AccountController{}, "get,post:Staff_reg")
 	beego.Router("registration/a-signup", &controllers.AccountController{}, "get,post:Admin_reg")
 	beego.Router("auth/myadmin", &controllers.MainController{}, "get,post:AdminHome")
-	beego.Router("hosreg", &controllers.HosregController{})
-	
+	beego.Router("hosreg", &controllers.HosregController{}, "post:Create")
+	beego.Router("hosreg", &controllers.HosregController{}, "get:Search")
+	beego.Router("facility_mgn", &controllers.FacilityController{}, "post:Createemp")
+	beego.Router("facility_mgn", &controllers.FacilityController{}, "get:RemoveEmp")
+	beego.Router("hosearch", &controllers.FaController{}, "post:Createservice")
+	beego.Router("hosearch", &controllers.FaController{}, "get:Removeservice")
 
 }

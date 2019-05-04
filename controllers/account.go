@@ -98,7 +98,7 @@ fmt.Println(submittedPassword)
 			return
 		}
 		fmt.Println(staff.EmpId, ":successful log in ")
-		this.Redirect("/", 302)
+		this.Redirect("/hosreg", 302)
 
 	}
 

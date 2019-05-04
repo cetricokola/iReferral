@@ -62,14 +62,6 @@ func (this *MainController) admin_logIn(view string) {
 	this.TplName = "auth/"+ view + ".html"
 }
 
-// func (this *BaseController) reset_password(view string) {
-// 	this.Data["Title"] = "Reset your cetride. password"
-// 	this.Layout = "layout.tpl"
-// 	this.LayoutSections = make(map[string]string)
-// 	this.LayoutSections["Footer"] = "footer.html"
-// 	this.TplName = "profile/"+ view + ".html"
-// }
-
 func (this *MainController) patient_signUp(view string) {
 	this.Data["Title"] = "Sign up to iReferral"
 	this.Layout = "layout.tpl"
@@ -105,6 +97,13 @@ func (this *MainController) AdminHome(){
 }
 func (this *MainController) hospital_reg(view string) {
 	this.Data["Title"] = "Create facility"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
+}
+func (this *MainController) facility_mgn(view string) {
+	this.Data["Title"] = "Manage facility"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"

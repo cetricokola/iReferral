@@ -1,0 +1,271 @@
+<div>
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <h1 class="navbar-brand">iReferral.</h1>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About us</a>
+                </li>
+
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="#">Contact us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#ser">Manage services</a>
+                </li>
+                <li class="nav-item mr-4">
+                    <a class="nav-link" href="#emp">Manage staff</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-capitalize text-white  py-2 px-4" href="/hosreg">Create
+                        Facility</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="py-1">
+            <h1 class="text-center text-primary mt-3">Welcome to {{.name}} Hospital Dashboard</h1>
+        </div>
+
+        <div>
+            <!--Carousel Wrapper-->
+            <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+                <!--Indicators-->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                </ol>
+                <!--/.Indicators-->
+                <!--Slides-->
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="view">
+                            <img class="d-block w-100" src="static/img/doc.jpg" alt="First slide"
+                                style="width:100%;height:500px;">
+                            <div class="mask rgba-black-light"></div>
+                        </div>
+                        <div class="carousel-caption">
+                            <h3 class="h3-responsive mb-4">Create and remove your employees</h3>
+                            <a href="#emp" class="btn btn-primary text-capitalize">My Employees</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <!--Mask color-->
+                        <div class="view">
+                            <img class="d-block w-100" src="static/img/hos4.jpg" alt="Second slide"
+                                style="width:100%;height:500px;">
+                            <div class="mask rgba-black-strong"></div>
+                        </div>
+                        <div class="carousel-caption">
+                            <h3 class="h3-responsive mb-4">Create and remove services in your hospital</h3>
+                            <a href="#ser" class="btn btn-primary text-capitalize">My Services</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <!--Mask color-->
+                        <div class="view">
+                            <img class="d-block w-100" src="static/img/referrals.jpg" alt="Third slide"
+                                style="width:100%;height:500px;">
+                            <div class="mask rgba-black-slight"></div>
+                        </div>
+                        <div class="carousel-caption">
+                            <h3 class="h3-responsive">View the current referrals at your facility</h3>
+                            <a href="#" class="btn btn-primary text-capitalize">Referral requests</a>
+                        </div>
+                    </div>
+                </div>
+                <!--/.Slides-->
+                <!--Controls-->
+                <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <!--/.Controls-->
+            </div>
+            <!--/.Carousel Wrapper-->
+        </div>
+        <div class="my-5 text-primary " id="emp">
+            <h2>Manage the employees.</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img src="static/img/emp.jpg" alt="add employee image">
+            </div>
+            <div class="mb-3 px-4 col-md-4 border-left border-primary">
+                <h3 class="text-center m-3">Register your employees.</h3>
+                <form action="/facility_mgn" method="POST" class="mb-3">
+                    <div class="row">
+                        <div class="col mt-2">
+                            <label class="text-primary" for="f">Firstname</label>
+                            <input type="text" name="first" id="f" class="form-control">
+                        </div>
+                        <div class="col mt-2">
+                            <label class="text-primary" for="l">Lastname</label>
+                            <input type="text" name="last" id="l" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-2">
+                            <label class="text-primary" for="pos">Position</label>
+                            <select name="position" class="form-control">
+                                <option value="Doctor">Doctor</option>
+                                <option value="Nurse">Nurse</option>
+                            </select>
+                        </div>
+                        <div class="col mt-2">
+                            <label class="text-primary" for="id">National Id</label>
+                            <input type="text" name="nId" class="form-control">
+                        </div>
+                    </div>
+                    <button class="btn btn-success py-2 px-4 mt-4 text-capitalize ml-auto" type="submit">Add
+                        Employee</button>
+                </form>
+            </div>
+            <div class="col">
+                <h3 class="mt-5">Do you want to remove employee?</h3>
+                <div class="accordion mt-3" id="accordion2">
+                    <div id="head3">
+                        <button class="btn px-5 btn-success text-capitalize px-3 py-2" type="button"
+                            data-toggle="collapse" data-target="#collapseTwo" title="Click me to find patient"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Delete Employee
+                        </button>
+                    </div>
+                    <div id="collapseTwo" class="collapse hide" aria-labelledby="head3" data-parent="#accordion2">
+                        <div class="card col-md-6 p-3">
+                            <p class="text-primary">Search employee by Id number:</p>
+                            <form action="/facility_mgn" method="GET">
+                                <div class="md-form mt-0 md-outline">
+                                    <input type="text" id="hdm" name="id" class="form-control">
+                                    <label for="hdm">Emp Id No</label>
+                                </div>
+                                <button type="submit"
+                                    class="btn btn-block btn-success text-capitalize py-2 ">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="my-5 text-primary">
+            <h2 id="ser">Manage the services.</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img class="my-5" src="static/img/med.jpg" alt="add employee image">
+            </div>
+            <div class="mb-3 col-md-4 px-4 border-left border-primary ">
+                <h3 class="text-center m-3">Register the services offered at your facility.</h3>
+                <form action="/hosearch" method="POST" class="mb-3">
+                    <div class="row">
+                        <div class="col mt-2">
+                            <label class="text-primary" for="f">Service name</label>
+                            <input type="text" name="name" id="f" class="form-control">
+                        </div>
+
+                        <div class="col mt-2">
+                            <label class="text-primary" for="cod">Service Code</label>
+                            <input type="text" name="code" id="cod" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-2">
+                            <label class="text-primary" for="id">Cost</label>
+                            <input type="text" name="cost" id="id" class="form-control">
+                        </div>
+                        <div class="col mt-2">
+                            <label class="text-primary" for="slot">Number of patient slots</label>
+                            <input type="text" name="slot" id="slot" class="form-control">
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <label class="text-primary" for="dept">Department</label>
+                        <select name="dep" id="dept" class="form-control">
+                            <option value="select Department">Select Department</option>
+                            <option value="Accident and emergency (A&E)"> Accident and emergency (A&E)</option>
+                            <option value="Anaesthetics">Anaesthetics</option>
+                            <option value="Breast screening">Breast screening</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Chaplaincy">Chaplaincy</option>
+                            <option value="Critical care">Critical care</option>
+                            <option value="Diagnostic imaging">Diagnostic imaging</option>
+                            <option value="Discharge lounge">Discharge lounge</option>
+                            <option value="Ear nose and throat (ENT)">Ear nose and throat (ENT)</option>
+                            <option value="Elderly services department">Elderly services department</option>
+                            <option value="Gastroenterology">Gastroenterology</option>
+                            <option value="General surgery">General surgery</option>
+                            <option value="Gynaecology">Gynaecology</option>
+                            <option value="Haematology"> Haematology</option>
+                            <option value="Maternity departments">Maternity departments</option>
+                            <option value="Microbiology">Microbiology</option>
+                            <option value="Neonatal unit">Neonatal unit</option>
+                            <option value=" Nephrology"> Nephrology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Nutrition and dietetics">Nutrition and dietetics</option>
+                            <option value="Obstetrics and gynaecology units"> Obstetrics and gynaecology units</option>
+                            <option value="Occupational therapy">Occupational therapy</option>
+                            <option value="Oncology">Oncology</option>
+                            <option value="Ophthalmology">Ophthalmology</option>
+                            <option value="Orthopaedics">Orthopaedics</option>
+                            <option value="Pain management clinics">Pain management clinics</option>
+                            <option value="Pharmacy"> Pharmacy</option>
+                            <option value="Physiotherapy">Physiotherapy</option>
+                            <option value="Radiotherapy">Radiotherapy</option>
+                            <option value="Renal unit">Renal unit</option>
+                            <option value="Rheumatology">Rheumatology</option>
+                            <option value="Sexual health"> Sexual health</option>
+                            <option value="Urology">Urology</option>
+
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col"><button class="btn btn-success py-2 px-4 mt-4 text-capitalize ml-auto"
+                                type="submit">Add
+                                service</button></div>
+                        <div class="col"><button class="btn btn-success py-2 px-4 mt-4 text-capitalize ml-auto">Update
+                                service</button></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <h3 class="mt-5">Do you want to remove a service?</h3>
+                <div class="accordion mt-3" id="accordion2">
+                    <div id="head3">
+                        <button class="btn px-5 btn-success text-capitalize px-3 py-2" type="button"
+                            data-toggle="collapse" data-target="#collap" title="Click me to find patient"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Delete Service
+                        </button>
+                    </div>
+                    <div id="collap" class="collapse hide" aria-labelledby="head3" data-parent="#accordion2">
+                        <div class="card col-md-6 p-3">
+                            <p class="text-primary">Search by service code:</p>
+                            <form action="/hosearch" method="GET">
+                                <div class="md-form mt-0 md-outline">
+                                    <input type="text" id="h" name="code" class="form-control">
+                                    <label for="h">Service Code</label>
+                                </div>
+                                <button type="submit"
+                                    class="btn btn-block btn-success text-capitalize py-2 ">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
