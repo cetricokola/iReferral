@@ -98,7 +98,7 @@ fmt.Println(submittedPassword)
 			return
 		}
 		fmt.Println(staff.EmpId, ":successful log in ")
-		this.Redirect("/hosreg", 302)
+		this.Redirect("/doctor", 302)
 
 	}
 
@@ -227,7 +227,7 @@ func (this *AccountController) Staff_reg() {
 			return
 		}
 
-		this.Redirect("/", 302)
+		this.Redirect("/doctor", 302)
 	}
 }
 

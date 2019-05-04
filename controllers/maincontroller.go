@@ -109,6 +109,27 @@ func (this *MainController) facility_mgn(view string) {
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = view + ".html"
 }
+func (this *MainController) diagnosis(view string) {
+	this.Data["Title"] = "Patient medical reports update"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
+}
+func (this *MainController) doctor_portal(view string) {
+	this.Data["Title"] = "Doctors dashboard"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
+}
 
-
+func (this *MainController) Referral(){
+	this.Data["Title"] = "iReferral-updated report"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "healthIssue.html"
+}
 

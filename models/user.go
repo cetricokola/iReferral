@@ -51,8 +51,20 @@ type Services struct{
 	Slot string
 	Department string
 }
+
+type Patient_diagnosis struct {
+	Id string `orm:"pk"`
+	HudumaNo string
+	Weight string
+	Temperature string
+	BloodPressure string
+	Diagnosis string 
+	Response string
+	Prescription string
+	Reg_date string
+}
 /********/
 func init() {
 	orm.RegisterModel(new(Patient_account), new(Employee_account),
-	 new(Admin_account), new(Hospital_account), new(Services), new(Employee))
+	 new(Admin_account), new(Hospital_account), new(Services), new(Employee), new(Patient_diagnosis))
 }
