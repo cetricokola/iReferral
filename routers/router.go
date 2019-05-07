@@ -11,6 +11,8 @@ func init() {
 	beego.Router("auth/s_login", &controllers.AccountController{}, "get,post:Staff_login")
 	beego.Router("auth/a-login", &controllers.AccountController{}, "get,post:Admin_login")
 	beego.Router("registration/p_signup", &controllers.AccountController{}, "get,post:Patient_reg")
+	beego.Router("info/admin_regSuccess", &controllers.MainController{}, "get,post:Admin_Reg_Success")
+	beego.Router("info/emp_regSuccess", &controllers.MainController{}, "get,post:Emp_Reg_Success")
 	beego.Router("info/patient_regSuccess", &controllers.MainController{}, "get,post:Patient_Reg_Success")
 	beego.Router("registration/s-signup", &controllers.AccountController{}, "get,post:Staff_reg")
 	beego.Router("registration/a-signup", &controllers.AccountController{}, "get,post:Admin_reg")

@@ -196,7 +196,7 @@ func (this *AccountController) Patient_reg() {
 			return
 		}
 		fmt.Print("successfull registration")
-		this.Redirect("/info/patient_regSuccess", 302)
+		this.Redirect("../info/patient_regSuccess", 302)
 	}
 }
 
@@ -235,7 +235,7 @@ func (this *AccountController) Staff_reg() {
 			return
 		}
 
-		this.Redirect("/doctor", 302)
+		this.Redirect("../info/emp_regSuccess", 302)
 	}
 }
 
@@ -272,7 +272,7 @@ func (this *AccountController) Admin_reg() {
 			return
 		}
 
-		this.Redirect("../auth/a-login", 302)
+		this.Redirect("../info/admin_regSuccess", 302)
 	}
 }
 

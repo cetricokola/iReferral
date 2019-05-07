@@ -45,6 +45,22 @@ func (this *MainController) Patient_Reg_Success(){
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "info/patient_regSuccess.html"
 }
+func (this *MainController) Admin_Reg_Success(){
+	this.Data["Title"] = "Admin account successfully created"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "info/admin_regSuccess.html"
+}
+func (this *MainController) Emp_Reg_Success(){
+	this.Data["Title"] = "Employee account successfully created"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "info/emp_regSuccess.html"
+}
 
 func (this *MainController) patient_logIn(view string) {
 	this.Data["Title"] = "Log in to iReferral"
