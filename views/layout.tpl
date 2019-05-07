@@ -22,7 +22,7 @@
 <body>
     {{.LayoutContent}}
    
-
+{{.Footer}}
     {{range .HeadScripts}}
     <script src="{{.}}"></script>
     {{end}}

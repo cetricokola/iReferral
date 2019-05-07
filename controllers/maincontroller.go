@@ -37,6 +37,14 @@ func (this *MainController) Get(){
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "home.html"
 }
+func (this *MainController) Patient_Reg_Success(){
+	this.Data["Title"] = "Patient account successfully created"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "info/patient_regSuccess.html"
+}
 
 func (this *MainController) patient_logIn(view string) {
 	this.Data["Title"] = "Log in to iReferral"
@@ -96,13 +104,29 @@ func (this *MainController) AdminHome(){
 
 }
 func (this *MainController) hospital_reg(view string) {
-	this.Data["Title"] = "Create facility"
+	//check if the user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
+		this.Data["Title"] = "Create facility"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = view + ".html"
 }
 func (this *MainController) facility_mgn(view string) {
+	//check if the user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
 	this.Data["Title"] = "Manage facility"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)

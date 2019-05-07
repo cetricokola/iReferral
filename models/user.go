@@ -38,33 +38,34 @@ type Hospital_account struct {
 }
 
 type Employee struct {
-	FirstName  string
-	LastName   string
-	Position   string
-	NationalId string `orm:"pk"`
+	FirstName string
+	LastName  string
+	Position  string
+	EmpId     string `orm:"pk"`
 }
 
-type Services struct{
-	Code string `orm:"pk"`
-	Name string
-	Cost string
-	Slot string
+type Services struct {
+	Code       string `orm:"pk"`
+	Name       string
+	Cost       string
+	Slot       string
 	Department string
 }
 
 type Patient_diagnosis struct {
-	Id string `orm:"pk"`
-	HudumaNo string
-	Weight string
-	Temperature string
+	Id            string `orm:"pk"`
+	HudumaNo      string
+	Weight        string
+	Temperature   string
 	BloodPressure string
-	Diagnosis string 
-	Response string
-	Prescription string
-	Reg_date string
+	Diagnosis     string
+	Response      string
+	Prescription  string
+	Reg_date      string
 }
+
 /********/
 func init() {
 	orm.RegisterModel(new(Patient_account), new(Employee_account),
-	 new(Admin_account), new(Hospital_account), new(Services), new(Employee), new(Patient_diagnosis))
+		new(Admin_account), new(Hospital_account), new(Services), new(Employee), new(Patient_diagnosis))
 }

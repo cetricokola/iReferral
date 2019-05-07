@@ -17,6 +17,7 @@ type FacilityController struct {
 
 // EMP registration
 func (this *FacilityController) Createemp() {
+	
 	this.facility_mgn("facility_mgn")
 	if this.Ctx.Input.Method() == "POST" {
 		//get the values from the form
@@ -26,7 +27,7 @@ func (this *FacilityController) Createemp() {
 		nId := this.GetString("nId")
 		o := orm.NewOrm()
 		o.Using("default")
-		emp := models.Employee{FirstName: first, LastName: last, Position: position, NationalId: nId}
+		emp := models.Employee{FirstName: first, LastName: last, Position: position, EmpId: nId}
 		_, err := o.Insert(&emp)
 		if err != nil {
 			fmt.Println(err)
@@ -47,7 +48,7 @@ func (this *FacilityController) RemoveEmp() {
 		if utf8.RuneCountInString(value) != 0 { //do not process empty values
 			o := orm.NewOrm()
 			o.Using("default")
-			emp := models.Employee{NationalId: value}
+			emp := models.Employee{EmpId: value}
 			err := o.Read(&emp, "NationalId")
 			if err == orm.ErrNoRows {
 				fmt.Println(err)

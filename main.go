@@ -5,6 +5,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/astaxie/beego/session"
 	
 )
 
@@ -16,5 +17,11 @@ func init() {
 }
 
 func main() {
+	sessionconf := &session.ManagerConfig{
+		CookieName: "sessionID",
+		Gclifetime: 3600,
+	}
+	beego.GlobalSessions, _ = session.NewManager("memory", sessionconf)
+	go beego.GlobalSessions.GC()
 	beego.Run()
 }

@@ -1,40 +1,24 @@
 
-<div class="bg-primary">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand text-primary h1 mt-auto mb-auto" href="#">HRM</a>
-        <!-- trigger button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="navbar-toggler-icon" aria-hidden="true"></i>
-        </button>
-        <div class="collapse navbar-collapse mr-5" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item mr-5 ">
-                    <a class="nav-link" href="#">About us</a>
-                </li>
-                <li class="nav-item mr-5 ">
-                    <a class="nav-link" href="#">Contact us</a>
-                </li>
-            </ul>
-            <a href="#">Log out</a>
-        </div>
-    </nav>
+<body class="bg-primary">
+    <div class="mt-5">
+        <h1 class="text-white ml-5">iReferral.</h1>
+    </div>
     <div class="container">
         <h2 class="text-center text1 mt-3">Doctor's Dashboard</h2>
-        <div class="d-flex justify-content-end mt-3">
-            <div class="col p-3">
-                <h4>Welcome Cetric OKola,</h4>
+        <div class=" row d-flex justify-content-end mt-3">
+            <div class="col py-3">
+                <h4>Welcome {{.First}} {{.Last}},</h4>
                 <p>Diagonose and update the patient medical report.</p>
                 <div class="accordion" id="accordion2">
                     <div id="head3">
-                        <button class="btn px-5 btn-success text-capitalize px-3 py-2" type="button"
+                        <button class="btn px-5 btn-success text-capitalize py-2" type="button"
                             data-toggle="collapse" data-target="#collapseTwo" title="Click me to find patient"
                             aria-expanded="true" aria-controls="collapseOne">
                             Find Patient
                         </button>
                     </div>
                     <div id="collapseTwo" class="collapse hide" aria-labelledby="head3" data-parent="#accordion2">
-                        <div class="card col-md-6 p-3">
+                        <div class="card col-md-6 py-3">
                             <p class="text-primary">Search the patient by Huduma No:</p>
                             <form action="/doctor" method="GET">
                                 <div class="md-form mt-0 md-outline">
@@ -46,8 +30,7 @@
                             </form>
                         </div>
                     </div>
-                    <h4 class="mt-5"><a href="#" class="text1"> <span><i class="fa fa-reply"
-                                    aria-hidden="true"></i></span> Back to home page</a></h4>
+                   
                 </div>
 
             </div>
@@ -63,7 +46,7 @@
             <div>
                 <div class="card hoverable z-depth-5 circle1">
                     <a href="#" class="text-warning">Change password</a>
-                    <a href="#">Log out</a>
+                    <a href="logout">Log out</a>
                 </div>
             </div>
         </div>
@@ -71,6 +54,6 @@
             <h3><a href="#" class="text1">get help.</a></h3>
         </div>
     </div>
-</div>
+</body>
    
 

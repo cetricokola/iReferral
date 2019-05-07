@@ -13,7 +13,26 @@ type DocController struct {
 	MainController
 }
 func(this *DocController) FindPatient(){
-	this.doctor_portal("doctor")
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
+	fmt.Println("Session id is:", userID)
+	//retrieve the name of the doctor from database using the session id
+	user := userID.(string)
+	o := orm.NewOrm()
+			o.Using("default")
+			doc := models.Employee{EmpId: user}
+			err := o.Read(&doc, "EmpId")
+			if err != nil{
+				fmt.Println("Internal Server error")
+			}
+			this.Data["First"] = doc.FirstName
+			this.Data["Last"] = doc.LastName
+		this.doctor_portal("doctor")
 			if this.Ctx.Input.Method() == "GET"{
 			value := this.GetString("huduma")
 			if utf8.RuneCountInString(value) != 0 {

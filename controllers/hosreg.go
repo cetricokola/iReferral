@@ -16,7 +16,7 @@ type HosregController struct {
 }
 
 func (this *HosregController) Create() {
-	this.hospital_reg("hosreg")
+		this.hospital_reg("hosreg")
 	if this.Ctx.Input.Method() == "POST" {
 		//get the values from the form
 		name := this.GetString("name")
@@ -45,7 +45,7 @@ func (this *HosregController) Create() {
 }
 
 func (this *HosregController) Search() {
-	this.hospital_reg("hosreg")
+		this.hospital_reg("hosreg")
 	if this.Ctx.Input.Method() == "GET"{
 		value := this.GetString("name")
 		o := orm.NewOrm()

@@ -17,6 +17,14 @@ type DiagnosisController struct {
 }
 
 func (this *DiagnosisController) UpdateReport() {
+	//check if the user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
 	this.diagnosis("report")
 	if this.Ctx.Input.Method() == "POST" {
 		huduma := this.GetString("huduma")

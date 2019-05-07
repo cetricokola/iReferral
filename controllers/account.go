@@ -25,13 +25,12 @@ func (this *AccountController) Patients_login() {
 		//Extract the form data
 		hudumaNo := this.GetString("hudumaNo")
 		submittedPassword := this.GetString("pss")
-		
+
 		//Read user account from database
 		o := orm.NewOrm()
 		o.Using("default")
 		patient := models.Patient_account{HudumaNo: hudumaNo}
 		err := o.Read(&patient, "hudumaNo")
-		
 
 		if err == orm.ErrNoRows || err == orm.ErrMissPK {
 			fmt.Println("incorrect huduma number or password")
@@ -54,22 +53,29 @@ func (this *AccountController) Patients_login() {
 			flash.Store(&this.Controller)
 			return
 		}
-
+		//set session for patient log in
+		this.SetSession("patient.HudumaNo", 50)
 		fmt.Println(patient.HudumaNo, ":successful log in ")
 		this.Redirect("/", 302)
-
 	}
-
 }
 
 //*STAFF PORTAL LOG IN*//
 func (this *AccountController) Staff_login() {
+	// Check if user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	if userID != nil {
+		// User is logged in already, display another page
+		this.Redirect("/doctor", 302)
+		return
+	}
 	this.staff_logIn("s_login")
 	if this.Ctx.Input.Method() == "POST" {
 		//Extract the form data
 		empId := this.GetString("empId")
 		submittedPassword := this.GetString("pass")
-fmt.Println(submittedPassword)
+		fmt.Println(submittedPassword)
 		//Read user account from database
 		o := orm.NewOrm()
 		o.Using("default")
@@ -97,9 +103,10 @@ fmt.Println(submittedPassword)
 			flash.Store(&this.Controller)
 			return
 		}
+		// Set the UserID if everything is ok
+		session.Set("UserID", empId)
 		fmt.Println(staff.EmpId, ":successful log in ")
 		this.Redirect("/doctor", 302)
-
 	}
 
 }
@@ -139,7 +146,8 @@ func (this *AccountController) Admin_login() {
 			flash.Store(&this.Controller)
 			return
 		}
-
+		//set session
+		this.SetSession("UserID", iD)
 		fmt.Println(admin.Id, ":successful log in ")
 		this.Redirect("../hosreg", 302)
 
@@ -188,7 +196,7 @@ func (this *AccountController) Patient_reg() {
 			return
 		}
 		fmt.Print("successfull registration")
-		this.Redirect("/", 302)
+		this.Redirect("/info/patient_regSuccess", 302)
 	}
 }
 
@@ -264,6 +272,18 @@ func (this *AccountController) Admin_reg() {
 			return
 		}
 
-		this.Redirect("hosreg", 302)
+		this.Redirect("../auth/a-login", 302)
 	}
+}
+
+func (this *AccountController) Logout(){
+	// Check if user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	if userID != nil {
+		// UserID is set and can be deleted
+		session.Delete("UserID")
+	}
+	fmt.Println("user successfully logged out", userID)
+	this.Redirect("/", 302)
 }
