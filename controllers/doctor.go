@@ -43,7 +43,7 @@ func(this *DocController) FindPatient(){
 			if err == orm.ErrNoRows {
 				fmt.Println(err)
 				fmt.Println("incorrect huduma number")
-				flash.Error("You've entered incorrect huduma number")
+				flash.Error("Incorrect Huduma No.Try again!")
 				flash.Store(&this.Controller)
 				return
 			} else if err != nil {

@@ -23,7 +23,6 @@
                 <li class="nav-item mr-4">
                     <a class="nav-link text-primary" href="logout">Log out</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link btn btn-primary text-capitalize text-white  py-2 px-4" href="/hosreg">Create
                         Facility</a>
@@ -107,6 +106,7 @@
             </div>
             <div class="mb-3 px-4 col-md-4 border-left border-primary">
                 <h3 class="text-center m-3">Register your employees.</h3>
+                <p class="text-danger">{{.err3.error}}</p>
                 <form action="/facility_mgn" method="POST" class="mb-3">
                     <div class="row">
                         <div class="col mt-2">
@@ -137,6 +137,7 @@
             </div>
             <div class="col">
                 <h3 class="mt-5">Do you want to remove employee?</h3>
+                <p class="text-danger">{{.err4.error}}</p>
                 <div class="accordion mt-3" id="accordion2">
                     <div id="head3">
                         <button class="btn px-5 btn-success text-capitalize px-3 py-2" type="button"
@@ -161,7 +162,6 @@
                 </div>
             </div>
         </div>
-
         <hr>
         <div class="my-5 text-primary">
             <h2 id="ser">Manage the services.</h2>
@@ -172,6 +172,7 @@
             </div>
             <div class="mb-3 col-md-4 px-4 border-left border-primary ">
                 <h3 class="text-center m-3">Register the services offered at your facility.</h3>
+                <p class="text-danger">{{.err5.error}}</p>
                 <form action="/hosearch" method="POST" class="mb-3">
                     <div class="row">
                         <div class="col mt-2">
@@ -245,6 +246,8 @@
             </div>
             <div class="col">
                 <h3 class="mt-5">Do you want to remove a service?</h3>
+                <!-- flash messages  -->
+                <p class="text-danger">{{.err6.error}}</p>
                 <div class="accordion mt-3" id="accordion2">
                     <div id="head3">
                         <button class="btn px-5 btn-success text-capitalize px-3 py-2" type="button"

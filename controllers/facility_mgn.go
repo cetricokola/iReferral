@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"iReferral/models"
 
-	// "github.com/astaxie/beego"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	//"github.com/astaxie/beego/validation"
 	//  "golang.org/x/crypto/bcrypt"
@@ -14,11 +14,13 @@ import (
 type FacilityController struct {
 	MainController
 }
+var err3 = beego.NewFlash()
+var err4 = beego.NewFlash()
+
 
 // EMP registration
 func (this *FacilityController) Createemp() {
-	
-	this.facility_mgn("facility_mgn")
+		this.facility_mgn("facility_mgn")
 	if this.Ctx.Input.Method() == "POST" {
 		//get the values from the form
 		first := this.GetString("first")
@@ -31,8 +33,8 @@ func (this *FacilityController) Createemp() {
 		_, err := o.Insert(&emp)
 		if err != nil {
 			fmt.Println(err)
-			flash.Error(nId + " already registered")
-			flash.Store(&this.Controller)
+			err3.Error(nId + " already registered")
+			err3.Store(&this.Controller)
 			return
 		}
 		fmt.Print("successfull registration Employee")
@@ -53,13 +55,13 @@ func (this *FacilityController) RemoveEmp() {
 			if err == orm.ErrNoRows {
 				fmt.Println(err)
 				fmt.Println("incorrect national id")
-				flash.Error("You've entered incorrect ID number")
-				flash.Store(&this.Controller)
+				err4.Error("You've entered incorrect ID number")
+				err4.Store(&this.Controller)
 				return
 			} else if err != nil {
 				fmt.Println("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-				flash.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-				flash.Store(&this.Controller)
+				err4.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
+				err4.Store(&this.Controller)
 				return
 			} else if err == nil {
 				// DELETE FROM employee WHERE Id = "user input value on the form"

@@ -19,8 +19,8 @@
                 <a class="nav-link" href="#contact">Contact</a>
             </li>
         </ul>
-                       <a class="btn btn-primary py-2 text-capitalize" href="logout" title="Log out">Log out</a>
-          
+        <a class="btn btn-primary py-2 text-capitalize" href="logout" title="Log out">Log out</a>
+
     </div>
 </nav>
 <!-- </div> -->
@@ -31,8 +31,8 @@
             <div class="col-md-6 p-5 mt-5 text-white">
                 <h1>Register your facility and the services offered at the facility with us.</h1>
                 <h1 class="mt-5">Already have an existing facility in place?</h1>
-
-                <!-- <button class="btn btn-success text-capitalize mt-5">Update facility here</button> -->
+                <!-- flash messages for errors -->
+                <p class="text-danger bg-white col-md-4">{{.err1.error}}</p>
                 <div class="accordion" id="accordion2">
                     <div id="head2">
                         <button class="btn px-5 btn-rounded btn-success text-capitalize px-3 py-2" type="button"
@@ -44,9 +44,11 @@
                     <div id="collapseTwo" class="collapse hide" aria-labelledby="head2" data-parent="#accordion2">
                         <div class="card  col-md-7 py-3 px-4 ml-3">
                             <!-- form -->
-                            <form  method="GET" action="/hosreg" class="text-center">
-                                <input class="form-control mb-2" type="text" name="name" placeholder="Search by hospital email address">
-                                <button class="btn btn-primary btn-block mt-3 py-2 text-capitalize" type="submit"> Find facility</button>
+                            <form method="GET" action="/hosreg" class="text-center">
+                                <input class="form-control mb-2" type="text" name="name"
+                                    placeholder="Search by hospital email address">
+                                <button class="btn btn-primary btn-block mt-3 py-2 text-capitalize" type="submit"> Find
+                                    facility</button>
                             </form>
                         </div>
                     </div>
@@ -56,14 +58,16 @@
                 <div class=" ml-auto  p-3 m-3 card">
                     <h3 class="text-center text-primary">iReferral.</h3>
                     <h5 class="text-center mb-3">Create your facility here.</h5>
+                    <!-- flash messages for errors -->
+                    <p class="text-danger">{{.err2.error}}</p>
                     <!-- Form -->
                     <form method="POST" action="/hosreg" class="text-center">
-                        <!-- Name-->
+                        <!--first Name-->
                         <div class="md-form mt-0 md-outline">
                             <input type="text" id="nam" name="name" class="form-control">
                             <label for="nam">Hospital Name</label>
                         </div>
-                        <!-- Name-->
+                        <!-- last Name-->
                         <div class="md-form mt-0 md-outline">
                             <input type="text" id="seria" name="serial" class="form-control">
                             <label for="seria">Hospital license serial No</label>
@@ -97,8 +101,8 @@
                         </div>
                         <!-- Register button -->
                         <button class="btn btn-primary text-capitalize btn-block py-2 " type="submit">Register</button>
+                    </form>
                 </div>
-                </form>
                 <!-- Form -->
             </div>
         </div>

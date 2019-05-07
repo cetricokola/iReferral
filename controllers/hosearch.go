@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"iReferral/models"
 
-	// "github.com/astaxie/beego"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	//"github.com/astaxie/beego/validation"
 	//  "golang.org/x/crypto/bcrypt"
@@ -14,6 +14,8 @@ import (
 type FaController struct {
 	MainController
 }
+var err5 = beego.NewFlash()
+var err6= beego.NewFlash()
 
 // create service
 func (this *FaController) Createservice() {
@@ -31,8 +33,8 @@ func (this *FaController) Createservice() {
 		_, err := o.Insert(&service)
 		if err != nil {
 			fmt.Println(err)
-			flash.Error(name + " already registered")
-			flash.Store(&this.Controller)
+			err5.Error(name + " already registered")
+			err5.Store(&this.Controller)
 			//this.Redirect("/", 302)
 			return
 		}
@@ -54,13 +56,13 @@ func (this *FaController) Removeservice() {
 			if err == orm.ErrNoRows {
 				fmt.Println(err)
 				fmt.Println("invalid service code")
-				flash.Error("You've entered incorrect service code-doesn't exist")
-				flash.Store(&this.Controller)
+				err6.Error("You've entered incorrect service code-doesn't exist")
+				err6.Store(&this.Controller)
 				return
 			} else if err != nil {
 				fmt.Println("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-				flash.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-				flash.Store(&this.Controller)
+				err6.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
+				err6.Store(&this.Controller)
 				return
 			} else if err == nil {
 				// DELETE FROM employee WHERE Id = "user input value on the form"

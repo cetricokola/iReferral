@@ -9,6 +9,7 @@
             <div class="col py-3">
                 <h4>Welcome {{.First}} {{.Last}},</h4>
                 <p>Diagonose and update the patient medical report.</p>
+                <p class="text-danger bg-white col-md-4">{{.flash.error}}</p>
                 <div class="accordion" id="accordion2">
                     <div id="head3">
                         <button class="btn px-5 btn-success text-capitalize py-2" type="button"
@@ -20,7 +21,7 @@
                     <div id="collapseTwo" class="collapse hide" aria-labelledby="head3" data-parent="#accordion2">
                         <div class="card col-md-6 py-3">
                             <p class="text-primary">Search the patient by Huduma No:</p>
-                            <form action="/doctor" method="GET">
+                                                       <form action="/doctor" method="GET">
                                 <div class="md-form mt-0 md-outline">
                                     <input type="text" id="hdm" name="huduma" class="form-control">
                                     <label for="hdm">Enter Huduma No</label>
@@ -32,7 +33,6 @@
                     </div>
                    
                 </div>
-
             </div>
             <div>
                 <div class="card view overlay zoom z-depth-5 circle">
@@ -41,8 +41,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4 ml-auto">
+               <div class="col-md-4 ml-auto">
             <div>
                 <div class="card hoverable z-depth-5 circle1">
                     <a href="#" class="text-warning">Change password</a>

@@ -34,7 +34,7 @@ func (this *AccountController) Patients_login() {
 
 		if err == orm.ErrNoRows || err == orm.ErrMissPK {
 			fmt.Println("incorrect huduma number or password")
-			flash.Error("You've entered incorrect huduma number or password")
+			flash.Error("You've entered incorrect huduma number or password.Try again!")
 			flash.Store(&this.Controller)
 			return
 
@@ -49,7 +49,7 @@ func (this *AccountController) Patients_login() {
 		if err != nil {
 			fmt.Println(err)
 			fmt.Println("Incorrect password")
-			flash.Error("You've entered incorrect password")
+			flash.Error("You've entered incorrect password.Try again!")
 			flash.Store(&this.Controller)
 			return
 		}
@@ -84,7 +84,7 @@ func (this *AccountController) Staff_login() {
 
 		if err == orm.ErrNoRows || err == orm.ErrMissPK {
 			fmt.Println("incorrect employee id or password")
-			flash.Error("You've entered incorrect employmee id or password")
+			flash.Error("You've entered incorrect national id number or password.Try again!")
 			flash.Store(&this.Controller)
 			return
 
@@ -99,7 +99,7 @@ func (this *AccountController) Staff_login() {
 		if err != nil {
 			fmt.Println(err)
 			fmt.Println("Incorrect password")
-			flash.Error("You've entered incorrect password")
+			flash.Error("You've entered incorrect password.Try again")
 			flash.Store(&this.Controller)
 			return
 		}
@@ -128,7 +128,7 @@ func (this *AccountController) Admin_login() {
 		if err == orm.ErrNoRows || err == orm.ErrMissPK {
 			fmt.Print(err)
 			fmt.Println("incorrect national id or password")
-			flash.Error("You've entered incorrect national id or password")
+			flash.Error("Incorrect national id or password.Try again!")
 			flash.Store(&this.Controller)
 			return
 
@@ -142,7 +142,7 @@ func (this *AccountController) Admin_login() {
 		err = bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(submittedPassword))
 		if err != nil {
 			fmt.Println("Incorrect password")
-			flash.Error("You've entered incorrect password")
+			flash.Error("You've entered incorrect password.Try again!")
 			flash.Store(&this.Controller)
 			return
 		}
@@ -175,7 +175,8 @@ func (this *AccountController) Patient_reg() {
 		//match the submitted password with the confirm password
 		if submittedpassword != confirmPass {
 			fmt.Println("The password submitted does no match the confirm password")
-			flash.Error("The password failed to match")
+			flash.Error("The password submitted does no match the confirm password!")
+			flash.Store(&this.Controller)
 			return
 		}
 		//hash the password
@@ -190,7 +191,7 @@ func (this *AccountController) Patient_reg() {
 		_, err := o.Insert(&patient)
 		if err != nil {
 			fmt.Println(err)
-			flash.Error(phone + " already registered")
+			flash.Error(phone + " already registered!")
 			flash.Store(&this.Controller)
 			//this.Redirect("/", 302)
 			return
@@ -216,7 +217,8 @@ func (this *AccountController) Staff_reg() {
 		//match the submitted password with the confirm password
 		if submittedpassword != confirmPass {
 			fmt.Println("The password submitted does no match the confirm password")
-			flash.Error("The password failed to match")
+			flash.Error("The password submitted does no match the confirm password!")
+			flash.Store(&this.Controller)
 			return
 		}
 		//hash the password
@@ -230,12 +232,11 @@ func (this *AccountController) Staff_reg() {
 		_, err := o.Insert(&staff)
 		if err != nil {
 			fmt.Println(err)
-			flash.Error(phone + " already registered")
+			flash.Error(phone + " already registered!")
 			flash.Store(&this.Controller)
 			return
 		}
-
-		this.Redirect("../info/emp_regSuccess", 302)
+	this.Redirect("../info/emp_regSuccess", 302)
 	}
 }
 
@@ -254,7 +255,8 @@ func (this *AccountController) Admin_reg() {
 		//match the submitted password with the confirm password
 		if submittedpassword != confirmPass {
 			fmt.Println("The password submitted does no match the confirm password")
-			flash.Error("The password failed to match")
+			flash.Error("The password submitted does no match the confirm password!")
+			flash.Store(&this.Controller)
 			return
 		}
 		//hash the password
@@ -267,7 +269,7 @@ func (this *AccountController) Admin_reg() {
 
 		_, err := o.Insert(&admin)
 		if err != nil {
-			flash.Error(email + " already registered")
+			flash.Error(email + " already registered!")
 			flash.Store(&this.Controller)
 			return
 		}

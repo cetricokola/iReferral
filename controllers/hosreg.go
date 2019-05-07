@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"iReferral/models"
 
-	// "github.com/astaxie/beego"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	//"github.com/astaxie/beego/validation"
 	//  "golang.org/x/crypto/bcrypt"
@@ -14,6 +14,8 @@ import (
 type HosregController struct {
 	MainController
 }
+var err1 = beego.NewFlash()
+var err2 = beego.NewFlash()
 
 func (this *HosregController) Create() {
 		this.hospital_reg("hosreg")
@@ -33,8 +35,8 @@ func (this *HosregController) Create() {
 		_, err := o.Insert(&facility)
 		if err != nil {
 			fmt.Println(err)
-			flash.Error(serial + " already registered")
-			flash.Store(&this.Controller)
+			err2.Error(serial + " already registered")
+			err2.Store(&this.Controller)
 			//this.Redirect("/", 302)
 			return
 		}
@@ -55,13 +57,13 @@ func (this *HosregController) Search() {
 		if err == orm.ErrNoRows {
 			fmt.Println(err)
 			fmt.Println("incorrect email")
-			flash.Error("You've entered incorrect email address")
-			flash.Store(&this.Controller)
+			err1.Error("You've entered incorrect email address")
+			err1.Store(&this.Controller)
 			return
 		} else if err != nil {
 			fmt.Println("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-			flash.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-			flash.Store(&this.Controller)
+			err1.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
+			err1.Store(&this.Controller)
 			return
 		} else if utf8.RuneCountInString(value) != 0 {
 			fmt.Println("Successful searching FACILITY")
