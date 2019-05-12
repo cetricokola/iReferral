@@ -5,26 +5,26 @@ import (
 )
 
 type Patient_account struct {
-	FirstName string
-	LastName  string
+	FirstName string 
+	LastName  string 
 	HudumaNo  string `orm:"pk"`
-	DoB       string
+	DoB       string `valid:"Required"`
 	PhoneNo   string `orm:"unique"`
-	Password  string
-	Sex       string
+	Password  string`valid:"Required"`
+	Sex       string`valid:"Required"`
 }
 
 type Employee_account struct {
 	EmpId    string `orm:"pk"`
 	Email    string `orm:"unique"`
-	PhoneNo  string
-	Password string
+	PhoneNo  string `valid:"Required"`
+	Password string `valid:"Required"`
 }
 
 type Admin_account struct {
 	Id       string `orm:"pk"`
 	Email    string `orm: "unique"`
-	Password string
+	Password string `valid:"Required"`
 }
 
 type Hospital_account struct {

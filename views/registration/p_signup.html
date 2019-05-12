@@ -39,12 +39,10 @@
                     <!-- phone number -->
                     <!-- <input type="text" id="phone1" name="sex" class="form-control">-->
                     <label class="text-primary" for="phone1">Gender</label>
-                    <select name="carlist" class="form-control">
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
+                    <select name="sex" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
-
-
                 </div>
             </div>
             <div class="form-row mt-1">
@@ -52,7 +50,6 @@
                     <!-- Password -->
                     <label class="text-primary" for="fPassword">Password</label>
                     <input type="password" id="fPassword" name="pass" class="form-control">
-
                 </div>
                 <div class="col">
                     <!-- Confirm password -->
@@ -61,10 +58,11 @@
 
                 </div>
                 <small id="helpBlock" class="form-text text-success ml-auto mr-auto text-muted">
-                    Use 8 or more characters including digits,letters & symbols
+                    Use 8 or more characters including digits& both capital and small letters
                 </small>
             </div>
             <p class="text-danger">{{.flash.error}}</p>
+            <p class="text-danger">{{.Errors}}</p>
             <!-- Sign up button -->
             <div class="form-row md-form mt-0 md-outline">
                 <div class="col">

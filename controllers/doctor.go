@@ -5,17 +5,21 @@ import (
 	"iReferral/models"
 
 	// "github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
 	"unicode/utf8"
-	//"github.com/astaxie/beego/validation"
-	)
+
+	"github.com/astaxie/beego/orm"
+	"github.com/astaxie/beego/validation"
+)
+
 type DocController struct {
 	MainController
 }
-func(this *DocController) FindPatient(){
+var Huduma string
+
+func (this *DocController) FindPatient() {
 	session := this.StartSession()
 	userID := session.Get("UserID")
-	
+
 	if userID == nil {
 		this.Redirect("/auth/s_login", 302)
 		return
@@ -24,18 +28,33 @@ func(this *DocController) FindPatient(){
 	//retrieve the name of the doctor from database using the session id
 	user := userID.(string)
 	o := orm.NewOrm()
-			o.Using("default")
-			doc := models.Employee{EmpId: user}
-			err := o.Read(&doc, "EmpId")
-			if err != nil{
-				fmt.Println("Internal Server error")
+	o.Using("default")
+	doc := models.Employee{EmpId: user}
+	err := o.Read(&doc, "EmpId")
+	if err != nil {
+		fmt.Println("Internal Server error")
+	}
+	this.Data["First"] = doc.FirstName
+	this.Data["Last"] = doc.LastName
+	this.doctor_portal("doctor")
+	if this.Ctx.Input.Method() == "GET" {
+		value := this.GetString("huduma")
+		//validate the user input
+		valid := validation.Validation{}
+		valid.Required(value, "Huduma Number")
+		valid.Numeric(value, "huduma Number")    //numeric values for huduma are permitted
+		valid.Length(value, 11, "huduma Number") //11 digits are permitted
+		if valid.HasErrors() {
+			errormap := []string{}
+			for _, err := range valid.Errors {
+				errormap = append(errormap, "Validation failed on "+err.Key+": "+err.Message+"\n")
+
 			}
-			this.Data["First"] = doc.FirstName
-			this.Data["Last"] = doc.LastName
-		this.doctor_portal("doctor")
-			if this.Ctx.Input.Method() == "GET"{
-			value := this.GetString("huduma")
-			if utf8.RuneCountInString(value) != 0 {
+			this.Data["Errors"] = errormap
+			return
+		}
+
+		if utf8.RuneCountInString(value) != 0 {
 			o := orm.NewOrm()
 			o.Using("default")
 			hos := models.Patient_account{HudumaNo: value}
@@ -51,12 +70,14 @@ func(this *DocController) FindPatient(){
 				flash.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
 				flash.Store(&this.Controller)
 				return
-			} else if err == nil{
+			} else if err == nil {
 				fmt.Println("Successful searching patient")
+				Huduma = value
 				this.Redirect("/report", 302)
+
 			}
-			
+
 		}
-		
+
 	}
-}	
+}

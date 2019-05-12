@@ -15,7 +15,8 @@
                     <a class="nav-link ml-5" href="logout">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-primary text-capitalize py-2 px-4" href="#">Refer Patient</a>
+                    <a class="nav-link btn btn-primary text-capitalize py-2 px-4" href="searchfacility">Refer
+                        Patient</a>
                 </li>
             </ul>
         </div>
@@ -31,8 +32,22 @@
             <hr>
             <div>
                 <form method="POST">
-                    <label class="text-success" for="h">Patient Huduma No</label>
-                    <input type="text" id="h" name="huduma" class="form-control col-md-4">
+                        <h4 class="text-primary mb-3">Patient Details</h4>
+                    <div class="row">
+                        
+                            <div class="col-md-4">
+                                <label class="text-success">Patient Huduma No:</label>
+                                <p class="text-black">{{.Huduma}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="text-success">Patient Name:</label>
+                                <p class="text-black">{{.FName}} {{.LName}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="text-success">Patient Age:</label>
+                                <p class="text-black">{{.Age}}</p>
+                            </div>
+                        </div>
                     <hr>
                     <h4 class="text-primary mb-3">Medical Triage Details</h4>
                     <div class="row">

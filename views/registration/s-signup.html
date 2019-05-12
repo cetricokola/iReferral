@@ -7,7 +7,7 @@
             <form method="POST" class="text-center">
                 <!-- Huduma no-->
                 <small id="helpBlock" class="form-text mr-auto mb-2 text-warning text-muted">
-                    * Provide the Employee Id (6-digits) assigned to you.
+                    * Use your national id number used for your employment.
                 </small>
                 <div class="md-form mt-0 md-outline">
 
@@ -40,10 +40,11 @@
                         <label for="fConfirm">Confirm</label>
                     </div>
                     <small id="helpBlock" class="form-text ml-auto mr-auto text-muted">
-                        Use 8 or more characters including digits,letters & symbols
+                        Use 8 or more characters including digits& both capital and small letters
                     </small>
                 </div>
-                <p class="text-danger">{{.flash.error}}</p>
+                <p class="text-danger">{{.Errors}}</p>
+                <p class="text-danger">{{.flash.errors}}</p>
                 <!-- Sign up button -->
                 <div class="form-row md-form mt-0 md-outline">
                     <div class="col">

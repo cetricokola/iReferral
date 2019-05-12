@@ -17,6 +17,7 @@ func (this *MainController) Prepare() {
 		"/static/css/custom/main.css",
 		"/static/css/custom/search.css",
 		"/static/css/custom/jquery.datepick.css",
+			"/static/css/custom/chung-timepicker.css",
 	}
 	this.Data["HeadScripts"] = []string{
 		"/static/js/mdb-js/jquery-3.3.1.min.js",
@@ -26,6 +27,9 @@ func (this *MainController) Prepare() {
 		"/static/js/custom/jquery.plugin.min.js",
 		"/static/js/custom/jquery.datepick.js",
 		"/static/js/custom/date.js",
+		"/static/js/custom/date2.js",
+		"/static/js/custom/time.js",
+		"/static/js/custom/chung-timepicker.js",
 	}
 }
 
@@ -150,6 +154,14 @@ func (this *MainController) facility_mgn(view string) {
 	this.TplName = view + ".html"
 }
 func (this *MainController) diagnosis(view string) {
+	//check if the user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
 	this.Data["Title"] = "Patient medical reports update"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
@@ -157,6 +169,13 @@ func (this *MainController) diagnosis(view string) {
 	this.TplName = view + ".html"
 }
 func (this *MainController) doctor_portal(view string) {
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
 	this.Data["Title"] = "Doctors dashboard"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
@@ -165,11 +184,47 @@ func (this *MainController) doctor_portal(view string) {
 }
 
 func (this *MainController) Referral(){
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
 	this.Data["Title"] = "iReferral-updated report"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	// this.LayoutSections["Header"] = "header.tpl"
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "healthIssue.html"
+}
+
+func (this *MainController) searchFacility( view string){
+	session := this.StartSession()
+	userID := session.Get("UserID")
+		if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
+	this.Data["Title"] = "iReferral-search for facilities"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
+}
+func (this *MainController) PatReferral(){
+	session := this.StartSession()
+	userID := session.Get("UserID")
+		if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
+	this.Data["Title"] = "iReferral-select the facility"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "patientreferral.html"
 }
 

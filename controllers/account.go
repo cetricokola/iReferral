@@ -3,12 +3,11 @@ package controllers
 import (
 	"fmt"
 	"iReferral/models"
+	"regexp"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-
-	//"github.com/astaxie/beego/validation"
-
+	"github.com/astaxie/beego/validation"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -17,6 +16,7 @@ type AccountController struct {
 }
 
 var flash = beego.NewFlash()
+var valid = validation.Validation{}
 
 //*PATIENT PORTAL LOG IN*//
 func (this *AccountController) Patients_login() {
@@ -159,7 +159,6 @@ func (this *AccountController) Admin_login() {
 func (this *AccountController) Patient_reg() {
 	this.patient_signUp("p_signup")
 	if this.Ctx.Input.Method() == "POST" {
-
 		//get the values from the form
 		first := this.GetString("first")
 		last := this.GetString("last")
@@ -169,9 +168,61 @@ func (this *AccountController) Patient_reg() {
 		sex := this.GetString("sex")
 		submittedpassword := this.GetString("pass")
 		confirmPass := this.GetString("copass")
-
 		fmt.Println(first)
-		//validation of user input
+
+		//input validation
+		valid.Required(first, "first name") //No null values are accepted
+		valid.Required(last, "last name")
+		valid.Required(huduma, "huduma no")   //non empty values are permitted
+		valid.Numeric(huduma, "huduma no")    //numeric values for huduma are permitted
+		valid.Length(huduma, 11, "huduma no") //11 digits are permitted
+		valid.Required(dob, "date of birth")  //non empty values are permitted
+		valid.Required(phone, "phone number") // non empty values are permitted
+		valid.Required(sex, "sex")            // non empty values are permitted
+		valid.Required(confirmPass, "confirm password")
+		valid.MinSize(submittedpassword, 8, "password") // minimum size for the password is 8 characters
+		valid.Length(phone, 10, "phone number")
+		valid.Numeric(phone, "phone number")
+
+		if phone != "" {
+			matched, err := regexp.MatchString("^(07)([0-9]{8})$", phone)
+			if err != nil {
+				valid.SetError("Phone", "Something wierd is going on here.")
+			} else if !matched {
+				valid.SetError("Phone", "Phone number should be something like: 07123145678")
+			}
+		} // end Phone2 validation if block
+
+		if valid.HasErrors() {
+			errormap := []string{}
+			for _, err := range valid.Errors {
+				errormap = append(errormap, "Validation failed on "+err.Key+": "+err.Message+"\n")
+
+			}
+			this.Data["Errors"] = errormap
+			return
+		}
+		//Check if the password contains a capital letter
+		r, _ := regexp.Compile(`[A-Z]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one capital letter")
+			flash.Store(&this.Controller)
+			return
+		}
+		// Check password contain lowercase letter
+		r, _ = regexp.Compile(`[a-z]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one lower case letter")
+			flash.Store(&this.Controller)
+			return
+		}
+		// Check password contain number
+		r, _ = regexp.Compile(`[0-9]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one number")
+			flash.Store(&this.Controller)
+			return
+		}
 		//match the submitted password with the confirm password
 		if submittedpassword != confirmPass {
 			fmt.Println("The password submitted does no match the confirm password")
@@ -214,6 +265,56 @@ func (this *AccountController) Staff_reg() {
 		confirmPass := this.GetString("copass")
 
 		//validation of user input
+		//input validation
+		valid.Required(empId, "National id") //No null values are accepted
+		valid.Required(email, "email")
+		valid.Email(email, "email")           //input a valid email address
+		valid.Required(phone, "phone number") // non empty values are permitted
+		valid.Required(confirmPass, "confirm password")
+		valid.MinSize(submittedpassword, 8, "password") // minimum size for the password is 8 characters
+		valid.Length(phone, 10, "phone number")
+		valid.Numeric(phone, "phone number")
+
+		if phone != "" {
+			matched, err := regexp.MatchString("^(07)([0-9]{8})$", phone)
+			if err != nil {
+				valid.SetError("Phone", "Something wierd is going on here.")
+			} else if !matched {
+				valid.SetError("Phone", "Phone number should be something like: 07123145678")
+			}
+		} // end Phone2 validation if block
+
+		if valid.HasErrors() {
+			errormap := []string{}
+			for _, err := range valid.Errors {
+				errormap = append(errormap, "Validation failed on "+err.Key+": "+err.Message+"\n")
+
+			}
+			this.Data["Errors"] = errormap
+			return
+		}
+		//Check if the password contains a capital letter
+		r, _ := regexp.Compile(`[A-Z]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one capital letter")
+			flash.Store(&this.Controller)
+			return
+		}
+		// Check password contain lowercase letter
+		r, _ = regexp.Compile(`[a-z]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one lower case letter")
+			flash.Store(&this.Controller)
+			return
+		}
+		// Check password contain number
+		r, _ = regexp.Compile(`[0-9]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one number")
+			flash.Store(&this.Controller)
+			return
+		}
+
 		//match the submitted password with the confirm password
 		if submittedpassword != confirmPass {
 			fmt.Println("The password submitted does no match the confirm password")
@@ -236,7 +337,7 @@ func (this *AccountController) Staff_reg() {
 			flash.Store(&this.Controller)
 			return
 		}
-	this.Redirect("../info/emp_regSuccess", 302)
+		this.Redirect("../info/emp_regSuccess", 302)
 	}
 }
 
@@ -244,7 +345,6 @@ func (this *AccountController) Staff_reg() {
 func (this *AccountController) Admin_reg() {
 	this.admin_signUp("a-signup")
 	if this.Ctx.Input.Method() == "POST" {
-
 		//get the values from the form
 		id := this.GetString("id")
 		email := this.GetString("email")
@@ -252,6 +352,44 @@ func (this *AccountController) Admin_reg() {
 		confirmPass := this.GetString("copass")
 
 		//validation of user input
+		//input validation
+		valid.Required(id, "National id") //No null values are accepted
+		valid.Required(email, "email")
+		valid.Email(email, "email") //input a valid email address
+		valid.Required(confirmPass, "confirm password")
+		valid.MinSize(submittedpassword, 8, "password") // minimum size for the password is 8 characters
+
+		if valid.HasErrors() {
+			errormap := []string{}
+			for _, err := range valid.Errors {
+				errormap = append(errormap, "Validation failed on "+err.Key+": "+err.Message+"\n")
+
+			}
+			this.Data["Errors"] = errormap
+			return
+		}
+		//Check if the password contains a capital letter
+		r, _ := regexp.Compile(`[A-Z]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one capital letter")
+			flash.Store(&this.Controller)
+			return
+		}
+		// Check password contain lowercase letter
+		r, _ = regexp.Compile(`[a-z]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one lower case letter")
+			flash.Store(&this.Controller)
+			return
+		}
+		// Check password contain number
+		r, _ = regexp.Compile(`[0-9]`)
+		if !r.MatchString(submittedpassword) {
+			flash.Error("Password must contain at least one number")
+			flash.Store(&this.Controller)
+			return
+		}
+
 		//match the submitted password with the confirm password
 		if submittedpassword != confirmPass {
 			fmt.Println("The password submitted does no match the confirm password")
@@ -278,7 +416,7 @@ func (this *AccountController) Admin_reg() {
 	}
 }
 
-func (this *AccountController) Logout(){
+func (this *AccountController) Logout() {
 	// Check if user is logged in
 	session := this.StartSession()
 	userID := session.Get("UserID")
