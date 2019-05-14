@@ -17,10 +17,20 @@ type HosregController struct {
 var err1 = beego.NewFlash()
 var err2 = beego.NewFlash()
 
+
 func (this *HosregController) Create() {
+	session := this.StartSession()
+	userID := session.Get("UserID")
+		if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
+	fmt.Println("Logged in user is", userID)
+	mgnId := userID.(string)
 		this.hospital_reg("hosreg")
 	if this.Ctx.Input.Method() == "POST" {
 		//get the values from the form
+		code := this.GetString("code")
 		name := this.GetString("name")
 		serial := this.GetString("serial")
 		phone := this.GetString("phone")
@@ -29,9 +39,10 @@ func (this *HosregController) Create() {
 		region := this.GetString("regio")
 		district := this.GetString("dist")
 		fmt.Println(region)
+		
 		o := orm.NewOrm()
 		o.Using("default")
-		facility := models.Hospital_account{Name: name, SerialNo: serial, PhoneNo: phone, Email: email, Country: country, Region: region, District: district}
+		facility := models.Hospital_account{Code:code, Name: name, SerialNo: serial, PhoneNo: phone, Email: email, Country: country, Region: region, District: district, MgnId:mgnId}
 		_, err := o.Insert(&facility)
 		if err != nil {
 			fmt.Println(err)

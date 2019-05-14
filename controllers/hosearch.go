@@ -19,6 +19,14 @@ var err6= beego.NewFlash()
 
 // create service
 func (this *FaController) Createservice() {
+	session := this.StartSession()
+	userID := session.Get("UserID")
+		if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
+	fmt.Println("Logged in user is", userID)
+	mgnId := userID.(string)
 	this.facility_mgn("facility_mgn")
 	if this.Ctx.Input.Method() == "POST" {
 		//get the values from the form
@@ -27,9 +35,11 @@ func (this *FaController) Createservice() {
 		cost := this.GetString("cost")
 		slot := this.GetString("slot")
 		dep := this.GetString("dep")
+		var hosCode string
 		o := orm.NewOrm()
 		o.Using("default")
-		service := models.Services{Code: code, Name: name, Cost: cost, Slot: slot, Department: dep}
+		o.Raw("select code from hospital_account where mgn_id=?", mgnId).QueryRow(&hosCode)
+		service := models.Services{ServiceCode: code, Code: hosCode, Name: name, Cost: cost, Slot: slot, Department: dep}
 		_, err := o.Insert(&service)
 		if err != nil {
 			fmt.Println(err)

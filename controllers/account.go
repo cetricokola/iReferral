@@ -325,12 +325,19 @@ func (this *AccountController) Staff_reg() {
 		//hash the password
 		password, _ := HashPassword(submittedpassword)
 		//******** Save user info to database
+		var iD string
 		o := orm.NewOrm()
 		o.Using("default")
-
-		staff := models.Employee_account{EmpId: empId, Email: email, PhoneNo: phone, Password: password}
-
-		_, err := o.Insert(&staff)
+		//check if the emp id is valid.The one admin assigned to the employer
+		err := o.Raw("select emp_id from employee where emp_id=?", empId).QueryRow(&iD)
+		if err != nil{
+			fmt.Println("invalid emp id")
+			flash.Error("The employee id is incorrect")
+			flash.Store(&this.Controller)
+			return
+		}
+		staff := models.Employee_account{EmpId: iD, Email: email, PhoneNo: phone, Password: password}
+		_, err = o.Insert(&staff)
 		if err != nil {
 			fmt.Println(err)
 			flash.Error(phone + " already registered!")

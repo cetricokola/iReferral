@@ -6,6 +6,7 @@ import (
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+
 	//"github.com/astaxie/beego/validation"
 	//  "golang.org/x/crypto/bcrypt"
 	"unicode/utf8"
@@ -14,22 +15,32 @@ import (
 type FacilityController struct {
 	MainController
 }
+
 var err3 = beego.NewFlash()
 var err4 = beego.NewFlash()
 
-
 // EMP registration
 func (this *FacilityController) Createemp() {
-		this.facility_mgn("facility_mgn")
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
+	fmt.Println("Logged in user is", userID)
+	mgnId := userID.(string)
+	this.facility_mgn("facility_mgn")
 	if this.Ctx.Input.Method() == "POST" {
 		//get the values from the form
 		first := this.GetString("first")
 		last := this.GetString("last")
 		position := this.GetString("position")
 		nId := this.GetString("nId")
+		var hosCode string
 		o := orm.NewOrm()
 		o.Using("default")
-		emp := models.Employee{FirstName: first, LastName: last, Position: position, EmpId: nId}
+		o.Raw("select code from hospital_account where mgn_id=?", mgnId).QueryRow(&hosCode)
+		emp := models.Employee{FirstName: first, LastName: last, Position: position, EmpId: nId, Code: hosCode}
 		_, err := o.Insert(&emp)
 		if err != nil {
 			fmt.Println(err)

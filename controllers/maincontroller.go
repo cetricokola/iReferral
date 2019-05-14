@@ -213,7 +213,22 @@ func (this *MainController) searchFacility( view string){
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = view + ".html"
 }
-func (this *MainController) PatReferral(){
+
+func (this *MainController) submitPatient( view string){
+	session := this.StartSession()
+	userID := session.Get("UserID")
+		if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
+	this.Data["Title"] = "iReferral-input your patient"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
+}
+func (this *MainController) patReferral(view string){
 	session := this.StartSession()
 	userID := session.Get("UserID")
 		if userID == nil {
@@ -221,10 +236,11 @@ func (this *MainController) PatReferral(){
 		return
 	}
 	this.Data["Title"] = "iReferral-select the facility"
+	this.Data["Names"] = Names
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	// this.LayoutSections["Header"] = "header.tpl"
 	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "patientreferral.html"
+	this.TplName = view+".html"
 }
 
