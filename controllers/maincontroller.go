@@ -269,18 +269,17 @@ func (this *MainController) PostDetails(){
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "success.html"
 }
-func (this *MainController) ViewReferrals() {
+func (this *MainController) viewReferrals(view string) {
 	//check if the user is logged in
-	session := this.StartSession()
-	userID := session.Get("UserID")
 	
-	if userID == nil {
-		this.Redirect("/auth/a-login", 302)
-		return
-	}
 		this.Data["Title"] = "View referrals at your facility"
+		this.Data["Name"] = Name
+		this.Data["Hdm"] = Hdm
+		this.Data["Serv"] = Serv
+		this.Data["Dat"] = Dat
+		this.Data["Tim"] = Tim
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "viewreferrals.html"
+	this.TplName = view+".html"
 }

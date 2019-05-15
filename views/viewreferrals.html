@@ -2,27 +2,64 @@
     <div class="ml-5">
         <h1 class="text-primary mt-3">iReferral.</h1>
     </div>
-    <div class="ml-auto col-md-1"><a href="#">Log out</a></div>
-    <div class="container">
+            <div class=" mr-5 ml-auto col-md-2 p-0 m-0">
+            <p class="text-success m-0 p-0">{{.Name}}</p>
+            <a href="logout" class="p-0 m-0">Log out</a>
+        </div>
+        <div class="container">
         <div class="text-center ml-auto mr-auto">
             <h2 class="font-weight-bolder">Current Referrals</h2>
             <h4 class="text-white"></h4>
         </div>
         <hr>
         <div class="ml-auto mr-auto col-md-8 mb-4">
-        <div class="row ml-auto mr-auto">
-            <div class="col-md-4">
-                <label>Start date</label>
-                <input type="text" class="form-control date3" readonly="readonly" style="background:white;">
+            <form action="" method="POST">
+            <div class="row ml-auto mr-auto">
+                <div class="col-md-4">
+                    <label>Start date</label>
+                    <input type="text" name="start" class="form-control date3" readonly="readonly" style="background:white;">
+                </div>
+                <div class="col-md-4">
+                    <label>End date</label>
+                    <input type="text" name="end" class="form-control date4" readonly="readonly" style="background:white;">
+                </div>
+                <div class="col-md-4 mt-3">
+                    <button type="submit" class="btn btn-primary text-capitalize py-2 px-2 btn-block">Search</button>
+                </div>
             </div>
-            <div class="col-md-4">
-                <label>End date</label>
-                <input type="text" class="form-control date4" readonly="readonly" style="background:white;">
-            </div>
-            <div class="col-md-4 mt-3">
-                <button class="btn btn-primary text-capitalize py-2 px-2 btn-block">Search</button>
-            </div>
+        </form>
         </div>
-    </div>
-    <hr>
+        <hr>
+        <!-- my table  -->
+        <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Patient Huduma No</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </table>
+        <!-- my table -->
 </body>

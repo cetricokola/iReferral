@@ -18,6 +18,9 @@ type AccountController struct {
 var flash = beego.NewFlash()
 var valid = validation.Validation{}
 
+var Name string
+var Nam string
+
 //*PATIENT PORTAL LOG IN*//
 func (this *AccountController) Patients_login() {
 	this.patient_logIn("p_login")
@@ -55,6 +58,7 @@ func (this *AccountController) Patients_login() {
 		}
 		//set session for patient log in
 		this.SetSession("patient.HudumaNo", 50)
+		Nam = patient.FirstName
 		fmt.Println(patient.HudumaNo, ":successful log in ")
 		this.Redirect("/", 302)
 	}
@@ -148,6 +152,7 @@ func (this *AccountController) Admin_login() {
 		}
 		//set session
 		this.SetSession("UserID", iD)
+		Name = admin.Email
 		fmt.Println(admin.Id, ":successful log in ")
 		this.Redirect("../hosreg", 302)
 
