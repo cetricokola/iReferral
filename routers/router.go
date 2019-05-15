@@ -7,6 +7,8 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("healthIssue", &controllers.MainController{}, "get,post:Referral")
+	beego.Router("viewreferrals", &controllers.MainController{}, "get,post:ViewReferrals")
+	beego.Router("confirmreferral", &controllers.MainController{}, "get,post:PostDetails")
 	beego.Router("searchfacility", &controllers.ReferController{}, "get,post:ListHospitals")
 	beego.Router("patientreferralform", &controllers.ReferralsController{}, "get,post:PatReferral")
 	beego.Router("auth/p_login", &controllers.AccountController{}, "get,post:Patients_login") //patient log in url

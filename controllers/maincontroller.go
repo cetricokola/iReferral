@@ -17,8 +17,9 @@ func (this *MainController) Prepare() {
 		"/static/css/custom/main.css",
 		"/static/css/custom/search.css",
 		"/static/css/custom/jquery.datepick.css",
-			"/static/css/custom/chung-timepicker.css",
-	}
+		"/static/css/custom/chung-timepicker.css",
+			}
+
 	this.Data["HeadScripts"] = []string{
 		"/static/js/mdb-js/jquery-3.3.1.min.js",
 		"/static/js/mdb-js/mdb.min.js",
@@ -28,8 +29,11 @@ func (this *MainController) Prepare() {
 		"/static/js/custom/jquery.datepick.js",
 		"/static/js/custom/date.js",
 		"/static/js/custom/date2.js",
+		"/static/js/custom/date3.js",
+		"/static/js/custom/date4.js",
 		"/static/js/custom/time.js",
 		"/static/js/custom/chung-timepicker.js",
+		
 	}
 }
 
@@ -243,4 +247,40 @@ func (this *MainController) patReferral(view string){
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = view+".html"
 }
-
+func (this *MainController) PostDetails(){
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/s_login", 302)
+		return
+	}
+	this.Data["Title"] = "iReferral-Confirm that you want to refer the patient"
+	this.Data["Fname"] = Fname
+	this.Data["Lname"] = Lname
+	this.Data["HudumaNumber"] = Myhuduma
+	this.Data["Servicename"] = Service
+	this.Data["Thisdate"] = Date
+	this.Data["Thistime"] = Time
+	this.Data["Hosname"] = Hosname
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "success.html"
+}
+func (this *MainController) ViewReferrals() {
+	//check if the user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	
+	if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
+		this.Data["Title"] = "View referrals at your facility"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "viewreferrals.html"
+}

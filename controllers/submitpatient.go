@@ -9,7 +9,7 @@ type SubmitPatientController struct {
 	MainController
 }
 
-var HudumaNo string
+var HudumaNb string
 func (this *SubmitPatientController) SubmitPatient(){
 	this.submitPatient("submitpatient")
 	if this.Ctx.Input.Method() == "POST" {
@@ -31,7 +31,7 @@ func (this *SubmitPatientController) SubmitPatient(){
 				return
 			} else if err == nil {
 				fmt.Println("Successful searching patient")
-				HudumaNo = huduma
+				HudumaNb = huduma
 				this.Redirect("/searchfacility", 302)
 
 			}

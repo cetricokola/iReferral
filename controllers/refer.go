@@ -13,6 +13,7 @@ type ReferController struct {
 }
 
 //variable declaration
+var Service string
 var Names []string
 func (this *ReferController) ListHospitals() {
 	Names = nil
@@ -128,6 +129,7 @@ func (this *ReferController) ListHospitals() {
 
 		fmt.Println(Names)
 		fmt.Println(len(Names))
+		Service = service
 		this.Redirect("/patientreferralform", 302)
 	
 	}

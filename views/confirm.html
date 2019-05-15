@@ -1,0 +1,38 @@
+<body class="">
+    <div class="mb-5">
+        <h1 class="text-primary my-3 p-3">iReferral.</h1>
+    </div>
+    <div class="container">
+        <div class="text-center ml-auto mr-auto">
+            <h2 class="my-4 font-weight-bolder">Patient Referral</h2>
+            <h4 class="text-white"></h4>
+        </div>
+        <div>
+            <p>The patient is successfuly referred.</p>
+        </div>
+        <div>
+            <h5>Patient Name:<p class="text-success"> {{.Fname}} {{.Lname}}</p>
+            </h5>
+            <h5>Huduma No:<p class="text-success"> {{.HudumaNumber}}</p>
+            </h5>
+            <h5>Referral Hospital:<p class="text-success"> {{.Hosname}}</p>
+            </h5>
+            <h5>Service:<p class="text-success"> {{.Servicename}}</p>
+            </h5>
+            <h5>Date:<p class="text-success"> {{.Thisdate}}</p>
+            </h5>
+            <h5>Time:<p class="text-success"> {{.Thistime}}</p>
+            </h5>
+        </div>
+        <div class="row col-md-4">
+            <div class="col">
+                <button type="submit" method="PostDetails" for="form1" class="btn btn-success">Refer</button>
+            </div>
+            <div class="col">
+                <a href="/patientreferralform" class="btn btn-success">No</a>
+            </div>
+        </div>
+
+
+    </div>
+</body>

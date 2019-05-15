@@ -1,0 +1,46 @@
+<body style="background-color: whitesmoke">
+    <div class="mb-3">
+        <h1 class="text-primary mt-3 p-3">iReferral.</h1>
+    </div>
+    <div class="container">
+        <div class="text-center ml-auto mr-auto">
+            <h2 class="font-weight-bolder">Patient Referral</h2>
+            <h4 class="text-white"></h4>
+        </div>
+        <hr>
+        <div class="card py-4 col-md-8 ml-auto mr-auto">
+            <div class="ml-auto mr-auto">
+                <div>
+                    <h4 class="text-primary">The patient has successfully been referred</h4>
+                </div>
+
+                <div class="row p-3">
+                    <div class="col-md-5">
+                        <h5>Patient Name:<p class="text-success"> {{.Fname}} {{.Lname}}</p>
+                        </h5>
+                        <h5>Huduma No:<p class="text-success"> {{.HudumaNumber}}</p>
+                        </h5>
+                        <h5>Referral Hospital:<p class="text-success"> {{.Hosname}}</p>
+                        </h5>
+                    </div>
+                    <div class="col-md-5 ml-auto">
+                        <h5>Service:<p class="text-success"> {{.Servicename}}</p>
+                        </h5>
+                        <h5>Date:<p class="text-success"> {{.Thisdate}}</p>
+                        </h5>
+                        <h5>Time:<p class="text-success"> {{.Thistime}}</p>
+                        </h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <div class="col-md-6 ml-auto mr-auto">
+            <a href="/doctor" class="mr-5">Back to my dashboard</a>
+            <a href="/submitpatient" class="mr-5">Refer another patient</a>
+            <a href="/logout">Log out</a>
+        </div>
+        <hr>
+        
+</body>
