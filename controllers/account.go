@@ -365,6 +365,7 @@ func (this *AccountController) Admin_reg() {
 
 		//validation of user input
 		//input validation
+		
 		valid.Required(id, "National id") //No null values are accepted
 		valid.Required(email, "email")
 		valid.Email(email, "email") //input a valid email address

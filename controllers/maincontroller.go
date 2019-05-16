@@ -278,6 +278,8 @@ func (this *MainController) viewReferrals(view string) {
 		this.Data["Serv"] = Serv
 		this.Data["Dat"] = Dat
 		this.Data["Tim"] = Tim
+		this.Data["Len"] = Len
+		this.Data["Referral"] = Referral
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
