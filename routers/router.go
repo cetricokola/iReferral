@@ -31,4 +31,6 @@ func init() {
 	beego.Router("doctor", &controllers.DocController{}, "get:FindPatient")
 	beego.Router("/report", &controllers.DiagnosisController{}, "get,post:UpdateReport")
 	beego.Router("/submitpatient", &controllers.SubmitPatientController{}, "get,post:SubmitPatient")
+	beego.Router("phome", &controllers.MainController{}, "get,post:Phome")
+	
 }

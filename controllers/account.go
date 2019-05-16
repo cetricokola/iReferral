@@ -19,10 +19,19 @@ var flash = beego.NewFlash()
 var valid = validation.Validation{}
 
 var Name string
+var Pfname string
+var Plname string
 var Nam string
 
 //*PATIENT PORTAL LOG IN*//
 func (this *AccountController) Patients_login() {
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	if userID != nil {
+		// User is logged in already, display another page
+		this.Redirect("/phome", 302)
+		return
+	}
 	this.patient_logIn("p_login")
 	if this.Ctx.Input.Method() == "POST" {
 		//Extract the form data
@@ -57,10 +66,11 @@ func (this *AccountController) Patients_login() {
 			return
 		}
 		//set session for patient log in
-		this.SetSession("patient.HudumaNo", 50)
-		Nam = patient.FirstName
+		session.Set("UserID", hudumaNo)
+		Pfname = patient.FirstName
+		Plname = patient.LastName
 		fmt.Println(patient.HudumaNo, ":successful log in ")
-		this.Redirect("/", 302)
+		this.Redirect("/phome", 302)
 	}
 }
 

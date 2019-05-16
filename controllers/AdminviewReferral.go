@@ -38,11 +38,10 @@ func (this *ViewReferralsController) MyReferrals() {
 
 	myId := userID.(string)
 	this.viewReferrals("viewreferrals")
-	/*Hdm = nil
+	Hdm = nil
 	Serv = nil
 	Dat = nil
 	Tim = nil
-	Len = 0*/
 	if this.Ctx.Input.Method() == "POST" {
 		start := this.GetString("start")
 		end := this.GetString("end")
@@ -68,19 +67,18 @@ func (this *ViewReferralsController) MyReferrals() {
 			Referral = nil
 			Len = len
 		} else {
-		
-		for i := 0; i < len; i++ {
-			hdm := Referral[i].HudumaNo
-			dat := Referral[i].RDate
-			tim := Referral[i].RTime
-			serv := Referral[i].Service
-			Hdm = append(Hdm, hdm)
-			Serv = append(Serv, serv)
-			Dat = append(Dat, dat)
-			Tim = append(Tim, tim)
+			for i := 0; i < len; i++ {
+				hdm := Referral[i].HudumaNo
+				dat := Referral[i].RDate
+				tim := Referral[i].RTime
+				serv := Referral[i].Service
+				Hdm = append(Hdm, hdm)
+				Serv = append(Serv, serv)
+				Dat = append(Dat, dat)
+				Tim = append(Tim, tim)
 
-		}
-		
+			}
+
 			Len = len
 		}
 		fmt.Println("Hudumas are the following", Serv, Dat, Tim, Hdm)

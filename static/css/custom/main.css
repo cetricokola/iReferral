@@ -41,7 +41,30 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.pat {
+     /* The image used */
+     background-image: url("../../img/p.jpg");
 
+     /* Full height */
+     height: 100%;
+ 
+     /* Center and scale the image nicely */
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+}
+.pat2 {
+    /* The image used */
+    background-image: url("../../img/p2.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .hosregbg {
     /* The image used */
     background-image: url("../../img/ch.jpg");
