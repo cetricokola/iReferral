@@ -1,0 +1,64 @@
+<body style="background-color: whitesmoke">
+  <div class="ml-5">
+    <h1 class="text-primary mt-3">iReferral.</h1>
+    <a href="phome" class="text-success ml-4 border p-1">To dashboard</a>
+    <a href="mymedicalrecords" class="text-success ml-2 border p-1">Medical history</a>
+
+  </div>
+  <div class=" mr-5 ml-auto col-md-2 p-0 m-0">
+    <p class="text-success m-0 p-0">{{.Pfname}}</p>
+    <a href="logout" class="p-0 m-0">Log out</a>
+  </div>
+  <div class="container">
+    <div class="text-center ml-auto mr-auto">
+      <h2 class="font-weight-bolder">Current Referrals</h2>
+      <h4 class="text-white"></h4>
+    </div>
+    <hr>
+    <div class="ml-auto mr-auto col-md-8 mb-4">
+      <form action="" method="POST">
+        <div class="row ml-auto mr-auto">
+          <div class="col-md-4">
+            <label>Start date</label>
+            <input type="text" name="start" class="form-control date3" readonly="readonly" style="background:white;">
+          </div>
+          <div class="col-md-4">
+            <label>End date</label>
+            <input type="text" name="end" class="form-control date4" readonly="readonly" style="background:white;">
+          </div>
+          <div class="col-md-4 mt-3">
+            <button type="submit" class="btn btn-primary text-capitalize py-2 px-2 btn-block">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr>
+    {{if (gt .Leng 0)}}
+    <table class="table">
+      <thead class="font-weight-bolder">
+        <tr>
+          <th scope="col">Patient Huduma No</th>
+          <th scope="col">Service</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range $refer := .MyRef}}
+        <tr>
+          <td scope="row">{{$refer.HosName}}</td>
+          <td scope="row">{{$refer.Service}}</td>
+          <td scope="row">{{$refer.RDate}}</td>
+          <td scope="row">{{$refer.RTime}}</td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+    {{else}}
+    <div class="bg- white text-primary text-center m-5 p-5 card">
+      <h3 class="my-5">Sorry.Your're currently having no referrals for the selected dates.</h3>
+      <h3>Thank you!</h3>
+    </div>
+    {{end}}
+
+</body>

@@ -166,7 +166,7 @@ func (this *AccountController) Admin_login() {
 		this.SetSession("UserID", iD)
 		Name = admin.Email
 		fmt.Println(admin.Id, ":successful log in ")
-		this.Redirect("../hosreg", 302)
+		this.Redirect("../adminhome", 302)
 
 	}
 
@@ -341,7 +341,6 @@ func (this *AccountController) Staff_reg() {
 		//hash the password
 		password, _ := HashPassword(submittedpassword)
 		//******** Save user info to database
-
 		o := orm.NewOrm()
 		o.Using("default")
 

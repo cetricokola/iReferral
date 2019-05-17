@@ -1,0 +1,42 @@
+<body style="background-color: whitesmoke">
+  <div class="ml-5">
+    <h1 class="text-primary mt-3">iReferral.</h1>
+    <a href="phome" class="text-success ml-4 border p-1">To dashboard</a>
+    <a href="myreferrals" class="text-success ml-2 border p-1">View referrals</a>
+
+  </div>
+  <div class=" mr-5 ml-auto col-md-2 p-0 m-0">
+    <p class="text-success m-0 p-0">{{.Pfname}}</p>
+    <a href="logout" class="p-0 m-0">Log out</a>
+  </div>
+<div class="container">
+    <div class="text-center ml-auto mr-auto">
+        <h2 class="font-weight-bolder">Medical History</h2>
+        <h4 class="text-white"></h4>
+      </div>
+      <hr>
+   <table class="table">
+    <thead class="font-weight-bolder">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Temperature</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Blood pressure</th>
+        <th scope="col">Diagnosis</th>
+        <th scope="col">Prescription</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range $refer := .Repo}}
+      <tr>
+        <td scope="row">{{$refer.Reg_date}}</td>
+        <td scope="row">{{$refer.Temperature}}</td>
+        <td scope="row">{{$refer.Weight}}</td>
+        <td scope="row">{{$refer.BloodPressure}}</td>
+        <td scope="row">{{$refer.Diagnosis}}</td>
+        <td scope="row">{{$refer.Prescription}}</td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</div>

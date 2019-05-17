@@ -270,7 +270,6 @@ func (this *MainController) PostDetails() {
 }
 func (this *MainController) viewReferrals(view string) {
 	//check if the user is logged in
-
 	this.Data["Title"] = "View referrals at your facility"
 	this.Data["Name"] = Name
 	this.Data["Len"] = Len
@@ -318,4 +317,28 @@ func (this *MainController) preport(view string) {
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = view + ".html"
+}
+func (this *MainController) AdminDash() {
+	//check if the user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+
+	if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
+	this.Data["Title"] = "Admin dashbord"
+	this.Data["Name"] = Name
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "admindash.html"
+}
+func (this *MainController) Unsuccessful() {
+	this.Data["Title"] = "iReferral-unable to create a facility"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "unsuccessful.html"
 }

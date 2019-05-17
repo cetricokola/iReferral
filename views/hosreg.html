@@ -1,6 +1,6 @@
 <!-- <div class="hosregbg">
     <div> -->
-<nav class="navbar navbar-expand-lg sticky-top navbar-light">
+<nav class="navbar navbar-expand-lg sticky-top navbar-light fixed-top">
     <h1 class="navbar-brand text-primary">iReferral.</h1>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,7 +8,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav ml-auto mr-auto">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="#home">Home</a>
             </li>
@@ -19,7 +19,6 @@
                 <a class="nav-link" href="#contact">Contact</a>
             </li>
         </ul>
-        <a class="btn btn-flat py-2 text-capitalize text-primary" href="viewreferrals" title="view referrals">View referrals</a>
         <a class="btn btn-primary py-2 text-capitalize" href="logout" title="Log out">Log out</a>
 
     </div>
@@ -30,30 +29,16 @@
     <div id="home" class="hosregbg">
         <div class="row">
             <div class="col-md-6 p-5 mt-5 text-white">
-                <h1>Register your facility and the services offered at the facility with us.</h1>
-                <h1 class="mt-5">Already have an existing facility in place?</h1>
-                <!-- flash messages for errors -->
-                <p class="text-danger bg-white col-md-4">{{.err1.error}}</p>
-                <div class="accordion" id="accordion2">
-                    <div id="head2">
-                        <button class="btn px-5 btn-rounded btn-success text-capitalize px-3 py-2" type="button"
-                            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-                            aria-controls="collapseOne">
-                            Update facility
-                        </button>
-                    </div>
-                    <div id="collapseTwo" class="collapse hide" aria-labelledby="head2" data-parent="#accordion2">
-                        <div class="card  col-md-7 py-3 px-4 ml-3">
-                            <!-- form -->
-                            <form method="GET" action="/hosreg" class="text-center">
-                                <input class="form-control mb-2" type="text" name="name"
-                                    placeholder="Search by hospital email address">
-                                <button class="btn btn-primary btn-block mt-3 py-2 text-capitalize" type="submit"> Find
-                                    facility</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <ul style="list-style-type:square;">
+                    <li>
+                        <h2>Register your facility and the services offered at the facility with us.</h2>
+                    </li>
+                    <li class="mt-5">
+                        <h2>Upon successful registration, go ahead and update it with the services offered and add staff
+                            for your facility for them to be able to interract with iReferral too.
+                        </h2>
+                    </li>
+                </ul>
             </div>
             <div class="col-md-4 ml-auto">
                 <div class=" ml-auto  p-3 m-3 card">
@@ -62,7 +47,7 @@
                     <!-- flash messages for errors -->
                     <p class="text-danger">{{.err2.error}}</p>
                     <!-- Form -->
-                    <form method="POST" action="/hosreg" class="text-center">
+                    <form method="POST" action="" class="text-center">
                         <!--first Name-->
                         <div class="md-form mt-0 md-outline">
                             <input type="text" id="nam" name="name" class="form-control">
@@ -118,101 +103,9 @@
     </div>
 </div>
 <!-- </div> -->
-<div id="contact" class="hosregbg1">
-    <!--Section: Contact v.2-->
-    <div class="p-1 container-fluid">
-        <section class="mb-4 mt-5 container">
-            <!--Section heading-->
-            <h2 class="h1-responsive font-weight-bold text-primary text-center my-4">Write to us</h2>
-            <!--Section description-->
-            <p class="text-center w-responsive mx-auto mb-5">Do you have any questions or need help? Please do not
-                hesitate to
-                contact us directly. Our team will come back to you within
-                a matter of hours to help you.Thank you!</p>
 
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-md-7 ml-3 mb-md-0 mb-5">
-                    <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-                        <!--Grid row-->
-                        <div class="row">
-                            <!--Grid column-->
-                            <div class="col-md-6">
-                                <div class="md-form mb-0">
-                                    <input type="text" id="name" name="name" class="form-control">
-                                    <label for="name" class="">Your name</label>
-                                </div>
-                            </div>
-                            <!--Grid column-->
-                            <!--Grid column-->
-                            <div class="col-md-6">
-                                <div class="md-form mb-0">
-                                    <input type="text" id="email" name="email" class="form-control">
-                                    <label for="email" class="">Your email</label>
-                                </div>
-                            </div>
-                            <!--Grid column-->
-                        </div>
-                        <!--Grid row-->
 
-                        <!--Grid row-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="md-form mb-0">
-                                    <input type="text" id="subject" name="subject" class="form-control">
-                                    <label for="subject" class="">Subject</label>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Grid row-->
-
-                        <!--Grid row-->
-                        <div class="row">
-
-                            <!--Grid column-->
-                            <div class="col-md-12">
-
-                                <div class="md-form">
-                                    <textarea type="text" id="message" name="message" rows="2"
-                                        class="form-control md-textarea"></textarea>
-                                    <label for="message">Your message</label>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!--Grid row-->
-                        <button class="btn btn-primary text-capitalize py-2 px-5" type="submit">send</button>
-                    </form>
-                </div>
-                <!--Grid column-->
-                <!--Grid column-->
-                <div class="col-md-3 text-center">
-                    <ul class="list-unstyled mb-0 m-4">
-                        <li>
-                            <h4 class="text-primary mb-4">Contacts</h4>
-                        </li>
-                        <li>
-                            <p class="text-success">Location</p>
-                            <p>Tower1 Nakuru, KENYA</p>
-                        </li>
-
-                        <li>
-                            <p class="text-success">Telephone</p>
-                            <p>+ 254 704 145 832</p>
-                        </li>
-
-                        <li>
-                            <p class="text-success">Email</p>
-                            <p>contact@iReferral.com</p>
-                        </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-            </div>
-        </section>
-        <!--Section: Contact v.2-->
-    </div>
 </div>
-<div class="bg-primary card" id="update">
 </div>
+
 </div>

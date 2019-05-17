@@ -1,0 +1,68 @@
+<body style="background-color:whitesmoke">
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <h1 class="navbar-brand text-primary">iReferral.</h1>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav ml-auto">
+                <a class="nav-link nav-item mr-3" href="#">Contact us</a>
+                <p class="text-success nav-item mr-3 mt-2">{{.Name}}</p>
+                <a class="nav-link text-primary nav-item mr-5" href="logout">Log out</a>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="mt-5">
+            <div class="card-deck">
+                <div class="card mb-4">
+                    <div class="view overlay">
+                        <img class="card-img-top" src="/static/img/p.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Create your facility profile.</h4>
+                        <p class="card-text">Register your facility and the services offered to make it available to
+                            patients and other facilities.</p>
+                        <a href="checkvalidity" class="btn btn-success btn-md">Register</a>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="view overlay">
+                        <img class="card-img-top" src="/static/img/hos4.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Keep your facility up-to date.</h4>
+                        <p class="card-text">Add new, change or remove services offered and the staff(doctors and
+                            nurses).</p>
+                        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                        <a href="facility_mgn" class="btn btn-success btn-md">update</a>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="view overlay">
+                        <img class="card-img-top" src="/static/img/hos2.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">View referrals at your facility.</h4>
+                        <p class="card-text">View the latest referrals directed to your hospital facility.Filter using
+                            dates to see more.</p>
+                        <a href="/viewreferrals" class="btn btn-success btn-md">Referrals</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+        </div>
+        <hr>
+    </div>
+    </div>
+</body>
