@@ -22,6 +22,7 @@ var Name string
 var Pfname string
 var Plname string
 var Nam string
+var PiD string
 
 //*PATIENT PORTAL LOG IN*//
 func (this *AccountController) Patients_login() {
@@ -69,6 +70,7 @@ func (this *AccountController) Patients_login() {
 		session.Set("UserID", hudumaNo)
 		Pfname = patient.FirstName
 		Plname = patient.LastName
+		PiD = hudumaNo
 		fmt.Println(patient.HudumaNo, ":successful log in ")
 		this.Redirect("/phome", 302)
 	}
@@ -303,7 +305,6 @@ func (this *AccountController) Staff_reg() {
 			errormap := []string{}
 			for _, err := range valid.Errors {
 				errormap = append(errormap, "Validation failed on "+err.Key+": "+err.Message+"\n")
-
 			}
 			this.Data["Errors"] = errormap
 			return
@@ -340,25 +341,29 @@ func (this *AccountController) Staff_reg() {
 		//hash the password
 		password, _ := HashPassword(submittedpassword)
 		//******** Save user info to database
-		var iD string
+
 		o := orm.NewOrm()
 		o.Using("default")
-		//check if the emp id is valid.The one admin assigned to the employer
-		err := o.Raw("select emp_id from employee where emp_id=?", empId).QueryRow(&iD)
-		if err != nil{
-			fmt.Println("invalid emp id")
-			flash.Error("The employee id is incorrect")
+
+		//check if the emp id is valid.The one admin assigned to the employer and the emp id is already used by the employee to sign up
+		exist := o.QueryTable("employee").Filter("EmpId", empId).Exist()
+		exist1 := o.QueryTable("employee_account").Filter("EmpId", empId).Exist()
+		if exist == true && exist1 == false {
+			staff := models.Employee_account{EmpId: empId, Email: email, PhoneNo: phone, Password: password}
+			_, err := o.Insert(&staff)
+			if err != nil {
+				fmt.Println(err)
+				flash.Error(phone + " already registered!")
+				flash.Store(&this.Controller)
+				return
+			}
+		} else {
+			fmt.Println("Invalid emp id")
+			flash.Error("Invalid employee id.Try again")
 			flash.Store(&this.Controller)
 			return
 		}
-		staff := models.Employee_account{EmpId: iD, Email: email, PhoneNo: phone, Password: password}
-		_, err = o.Insert(&staff)
-		if err != nil {
-			fmt.Println(err)
-			flash.Error(phone + " already registered!")
-			flash.Store(&this.Controller)
-			return
-		}
+		fmt.Println("Successfull sign up")
 		this.Redirect("../info/emp_regSuccess", 302)
 	}
 }
@@ -375,7 +380,7 @@ func (this *AccountController) Admin_reg() {
 
 		//validation of user input
 		//input validation
-		
+
 		valid.Required(id, "National id") //No null values are accepted
 		valid.Required(email, "email")
 		valid.Email(email, "email") //input a valid email address

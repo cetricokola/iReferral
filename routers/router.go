@@ -28,9 +28,11 @@ func init() {
 	beego.Router("facility_mgn", &controllers.FacilityController{}, "get:RemoveEmp")
 	beego.Router("hosearch", &controllers.FaController{}, "post:Createservice")
 	beego.Router("hosearch", &controllers.FaController{}, "get:Removeservice")
-	beego.Router("doctor", &controllers.DocController{}, "get:FindPatient")
+	beego.Router("/doctor", &controllers.DocController{}, "get:FindPatient")
 	beego.Router("/report", &controllers.DiagnosisController{}, "get,post:UpdateReport")
 	beego.Router("/submitpatient", &controllers.SubmitPatientController{}, "get,post:SubmitPatient")
-	beego.Router("phome", &controllers.MainController{}, "get,post:Phome")
+	beego.Router("/phome", &controllers.MainController{}, "get,post:Phome")
+	beego.Router("/mymedicalrecords", &controllers.PatientController{}, "get,post:Preport")
+	beego.Router("/myreferrals", &controllers.PatientController{}, "get,post:Preferral")
 	
 }

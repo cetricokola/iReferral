@@ -273,10 +273,6 @@ func (this *MainController) viewReferrals(view string) {
 
 	this.Data["Title"] = "View referrals at your facility"
 	this.Data["Name"] = Name
-	this.Data["Hdm"] = Hdm
-	this.Data["Serv"] = Serv
-	this.Data["Dat"] = Dat
-	this.Data["Tim"] = Tim
 	this.Data["Len"] = Len
 	this.Data["Referral"] = Referral
 	this.Layout = "layout.tpl"
@@ -299,4 +295,27 @@ func (this *MainController) Phome() {
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "phome.html"
+}
+
+func (this *MainController) preferral(view string) {
+	this.Data["Title"] = "iReferral-View your referrals"
+	this.Data["Plname"] = Plname
+	this.Data["Pfname"] = Pfname
+	this.Data["MyRef"] = MyRef
+	this.Data["Leng"] = Leng
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
+}
+
+func (this *MainController) preport(view string) {
+	this.Data["Title"] = "iReferral-View your medical history"
+	this.Data["Plname"] = Plname
+	this.Data["Pfname"] = Pfname
+	this.Data["Repo"] = Repo
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
 }
