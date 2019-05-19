@@ -15,6 +15,7 @@ type ReferController struct {
 //variable declaration
 var Service string
 var Names []string
+
 func (this *ReferController) ListHospitals() {
 	Names = nil
 	session := this.StartSession()
@@ -81,7 +82,8 @@ func (this *ReferController) ListHospitals() {
 
 		//return hospital names offering the service requested in the same district
 		fmt.Println(len(Names))
-		control := false //control variable
+
+		var control bool
 		if control == false {
 			///var Names []string
 			for i := 0; i < len(lists); i++ {
@@ -96,12 +98,10 @@ func (this *ReferController) ListHospitals() {
 			} else {
 				control = true
 			}
-		}
-		fmt.Println("After a check fro mthe same district:=", Names)
-		fmt.Println("the contro:", control)
-		//return hospital names offering the service requested in the same region
 
-		if control == false {
+			//return hospital names offering the service requested in the same region
+
+		} else if control == false {
 			for i := 0; i < len(lists); i++ {
 				var name string
 				fmt.Println(lists[i])
@@ -114,9 +114,7 @@ func (this *ReferController) ListHospitals() {
 			} else {
 				control = true
 			}
-		}
-
-		if control == false {
+		} else if control == false {
 			//return hospital names offering the service requested in the rest of the country parts
 			for i := 0; i < len(lists); i++ {
 				var name string
@@ -126,11 +124,12 @@ func (this *ReferController) ListHospitals() {
 				Names = append(Names, name)
 			}
 		}
-
+		fmt.Println("After a check fro mthe same district:=", Names)
+		fmt.Println("the contro:", control)
 		fmt.Println(Names)
 		fmt.Println(len(Names))
 		Service = service
 		this.Redirect("/patientreferralform", 302)
-	
+
 	}
 }
