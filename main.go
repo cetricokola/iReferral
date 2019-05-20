@@ -12,7 +12,7 @@ import (
 func init() {
 	
 	orm.RegisterDriver("mysql", orm.DRMySQL)                                                       //mapping database driver and database name
-	orm.RegisterDataBase("default", "mysql", "root:9988@tcp(127.0.0.1:3306)/ireferral?charset=utf8") //connecting to the database
+	orm.RegisterDataBase("default", "mysql", "root:@tcp(127.0.0.1:3306)/ireferral?charset=utf8") //connecting to the database
 
 }
 
