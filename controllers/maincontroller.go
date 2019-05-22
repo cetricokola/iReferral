@@ -335,10 +335,48 @@ func (this *MainController) AdminDash() {
 	this.TplName = "admindash.html"
 }
 func (this *MainController) Unsuccessful() {
+	session := this.StartSession()
+	userID := session.Get("UserID")
+
+	if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
 	this.Data["Title"] = "iReferral-unable to create a facility"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	// this.LayoutSections["Header"] = "header.tpl"
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "unsuccessful.html"
+}
+func (this *MainController) UnsuccessfulHos() {
+	session := this.StartSession()
+	userID := session.Get("UserID")
+
+	if userID == nil {
+		this.Redirect("/auth/a-login", 302)
+		return
+	}
+	this.Data["Title"] = "iReferral-unable to manage facility"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "info/reghos.html"
+}
+
+func (this *MainController) Conta(){
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	SessionId := userID.(string)
+	this.Data["Session"] = SessionId
+	this.Data["Pat"] = PiD
+	this.Data["Admin"] = ID
+	this.Data["Doc"] = Sid
+	this.Data["Title"] = "iReferral-contacts"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "info/contacts.html"
 }

@@ -19,10 +19,12 @@ var flash = beego.NewFlash()
 var valid = validation.Validation{}
 
 var Name string
+var ID string //admin id...currently logged in
+var Sid string //emp id ... currently logged in
 var Pfname string
 var Plname string
 var Nam string
-var PiD string
+var PiD string // patient huduma number currently logged in
 
 //*PATIENT PORTAL LOG IN*//
 func (this *AccountController) Patients_login() {
@@ -165,6 +167,7 @@ func (this *AccountController) Admin_login() {
 		//set session
 		this.SetSession("UserID", iD)
 		Name = admin.Email
+		ID = admin.Id
 		fmt.Println(admin.Id, ":successful log in ")
 		this.Redirect("../adminhome", 302)
 
