@@ -40,10 +40,10 @@ func (this *ReferralsController) PatReferral() {
 		}
 
 		var mhuduma string
-		if len(HudumaNb) == 0 {
+		if len(Myhuduma) == 0 {
 			mhuduma = Huduma
 		} else {
-			mhuduma = HudumaNb
+			mhuduma = Myhuduma
 		}
 		o := orm.NewOrm()
 		o.Using("default")

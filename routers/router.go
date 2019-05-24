@@ -9,7 +9,6 @@ func init() {
 	beego.Router("healthIssue", &controllers.MainController{}, "get,post:Referral")
 	beego.Router("viewreferrals", &controllers.ViewReferralsController{}, "get,post:MyReferrals")
 	beego.Router("confirmreferral", &controllers.MainController{}, "get,post:PostDetails")
-	beego.Router("searchfacility", &controllers.ReferController{}, "get,post:ListHospitals")
 	beego.Router("patientreferralform", &controllers.ReferralsController{}, "get,post:PatReferral")
 	beego.Router("auth/p_login", &controllers.AccountController{}, "get,post:Patients_login") //patient log in url
 	beego.Router("auth/s_login", &controllers.AccountController{}, "get,post:Staff_login")
@@ -31,7 +30,6 @@ func init() {
 	beego.Router("hosearch", &controllers.FaController{}, "get:Removeservice")
 	beego.Router("/doctor", &controllers.DocController{}, "get:FindPatient")
 	beego.Router("/report", &controllers.DiagnosisController{}, "get,post:UpdateReport")
-	beego.Router("/submitpatient", &controllers.SubmitPatientController{}, "get,post:SubmitPatient")
 	beego.Router("/phome", &controllers.MainController{}, "get,post:Phome")
 	beego.Router("/mymedicalrecords", &controllers.PatientController{}, "get,post:Preport")
 	beego.Router("/myreferrals", &controllers.PatientController{}, "get,post:Preferral")
@@ -40,5 +38,7 @@ func init() {
 	beego.Router("unsuccessfulservicerequest", &controllers.MainController{}, "get,post:UnsuccessfulHos")
 	beego.Router("ourcontacts", &controllers.MainController{}, "get,post:Conta")
 	beego.Router("referpatient", &controllers.ReferpController{})
+	beego.Router("searchservice", &controllers.ServicesController{})
+	beego.Router("services", &controllers.ServiceController{}, "get,post:Listservices")
 	
 }

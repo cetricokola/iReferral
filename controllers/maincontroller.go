@@ -33,6 +33,7 @@ func (this *MainController) Prepare() {
 		"/static/js/custom/date4.js",
 		"/static/js/custom/time.js",
 		"/static/js/custom/chung-timepicker.js",
+		"/static/js/mdb-js/axios.min.js",
 	}
 }
 

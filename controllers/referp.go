@@ -11,31 +11,25 @@ type ReferpController struct {
 	MainController
 }
 
-// type Form_data struct {
-// 	huduma  string
-// 	service string
-// }
-
 type ErrorJson struct {
 	Message string
 	Huduma string
 	Service string
 }
 
-//var dataform Form_data
-
+var MyHuduma string
+var Myservice string
 func (this *ReferpController) Get() {
 	this.doctor_portal("doctor")
 }
 
 func (this *ReferpController) Post() {
-	//json.Unmarshal(this.Ctx.Input.RequestBody, &dataform)
+	
 	fmt.Println(string(this.Ctx.Input.RequestBody))
 	var dataform map[string]interface{}
 	json.Unmarshal(this.Ctx.Input.RequestBody, &dataform)
 	huduma :=  dataform["huduma"]
 	service := dataform["service"]
-
 	fmt.Println(huduma)
 	fmt.Println(service)
 	o := orm.NewOrm()
@@ -45,12 +39,14 @@ func (this *ReferpController) Post() {
 	exist1 := o.QueryTable("services").Filter("Name", service).Exist()
 	h := huduma.(string)
 	s := service.(string)
-
+	MyHuduma = h
+	Myservice = s
 	fmt.Println(exist)
 	fmt.Println(exist1)
 	if exist == true && exist1 == true {
 		var responsejson ErrorJson
-		responsejson.Message = "/submitpatient?huduma="+h+"&service="+s
+		//responsejson.Message = "/submitpatient?huduma="+h+"&service="+s
+		responsejson.Message = "/services"
 		obj, _ := json.Marshal(responsejson)
 		this.Ctx.Output.Header("Content-Type", "application/json")
 		this.Ctx.Output.Body(obj)
