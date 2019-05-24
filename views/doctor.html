@@ -47,7 +47,8 @@
                 </div>
                 <div class="col-md-5 ml-auto px-5">
                     <div class="card hoverable z-depth-5 circle1">
-                        <a href=""> <img src="static/img/arro.png" alt="arrow" style="height:50px; width:50px" data-toggle="modal" data-target="#refer"></a>
+                        <a href=""> <img src="static/img/arro.png" alt="arrow" style="height:50px; width:50px"
+                                data-toggle="modal" data-target="#refer"></a>
                         <a href="" class="text-warning" data-toggle="modal" data-target="#refer">
                             <h5>Refer the patient.</h5>
                         </a>
@@ -58,31 +59,71 @@
         </div>
     </div>
     <div class="modal fade" id="refer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="text-success">Enter the patient huduma number and service he/she requires.</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="/referpatient" method="POST">
-                        <div class="modal-body mx-3">
-                            <div class="md-form mb-5">
-                                <input type="text" id="hdmn" name="huduma" class="form-control validate">
-                                <label for="hdmn">Patient Huduma No</label>
-                            </div>
-                            <div class="md-form mb-4">
-                                <input type="text" id="serv" name="service" class="form-control validate">
-                                <label for="serv">Service name</label>
-                            </div>
-                        </div>
-                        <p>{{.flash.error}}</p>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary text-capitalize px-5">Submit</button>
-                        </div>
-                    </form>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="text-success">Enter the patient huduma number and service he/she requires.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form>
+                <!-- <form action="/referpatient" method="POST"> -->
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-5">
+                            <input type="text" id="huduma" name="huduma" class="form-control validate">
+                            <label for="huduma">Patient Huduma No</label>
+                            <small id="hudumaError" class="text-danger small-text" style="display: none;">The patient does not exist</small>
+                        </div>
+                        <div class="md-form mb-4">
+                            <input type="text" id="service" name="service" class="form-control validate">
+                            <label for="service">Service name</label>
+                            <small id="serviceError"  class="text-danger small-text" style="display: none;">Invalid service name</small>
+                        </div>
+                    </div>
+                    <div id="error_msg"></div>
+                    <!-- <p>{{.flash.error}}</p> -->
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="submit" id="submit" class="btn btn-primary text-capitalize px-5" >Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js">
+
+    </script>
+    <script>
+        document.querySelector("#submit").onclick = (e)=>{
+           e.preventDefault()
+
+           document.querySelector("#huduma").classList.remove("border-danger")
+           document.querySelector("#hudumaError").style.display = "none"
+           document.querySelector("#service").classList.remove("border-danger")
+          document.querySelector("#serviceError").style.display = "none"
+           
+           axios.post("/referpatient",{
+               huduma : document.querySelector("#huduma").value,
+               service : document.querySelector("#service").value
+           })
+           .then(data=>{
+              window.location.href = data.data.Message
+           })
+           .catch(err=>{
+               var resp = err.response.data
+              
+               if(resp.Huduma == "invalid"){
+                   document.querySelector("#huduma").classList.add("border-danger")
+                   document.querySelector("#hudumaError").style.display = "block"
+               }
+
+               if(resp.Service == "invalid"){
+                  document.querySelector("#service").classList.add("border-danger")
+                  document.querySelector("#serviceError").style.display = "block"
+               }
+           })
+
+        }
+    </script>
+   
 </body>

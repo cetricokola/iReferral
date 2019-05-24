@@ -9,19 +9,19 @@ $('document').ready(function () {
             return;
         }
         $.ajax({
-            url: '../view/doctor.html',
+            url: '/referpatient',
             type: 'post',
             data: {
-                'huduma_check': 1,
+             
                 'huduma': huduma,
             },
             success: function (response) {
-                if (response == 'taken') {
+                if (response.data){
                     huduma_state = false;
                     $('#huduma').parent().removeClass();
                     $('#huduma').parent().addClass("form_error");
                     $('#huduma').siblings("span").text('Patient does not exist');
-                } else if (response == 'not_taken') {
+                } else if (response.data) {
                     username_state = true;
                     $('#huduma').parent().removeClass();
                     $('#huduma').parent().addClass("form_success");
@@ -38,19 +38,18 @@ $('document').ready(function () {
             return;
         }
         $.ajax({
-            url: '../view/doctor.html',
+            url: '/referpatient',
             type: 'post',
             data: {
-                'service_check': 1,
-                'service': email,
+                                'service': email,
             },
             success: function (response) {
-                if (response == 'taken') {
+                if (response.data) {
                     service_state = false;
                     $('#service').parent().removeClass();
                     $('#service').parent().addClass("form_error");
                     $('#service').siblings("span").text('Service does not exist');
-                } else if (response == 'not_taken') {
+                } else {
                     service_state = true;
                     $('#service').parent().removeClass();
                     $('#service').parent().addClass("form_success");
@@ -68,10 +67,10 @@ $('document').ready(function () {
         } else {
             // proceed with form submission
             $.ajax({
-                url: '../view/doctor.html',
+                url: '/referpatient',
                 type: 'post',
                 data: {
-                    'save': 1,
+                   
                     'service': service,
                     'huduma': huduma,
 

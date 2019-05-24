@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
-	"iReferral/models"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -11,45 +11,65 @@ type ReferpController struct {
 	MainController
 }
 
-func(this *ReferpController) Get(){
+// type Form_data struct {
+// 	huduma  string
+// 	service string
+// }
+
+type ErrorJson struct {
+	Message string
+	Huduma string
+	Service string
+}
+
+//var dataform Form_data
+
+func (this *ReferpController) Get() {
 	this.doctor_portal("doctor")
 }
+
 func (this *ReferpController) Post() {
-	huduma := this.GetString("huduma")
-	service := this.GetString("service")
+	//json.Unmarshal(this.Ctx.Input.RequestBody, &dataform)
+	fmt.Println(string(this.Ctx.Input.RequestBody))
+	var dataform map[string]interface{}
+	json.Unmarshal(this.Ctx.Input.RequestBody, &dataform)
+	huduma :=  dataform["huduma"]
+	service := dataform["service"]
+
+	fmt.Println(huduma)
+	fmt.Println(service)
 	o := orm.NewOrm()
 	o.Using("default")
-	hos := models.Patient_account{HudumaNo: huduma}
-	err := o.Read(&hos, "HudumaNo")
-	if err == orm.ErrNoRows {
-		fmt.Println(err)
-		fmt.Println("incorrect huduma number")
-		flash.Error("Incorrect Huduma No.Try again!")
-		flash.Store(&this.Controller)
-		return
-	} else if err != nil {
-		fmt.Println("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-		flash.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-		flash.Store(&this.Controller)
-		return
+
+	exist := o.QueryTable("patient_account").Filter("HudumaNo", huduma).Exist()
+	exist1 := o.QueryTable("services").Filter("Name", service).Exist()
+	h := huduma.(string)
+	s := service.(string)
+
+	fmt.Println(exist)
+	fmt.Println(exist1)
+	if exist == true && exist1 == true {
+		var responsejson ErrorJson
+		responsejson.Message = "/submitpatient?huduma="+h+"&service="+s
+		obj, _ := json.Marshal(responsejson)
+		this.Ctx.Output.Header("Content-Type", "application/json")
+		this.Ctx.Output.Body(obj)
+	} else {
+		var responsejson ErrorJson
+		responsejson.Message = "Invalid details"
+		responsejson.Huduma = "valid"
+		responsejson.Service = "valid"
+		if exist == false {
+			responsejson.Huduma = "invalid"
+		}
+		if exist1 == false {
+			responsejson.Service = "invalid"
+		}
+		obj, _ := json.Marshal(responsejson)
+		this.Ctx.Output.SetStatus(300)
+		this.Ctx.Output.Header("Content-Type", "application/json")
+		this.Ctx.Output.Body(obj)
+
 	}
-
-	//searches if the services are available in the database
-	serv := models.Services{Name: service}
-	err = o.Read(&serv, "Name")
-	if err == orm.ErrNoRows {
-		fmt.Println("Service not found")
-		flash.Error("Invalid service name or service not found.Try again!!")
-		flash.Store(&this.Controller)
-		return
-
-	} else if err != nil {
-		fmt.Println("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-		flash.Error("Internal server error - Sorry but we're unable to process your request at the moment. Please try later or contact support.")
-		flash.Store(&this.Controller)
-		return
-	}
-
-	this.Redirect("/patientreferralform", 302)
 
 }
