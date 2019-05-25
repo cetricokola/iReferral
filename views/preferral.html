@@ -37,7 +37,7 @@
     <table class="table">
       <thead class="font-weight-bolder">
         <tr>
-          <th scope="col">Patient Huduma No</th>
+          <th scope="col">Hospital name</th>
           <th scope="col">Service</th>
           <th scope="col">Date</th>
           <th scope="col">Time</th>
@@ -50,7 +50,33 @@
           <td scope="row">{{$refer.Service}}</td>
           <td scope="row">{{$refer.RDate}}</td>
           <td scope="row">{{$refer.RTime}}</td>
+          <td scope="row">
+            <a href="#" class="btn btn-info text-capitalize py-1 px-2" data-toggle="modal" data-target="#refer">View
+              more</a>
+          </td>
         </tr>
+        <!-- modal to display more details -->
+        <div class="modal fade" id="refer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="text-primary">Referral details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="ml-auto mr-auto m-4 p-4 border border-primary">
+
+                <p>Referred from: -{{$refer.Refer_hos}}</p>
+                <p>Referred by: -{{$refer.Refer_by}}</p>
+                <p>Contacts: -</p>
+                <p>Email -{{$refer.Email}}</p>
+                <p>Phone number -{{$refer.Phone}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
         {{end}}
       </tbody>
     </table>

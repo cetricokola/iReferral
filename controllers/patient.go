@@ -27,6 +27,10 @@ type Myreferrals struct {
 	Service  string
 	RDate    string
 	RTime    string
+	Refer_hos string
+	Refer_by  string
+	Email     string
+	Phone     string
 }
 
 var Repo []Report
@@ -41,8 +45,14 @@ func (this *PatientController) Preport() {
 		this.Redirect("/auth/p_login", 302)
 		return
 	}
-	myHd := userID.(string)
+	myHd1 := userID.(string)
+	var myHd string
 		if this.Ctx.Input.Method() == "GET" {
+			if len(Huduma) == 0{
+				myHd = myHd1
+			}else{
+				myHd = Huduma
+			}
 		o := orm.NewOrm()
 		o.Using("default")
 		o.Raw("SELECT reg_date, temperature, weight, blood_pressure, diagnosis, prescription FROM patient_diagnosis WHERE huduma_no=? ORDER BY reg_date", myHd).QueryRows(&Repo)
@@ -71,7 +81,7 @@ func (this *PatientController) Preferral() {
 		if Leng > 0 {
 			MyRef = nil
 		}
-		o.Raw("SELECT hos_name, service, r_date, r_time FROM referrals WHERE huduma_no=? AND r_date BETWEEN ? AND ? ORDER BY r_date", myHd, start, end).QueryRows(&MyRef)
+		o.Raw("SELECT hos_name, service, r_date, r_time, refer_hos, refer_by, email, phone FROM referrals WHERE huduma_no=? AND r_date BETWEEN ? AND ? ORDER BY r_date", myHd, start, end).QueryRows(&MyRef)
 		len := len(MyRef)
 		Leng = len
 		this.Redirect("/myreferrals", 302)

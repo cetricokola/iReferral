@@ -123,6 +123,7 @@ func (this *AccountController) Staff_login() {
 		}
 		// Set the UserID if everything is ok
 		session.Set("UserID", empId)
+		Sid = empId
 		fmt.Println(staff.EmpId, ":successful log in ")
 		this.Redirect("/doctor", 302)
 	}
@@ -136,7 +137,6 @@ func (this *AccountController) Admin_login() {
 		//Extract the form data
 		iD := this.GetString("nationalId")
 		submittedPassword := this.GetString("password")
-
 		//Read user account from database
 		o := orm.NewOrm()
 		o.Using("default")

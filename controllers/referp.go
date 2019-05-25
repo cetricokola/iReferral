@@ -24,7 +24,7 @@ func (this *ReferpController) Get() {
 }
 
 func (this *ReferpController) Post() {
-	
+
 	fmt.Println(string(this.Ctx.Input.RequestBody))
 	var dataform map[string]interface{}
 	json.Unmarshal(this.Ctx.Input.RequestBody, &dataform)
@@ -41,6 +41,7 @@ func (this *ReferpController) Post() {
 	s := service.(string)
 	MyHuduma = h
 	Myservice = s
+	fmt.Println(MyHuduma)
 	fmt.Println(exist)
 	fmt.Println(exist1)
 	if exist == true && exist1 == true {

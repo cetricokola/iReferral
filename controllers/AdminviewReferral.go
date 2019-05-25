@@ -11,6 +11,10 @@ type Referrals struct {
 	Service  string
 	RDate    string
 	RTime    string
+	Refer_hos string
+	Refer_by  string
+	Email     string
+	Phone     string
 }
 
 var Referral []Referrals
@@ -48,7 +52,7 @@ func (this *ViewReferralsController) MyReferrals() {
 		if Len > 0 {
 			Referral = nil
 		}
-		o.Raw("SELECT huduma_no, service, r_date, r_time FROM referrals WHERE hos_name=? AND r_date BETWEEN ? AND ? ORDER BY r_date", mycode, start, end).QueryRows(&Referral)
+		o.Raw("SELECT huduma_no, service, r_date, r_time, refer_hos, refer_by, email, phone FROM referrals WHERE hos_name=? AND r_date BETWEEN ? AND ? ORDER BY r_date", mycode, start, end).QueryRows(&Referral)
 		len := len(Referral)
 		Len = len
 		this.Redirect("/viewreferrals", 302)

@@ -69,12 +69,16 @@ type Patient_diagnosis struct {
 }
 
 type Referrals struct {
-	Id       string `orm:"pk"`
-	HudumaNo string
-	Service string
-	HosName  string
-	RDate    string
-	RTime    string
+	Id        string `orm:"pk"`
+	HudumaNo  string
+	Service   string
+	HosName   string
+	RDate     string
+	RTime     string
+	Refer_hos string
+	Refer_by  string
+	Email     string
+	Phone     string
 }
 
 /********/
