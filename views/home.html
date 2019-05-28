@@ -41,7 +41,8 @@
                   </div>
                   <div id="collapseOne" class="collapse hide" aria-labelledby="head1" data-parent="#accordion1">
                      <div class="card ml-3 p-3">
-                        <a class="ml-1 mb-3" href="auth/p_login"><b>Sign in to iReferral</b></a>
+                        <a class="ml-1 mb-3" href="" data-toggle="modal" data-target="#patientlogin"><b>Sign in to
+                              iReferral</b></a>
                         <a href="registration/p_signup">
                            <button class="btn btn-success ml-1 text-capitalize py-2 ">Create Account</button></a>
                      </div>
@@ -59,7 +60,7 @@
                   </div>
                   <div id="collapseTwo" class="collapse hide" aria-labelledby="head2" data-parent="#accordion2">
                      <div class="card ml-3 p-3">
-                        <a class="ml-1 mb-3" href="auth/s_login"><b>Sign in to iReferral</b></a>
+                        <a class="ml-1 mb-3" href=""  data-toggle="modal" data-target="#stafflogin"><b>Sign in to iReferral</b></a>
                         <a href="registration/s-signup">
                            <button class="btn btn-success ml-1 text-capitalize py-2">Create Password</button></a>
                      </div>
@@ -79,7 +80,7 @@
       </div>
    </div>
 
-</div> 
+</div>
 
 <div id="about">
 
@@ -202,3 +203,150 @@
       <!--Section: Contact v.2-->
    </div>
 </div>
+<!-- patient log in modal -->
+<div class="modal fade " id="patientlogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog card" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="text-success text-center font-weight-bolder">Log in.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <form>
+            <div class="modal-body mx-3">
+               <div class="md-form mb-5">
+                  <input type="text" id="huduma1" name="huduma" class="form-control validate">
+                  <label for="huduma1">Huduma number</label>
+                  <small id="hudumaError1" class="text-danger small-text" style="display: none;">You entered incorrect
+                     huduma number</small>
+               </div>
+               <div class="md-form mb-4">
+                  <input type="password" id="password1" name="password" class="form-control validate">
+                  <label for="password1">Password</label>
+                  <small id="passwordError1" class="text-danger small-text" style="display: none;">Incorrect
+                     password</small>
+               </div>
+            </div>
+            <div class="text-center">
+               <p>New to iReferral?<a href="">Register</a>.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+               <button type="submit" id="submit1" class="btn btn-primary text-capitalize px-5">Log in</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+
+<!-- staff log in modal -->
+<div class="modal fade " id="stafflogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog card" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="text-success text-center font-weight-bolder">Log in.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <form>
+            <div class="modal-body mx-3">
+               <div class="md-form mb-5">
+                  <input type="text" id="empid" name="empid" class="form-control validate">
+                  <label for="empid">Employee id</label>
+                  <small id="empiderror" class="text-danger small-text" style="display: none;">You entered incorrect
+                     employee id</small>
+               </div>
+               <div class="md-form mb-4">
+                  <input type="password" id="password2" name="password" class="form-control validate">
+                  <label for="password2">Password</label>
+                  <small id="passwordError2" class="text-danger small-text" style="display: none;">Incorrect
+                     password</small>
+               </div>
+            </div>
+            <div class="text-center">
+               <p>Have no Account ?<a href="">Create one</a>.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+               <button type="submit" id="submit2" class="btn btn-primary text-capitalize px-5">Log in</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+
+<!-- ajax for patient log in -->
+<script>
+   document.querySelector("#submit1").onclick = (e) => {
+      e.preventDefault()
+
+      document.querySelector("#huduma1").classList.remove("border-danger")
+      document.querySelector("#hudumaError1").style.display = "none"
+      document.querySelector("#password1").classList.remove("border-danger")
+      document.querySelector("#passwordError1").style.display = "none"
+
+      axios.post("/patient_login", {
+         huduma: document.querySelector("#huduma1").value,
+         password: document.querySelector("#password1").value
+      })
+         .then(data => {
+            window.location.href = data.data.Messages
+            alert("Successful log in")
+         })
+         .catch(err => {
+            var resp = err.response.data
+
+            if (resp.PatientHuduma == "invalid") {
+               alert("Incorrect huduma number")
+               document.querySelector("#huduma1").classList.add("border-danger")
+               document.querySelector("#hudumaError1").style.display = "block"
+            }
+
+            if (resp.PatientPassword == "invalid") {
+               alert("Incorrect password")
+               document.querySelector("#password1").classList.add("border-danger")
+               document.querySelector("#passwordError1").style.display = "block"
+            }
+         })
+
+   }
+</script>
+
+<!-- ajax for staff log in -->
+<script>
+   document.querySelector("#submit2").onclick = (e) => {
+      e.preventDefault()
+
+      document.querySelector("#empid").classList.remove("border-danger")
+      document.querySelector("#empiderror").style.display = "none"
+      document.querySelector("#password2").classList.remove("border-danger")
+      document.querySelector("#passwordError2").style.display = "none"
+
+      axios.post("/staff_login", {
+        empid: document.querySelector("#empid").value,
+         password: document.querySelector("#password2").value
+      })
+         .then(data => {
+            window.location.href = data.data.Success
+            alert("Successful log in")
+         })
+         .catch(err => {
+            var resp = err.response.data
+
+            if (resp.EmpId == "invalid") {
+               alert("Incorrect employee id")
+               document.querySelector("#empid").classList.add("border-danger")
+               document.querySelector("#empiderror").style.display = "block"
+            }
+
+            if (resp.StaffPassword == "invalid") {
+               alert("Incorrect password")
+               document.querySelector("#password2").classList.add("border-danger")
+               document.querySelector("#passwordError2").style.display = "block"
+            }
+         })
+
+   }
+</script>

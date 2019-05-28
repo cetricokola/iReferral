@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+
 )
 
 type MainController struct {
@@ -44,6 +45,15 @@ func (this *MainController) Get() {
 	// this.LayoutSections["Header"] = "header.tpl"
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "home.html"
+}
+
+func (this *MainController) home(view string) {
+	this.Data["Title"] = "iReferral-Welcome"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
 }
 func (this *MainController) Patient_Reg_Success() {
 	this.Data["Title"] = "Patient account successfully created"
@@ -272,12 +282,12 @@ func (this *MainController) Phome() {
 	session := this.StartSession()
 	userID := session.Get("UserID")
 	if userID == nil {
-		this.Redirect("/auth/p_login", 302)
+		this.Redirect("/patient_login", 302)
 		return
 	}
 	this.Data["Title"] = "iReferral-Welcome to patient portal"
-	this.Data["Plname"] = Plname
-	this.Data["Pfname"] = Pfname
+	this.Data["PatientFirstname"] = PatientFirstname
+	this.Data["PatientLastname"] = PatientLastname
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"

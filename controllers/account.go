@@ -68,10 +68,7 @@ func (this *AccountController) Patients_login() {
 			flash.Store(&this.Controller)
 			return
 		}
-		//set session for patient log in
-		session.Set("UserID", hudumaNo)
-		Pfname = patient.FirstName
-		Plname = patient.LastName
+		
 		PiD = hudumaNo
 		fmt.Println(patient.HudumaNo, ":successful log in ")
 		this.Redirect("/phome", 302)

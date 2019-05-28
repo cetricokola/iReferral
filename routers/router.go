@@ -39,6 +39,8 @@ func init() {
 	beego.Router("ourcontacts", &controllers.MainController{}, "get,post:Conta")
 	beego.Router("referpatient", &controllers.ReferpController{})
 	beego.Router("searchservice", &controllers.ServicesController{})
+	beego.Router("patient_login", &controllers.PatientLogInController{})
+	beego.Router("staff_login", &controllers.StaffLogInController{})
 	beego.Router("services", &controllers.ServiceController{}, "get,post:Listservices")
 	
 }
