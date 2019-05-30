@@ -22,6 +22,7 @@ type Employee_account struct {
 }
 
 type Admin_account struct {
+	Username string `orm:"unique"`
 	Id       string `orm:"pk"`
 	Email    string `orm: "unique"`
 	Password string `valid:"Required"`

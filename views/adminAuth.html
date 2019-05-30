@@ -1,0 +1,92 @@
+<div class="slider">
+	<div class="load">
+	</div>
+	<div class="content">
+		<h1 class="ml-5 text-white py-3" title="Back to home">iReferral.</h1>
+
+		<div class="container my-md-5 py-md-2">
+			<div class="login-reg-panel">
+				<div class="login-info-box">
+					<h2 class="text-orange mb-md-3 account">Have an account?</h2>
+					<label id="label-register" for="log-reg-show">Login</label>
+					<input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+				</div>
+				<div class="register-info-box">
+					<h2 class="text-orange mb-md-3 account">Don't have an account?</h2>
+					<label id="label-login" for="log-login-show">Register</label>
+					<input type="radio" name="active-log-panel" id="log-login-show">
+				</div>
+				<div class="white-panel p-5 col-md-5 card">
+					<div class="login-show border p-3">
+						<form>
+							<h2 class="text-primary text-center">Log In</h2>
+							<div class="md-form md-outline">
+								<label for="nationalId">National Id</label>
+								<input id="nationalId" type="text" name="nationalId" class="form-control mb-4">
+								<small id="nationalIdError" class="text-danger small-text" style="display: none;">You
+									entered incorrect
+									national id</small>
+							</div>
+							<div class="md-form md-outline">
+								<label for="password">Password</label>
+								<input id="password" type="password" name="password" class="form-control mb-4">
+								<small id="passwordError" class="text-danger small-text" style="display: none;">You
+									entered incorrect
+									password</small>
+							</div>
+							<button type="submit" id="mySubmit" class="btn btn-primary text-capitalize btn-block">Log
+								in</button>
+
+						</form>
+					</div>
+					<div class="register-show border p-3">
+						<h2 class="text-primary text-center p-0">Sign Up</h2>
+						<form>
+							<div class="md-form md-outline">
+								<label for="username">UserName</label>
+								<input type="text" id="username" name="username" class="form-control mb-4">
+								<small id="usernameError" class="text-danger small-text" style="display: none;">Username
+									already taken</small>
+							</div>
+							<div class="md-form md-outline">
+								<label for="id">National Id</label>
+								<input type="text" name="id" id="id" class="form-control mb-4">
+								<small id="idError" class="text-danger small-text" style="display: none;">Id already
+									used</small>
+									<small id="idError2" class="text-danger small-text" style="display: none;">Invalid id</small>
+							</div>
+							<div class="md-form md-outline">
+								<label for="email">Email</label>
+								<input type="email" name="email" id="email" class="form-control mb-4">
+								<small id="emailError" class="text-danger small-text" style="display: none;">Invalid email address</small>
+							</div>
+							<div class="md-form md-outline">
+								<label for="password11">Password</label>
+								<input type="password" name="password11" id="password11" class="form-control mb-4">
+								<small id="passwordError11" class="text-danger small-text"
+									style="display: none;"></small>
+							</div>
+							<div class="md-form md-outline">
+								<label for="cpassword">Confirm Password</label>
+								<input type="password" name="cpassword" id="cpassword" class="form-control mb-4">
+								<small id="cpasswordError" class="text-danger small-text"
+									style="display: none;">Password and confirm password do not match</small>
+								<small id="cpasswordError2" class="text-danger small-text"
+									style="display: none;">"Password must contain atleast 8 characters composed of both
+									capital,small letters and digits"</small>
+								<small class=" small-text text-warning form-text ml-auto mr-auto text-muted">Password
+									must contain
+									atleast 8 characters composed of both
+									capital,small letters and digits</small>
+							</div>
+							<button type="submit" id="mySubmit1"
+								class="btn btn-primary text-capitalize  btn-block">Register</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/static/js/custom/mgnLogIn.js"></script>
+<script src="/static/js/custom/mgnSignUp.js"></script>

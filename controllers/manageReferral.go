@@ -18,7 +18,7 @@ func (this *ServiceController) Listservices(){
 	session := this.StartSession()
 	userID := session.Get("UserID")
 	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	myId := userID.(string)

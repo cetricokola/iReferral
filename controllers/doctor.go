@@ -21,7 +21,7 @@ func (this *DocController) FindPatient() {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	fmt.Println("Session id is:", userID)

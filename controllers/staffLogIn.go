@@ -19,6 +19,8 @@ type StaffErrorJson struct {
 	EmpId         string
 }
 
+var Sid string
+
 //render the home page
 func (this *StaffLogInController) Get() {
 	this.home("home")
@@ -55,6 +57,7 @@ func (this *StaffLogInController) Post() {
 		//set sessions
 		session := this.StartSession()
 		session.Set("UserID", h)
+		Sid = h
 		responsejson.Success = "/doctor" //redirect to patient home page
 		obj, _ := json.Marshal(responsejson)
 		this.Ctx.Output.Header("Content-Type", "application/json")

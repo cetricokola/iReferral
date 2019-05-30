@@ -9,6 +9,7 @@ type MainController struct {
 	beego.Controller
 }
 
+var flash = beego.NewFlash()
 func (this *MainController) Prepare() {
 
 	this.Data["HeadStyles"] = []string{
@@ -17,6 +18,7 @@ func (this *MainController) Prepare() {
 		"/static/css/mdb/style.min.css",
 		"/static/css/custom/main.css",
 		"/static/css/custom/search.css",
+		"/static/css/custom/login.css",
 		"/static/css/custom/jquery.datepick.css",
 		"/static/css/custom/chung-timepicker.css",
 	}
@@ -35,6 +37,7 @@ func (this *MainController) Prepare() {
 		"/static/js/custom/time.js",
 		"/static/js/custom/chung-timepicker.js",
 		"/static/js/mdb-js/axios.min.js",
+		"/static/js/custom/login.js",
 	}
 }
 
@@ -47,6 +50,15 @@ func (this *MainController) Get() {
 	this.TplName = "home.html"
 }
 
+func (this *MainController) AdminAuth() {
+	this.Data["Title"] = "iReferral-Welcome"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "adminAuth.html"
+}
+
 func (this *MainController) home(view string) {
 	this.Data["Title"] = "iReferral-Welcome"
 	this.Layout = "layout.tpl"
@@ -55,6 +67,7 @@ func (this *MainController) home(view string) {
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = view + ".html"
 }
+
 func (this *MainController) Patient_Reg_Success() {
 	this.Data["Title"] = "Patient account successfully created"
 	this.Layout = "layout.tpl"
@@ -96,13 +109,7 @@ func (this *MainController) staff_logIn(view string) {
 	this.TplName = "auth/" + view + ".html"
 }
 
-func (this *MainController) admin_logIn(view string) {
-	this.Data["Title"] = "Log in to iReferral"
-	this.Layout = "layout.tpl"
-	this.LayoutSections = make(map[string]string)
-	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "auth/" + view + ".html"
-}
+
 
 func (this *MainController) patient_signUp(view string) {
 	this.Data["Title"] = "Sign up to iReferral"
@@ -118,24 +125,6 @@ func (this *MainController) staff_signUp(view string) {
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "registration/" + view + ".html"
-}
-
-func (this *MainController) admin_signUp(view string) {
-	this.Data["Title"] = "Sign up to iReferral"
-	this.Layout = "layout.tpl"
-	this.LayoutSections = make(map[string]string)
-	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "registration/" + view + ".html"
-}
-
-func (this *MainController) AdminHome() {
-	this.Data["Title"] = "iReferral-myAdmin portal"
-	this.Layout = "layout.tpl"
-	this.LayoutSections = make(map[string]string)
-	// this.LayoutSections["Header"] = "header.tpl"
-	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "auth/myadmin.html"
-
 }
 func (this *MainController) hospital_reg(view string) {
 	//check if the user is logged in
@@ -269,7 +258,7 @@ func (this *MainController) PostDetails() {
 func (this *MainController) viewReferrals(view string) {
 	//check if the user is logged in
 	this.Data["Title"] = "View referrals at your facility"
-	this.Data["Name"] = Name
+	this.Data["Name"] = Uname
 	this.Data["Len"] = Len
 	this.Data["Referral"] = Referral
 	this.Layout = "layout.tpl"
@@ -286,8 +275,8 @@ func (this *MainController) Phome() {
 		return
 	}
 	this.Data["Title"] = "iReferral-Welcome to patient portal"
-	this.Data["PatientFirstname"] = PatientFirstname
-	this.Data["PatientLastname"] = PatientLastname
+	this.Data["Pfname"] = Pfname
+	this.Data["Plname"] = Plname
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
@@ -326,7 +315,7 @@ func (this *MainController) AdminDash() {
 		return
 	}
 	this.Data["Title"] = "Admin dashbord"
-	this.Data["Name"] = Name
+	this.Data["Name"] = Uname
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"

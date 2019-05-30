@@ -1,55 +1,30 @@
-
-    <div class="container mt-3">
-        <div class=" ml-auto mr-auto col-md-4 p-3 m-3 card">
-            <h3 class="text-center text-primary">iReferral.</h3>
-            <h5 class="text-center mb-3">Create your Admin account</h5>
-                                <!-- Form -->
-            <form method="POST" class="text-center">
-
-                <!-- Huduma no-->
-                
-                <div class="md-form mt-0 md-outline">
-
-                    <input type="text" id="hdm" name="id" class="form-control">
-                    <label for="hdm">National Id</label>
-
-                </div>
-
-                <div class="md-form mt-0 md-outline">
-                   
-                        <input type="email" id="email" name="email" class="form-control">
-                        <label for="email">Email</label>
-                    </div>
-                    
-
-                <div class="form-row md-form mt-0 md-outline">
-                    <div class="col">
-                        <!-- Password -->
-                        <input type="password" id="fPassword" name="pass" class="form-control">
-                        <label for="fPassword">Password</label>
-                    </div>
-                    <div class="col">
-                        <!-- Confirm password -->
-                        <input type="password" id="fConfirm" name="copass" class="form-control">
-                        <label for="fConfirm">Confirm</label>
-                    </div>
-                    <small id="helpBlock" class="form-text ml-auto mr-auto text-muted">
-                        Use 8 or more characters including digits& both capital and small letters
-                    </small>
-                </div>
-                <p class="text-danger">{{.Errors}}</p>
-                <p class="text-danger">{{.flash.errors}}</p>
-                <!-- Sign up button -->
-                <div class="form-row md-form mt-0 md-outline">
-                    <div class="col">
-                        <a href="../../auth/a-login" class="btn btn-flat text-capitalize border-0 text-primary py-2 px-2"><b>Sign
-                                    in instead</b></a>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-primary text-capitalize  py-2 " type="submit">Sign up</button>
-                    </div>
-                </div>
-            </form>
-            <!-- Form -->
-        </div>
+<div>
+    <!-- Button to trigger modal -->
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <div id="datetimepicker1" class="input-append date">
+      <input data-format="yyyy-MM-dd" type="text"></input>
+      <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+    $(function() {
+  $('#datetimepicker1').datetimepicker({
+    language: 'pt-BR'
+  });
+});
+</script>

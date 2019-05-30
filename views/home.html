@@ -23,7 +23,8 @@
             </li>
 
          </ul>
-         <a href="auth/myadmin"><button class="btn btn-primary text-capitalize px-2 py-2">myAdmin</button></a>
+         <a href="/management_authentication"><button
+               class="btn btn-primary text-capitalize px-2 py-2">myAdmin</button></a>
 
       </div>
    </nav>
@@ -43,7 +44,7 @@
                      <div class="card ml-3 p-3">
                         <a class="ml-1 mb-3" href="" data-toggle="modal" data-target="#patientlogin"><b>Sign in to
                               iReferral</b></a>
-                        <a href="registration/p_signup">
+                        <a href=" " data-toggle="modal" data-target="#patientSignup">
                            <button class="btn btn-success ml-1 text-capitalize py-2 ">Create Account</button></a>
                      </div>
                   </div>
@@ -60,8 +61,9 @@
                   </div>
                   <div id="collapseTwo" class="collapse hide" aria-labelledby="head2" data-parent="#accordion2">
                      <div class="card ml-3 p-3">
-                        <a class="ml-1 mb-3" href=""  data-toggle="modal" data-target="#stafflogin"><b>Sign in to iReferral</b></a>
-                        <a href="registration/s-signup">
+                        <a class="ml-1 mb-3" href="" data-toggle="modal" data-target="#stafflogin"><b>Sign in to
+                              iReferral</b></a>
+                        <a href="" data-toggle="modal" data-target="#staffSignup">
                            <button class="btn btn-success ml-1 text-capitalize py-2">Create Password</button></a>
                      </div>
                   </div>
@@ -230,7 +232,8 @@
                </div>
             </div>
             <div class="text-center">
-               <p>New to iReferral?<a href="">Register</a>.</p>
+               <p>New to iReferral?<a href="" class="text-primary" data-toggle="modal" data-target="#patientSignup"
+                     onclick='$(this).closest(".modal").modal("hide")'>Register</a>.</p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                <button type="submit" id="submit1" class="btn btn-primary text-capitalize px-5">Log in</button>
@@ -241,8 +244,7 @@
 </div>
 
 <!-- staff log in modal -->
-<div class="modal fade " id="stafflogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-   aria-hidden="true">
+<div class="modal fade " id="stafflogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-dialog card" role="document">
       <div class="modal-content">
          <div class="modal-header">
@@ -267,7 +269,8 @@
                </div>
             </div>
             <div class="text-center">
-               <p>Have no Account ?<a href="">Create one</a>.</p>
+               <p>Have no profile ?<a href="" data-toggle="modal" data-target="#staffSignup"
+                     onclick='$(this).closest(".modal").modal("hide")'>Create one</a>.</p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                <button type="submit" id="submit2" class="btn btn-primary text-capitalize px-5">Log in</button>
@@ -277,76 +280,184 @@
    </div>
 </div>
 
-<!-- ajax for patient log in -->
-<script>
-   document.querySelector("#submit1").onclick = (e) => {
-      e.preventDefault()
+<!-- patient sign up modal -->
+<div class="modal fade " id="patientSignup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog card" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="text-success text-center font-weight-bolder">Register</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <!-- Form -->
+         <form>
+            <div class="border-1 p-5">
+               <div class="form-row mt-0">
+                  <div class="col">
+                     <!-- First name -->
+                     <label class="text-primary" for="first">First name</label>
+                     <input type="text" id="first" name="first" class="form-control">
+                     <small id="firstError" class="text-danger small-text" style="display: none;">Fill in first name</small>
+                  </div>
+                  <div class="col">
+                     <!-- Last name -->
+                     <label class="text-primary" for="last">Last name</label>
+                     <input type="text" id="last" name="last" class="form-control">
+                     <small id="lastError" class="text-danger small-text" style="display: none;">Fill in last name</small>
 
-      document.querySelector("#huduma1").classList.remove("border-danger")
-      document.querySelector("#hudumaError1").style.display = "none"
-      document.querySelector("#password1").classList.remove("border-danger")
-      document.querySelector("#passwordError1").style.display = "none"
+                  </div>
+               </div>
+               <div class="form-row mt-1">
+                  <div class="col">
+                     <!-- Huduma no-->
+                     <label class="text-primary" for="hdm1">Huduma No</label>
+                     <input type="text" id="hdm1" name="huduma" class="form-control">
+                     <small id="hdm1Error" class="text-danger small-text" style="display: none;">Huduma number already used.Choose another one</small>
+                     <small id="hdmError1" class="text-danger small-text" style="display: none;">Invalid huduma number</small>
 
-      axios.post("/patient_login", {
-         huduma: document.querySelector("#huduma1").value,
-         password: document.querySelector("#password1").value
-      })
-         .then(data => {
-            window.location.href = data.data.Messages
-            alert("Successful log in")
-         })
-         .catch(err => {
-            var resp = err.response.data
+                  </div>
+                  <div class="col">
+                     <!-- phone number -->
+                     <label class="text-primary" for="phone1">Phone No</label>
+                     <input type="text" id="phone1" name="phone1" class="form-control">
+                     <small id="phone1Error" class="text-danger small-text" style="display: none;">Invalid phone number</small>
 
-            if (resp.PatientHuduma == "invalid") {
-               alert("Incorrect huduma number")
-               document.querySelector("#huduma1").classList.add("border-danger")
-               document.querySelector("#hudumaError1").style.display = "block"
-            }
+                  </div>
+               </div>
+               <div class="form-row mt-1">
+                  <div class="col">
+                     <!-- date of birth -->
+                     <label class="text-primary" for="dob">Date of Birth</label>
+                     <input type="text" id="dob" name="dob" class="form-control popupDatepicker" readonly="readonly"
+                        style="background:white;">
+                        <small id="dobError" class="text-danger small-text" style="display: none;">Fill in date of birth field</small>
 
-            if (resp.PatientPassword == "invalid") {
-               alert("Incorrect password")
-               document.querySelector("#password1").classList.add("border-danger")
-               document.querySelector("#passwordError1").style.display = "block"
-            }
-         })
+                  </div>
+                  <div class="col">
 
-   }
-</script>
+                     <label class="text-primary" for="sex">Gender</label>
+                     <select name="sex" class="form-control" id="sex">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                     </select>
 
-<!-- ajax for staff log in -->
-<script>
-   document.querySelector("#submit2").onclick = (e) => {
-      e.preventDefault()
+                  </div>
+               </div>
+               <div class="form-row mt-1">
+                  <div class="col">
+                     <!-- Password -->
+                     <label class="text-primary" for="pass">Password</label>
+                     <input type="password" id="pass" name="pass" class="form-control">
+                  </div>
+                  <div class="col">
+                     <!-- Confirm password -->
+                     <label class="text-primary" for="copass">Confirm Password</label>
+                     <input type="password" id="copass" name="copass" class="form-control">
 
-      document.querySelector("#empid").classList.remove("border-danger")
-      document.querySelector("#empiderror").style.display = "none"
-      document.querySelector("#password2").classList.remove("border-danger")
-      document.querySelector("#passwordError2").style.display = "none"
+                  </div>
+                  <small id="helpBlock" class="form-text text-success ml-auto mr-auto text-muted">
+                     Use 8 or more characters including digits& both capital and small letters
+                  </small>
+                  <small id="passError" class="text-danger small-text" style="display: none;">Password must contain 8 or more characters including digits& both capital and small letters</small>
+                  <small id="passError1" class="text-danger small-text" style="display: none;">Password and confirm password does not match</small>
 
-      axios.post("/staff_login", {
-        empid: document.querySelector("#empid").value,
-         password: document.querySelector("#password2").value
-      })
-         .then(data => {
-            window.location.href = data.data.Success
-            alert("Successful log in")
-         })
-         .catch(err => {
-            var resp = err.response.data
+               </div>
+               <!-- Sign up button -->
+               <div class="row mt-1">
+                  <div class="col">
+                     <p class="py-3">Have an account?<a href="" class="text-primary" data-toggle="modal"
+                           data-target="#patientlogin" onclick='$(this).closest(".modal").modal("hide")'>Log in</a></p>
+                  </div>
+                  <div class="col ml-auto">
+                     <button class="btn btn-primary text-capitalize py-2 btn-block" id="patSubmit" type="submit">Register</button>
 
-            if (resp.EmpId == "invalid") {
-               alert("Incorrect employee id")
-               document.querySelector("#empid").classList.add("border-danger")
-               document.querySelector("#empiderror").style.display = "block"
-            }
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+      <!-- Form -->
+   </div>
+</div>
 
-            if (resp.StaffPassword == "invalid") {
-               alert("Incorrect password")
-               document.querySelector("#password2").classList.add("border-danger")
-               document.querySelector("#passwordError2").style.display = "block"
-            }
-         })
+<!-- staff sign up modal -->
+<div class="modal fade " id="staffSignup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog card" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="text-success text-center font-weight-bolder">Create Profile</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <!-- Form -->
+         <form>
+            <div class="border-1 p-5">
 
-   }
-</script>
+               <div class="md-form mt-0 md-outline">
+                  <input type="text" id="emp" name="emp" class="form-control">
+                  <label for="emp">Employee ID</label>
+                  <small id="helpBlock" class="form-text mr-auto mb-2 text-warning text-muted">
+                     * Use your national id number used for your employment.
+                  </small>
+                  <small id="empError" class="text-danger small-text" style="display: none;">Employee id already registered.</small>
+                     <small id="empError1" class="text-danger small-text" style="display: none;">Employee id does not exist</small>
+
+               </div>
+               <div class="form-row md-form mt-0 md-outline">
+                  <div class="col">
+                     <!-- date of birth -->
+                     <input type="email" id="em" name="em" class="form-control">
+                     <label for="em">Email</label>
+                     <small id="emError" class="text-danger small-text" style="display: none;">Invalid phone number</small>
+
+                  </div>
+                  <div class="col">
+                     <!-- phone number -->
+                     <input type="text" id="phone" name="phone" class="form-control">
+                     <label for="phone">Phone No</label>
+                     <small id="phoneError" class="text-danger small-text" style="display: none;">Invalid phone number</small>
+                  </div>
+               </div>
+
+               <div class="form-row md-form mt-0 md-outline">
+                  <div class="col">
+                     <!-- Password -->
+                     <input type="password" id="mypass" name="mypass" class="form-control">
+                     <label for="mypass">Password</label>
+                  </div>
+                  <div class="col">
+                     <!-- Confirm password -->
+                     <input type="password" id="comypass" name="comypass" class="form-control">
+                     <label for="comypass">Confirm</label>
+                  </div>
+                  <small id="helpBlock" class="form-text ml-auto mr-auto text-muted">
+                     Use 8 or more characters including digits& both capital and small letters
+                  </small>
+                  <small id="mypassError" class="text-danger small-text" style="display: none;">Password must contain 8 or more characters including digits& both capital and small letters</small>
+                  <small id="comypassError" class="text-danger small-text" style="display: none;">Password and confirm password does not match</small>
+
+               </div>
+               <!-- Sign up button -->
+               <div class="row mt-1">
+                  <div class="col">
+                     <p class="py-3">Have an account?<a href="" class="text-primary" data-toggle="modal"
+                           data-target="#stafflogin" onclick='$(this).closest(".modal").modal("hide")'>Log in</a></p>
+                  </div>
+                  <div class="col ml-auto">
+                     <button class="btn btn-primary text-capitalize py-2 btn-block " id="staffSubmit" type="submit">Create</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+         <!-- Form -->
+      </div>
+   </div>
+</div>
+
+<script src="/static/js/custom/patientLogin.js"></script>
+<script src="/static/js/custom/patientSignup.js"></script>
+<script src="/static/js/custom/staffLogin.js"></script>
+<script src="/static/js/custom/staffSignup.js"></script>

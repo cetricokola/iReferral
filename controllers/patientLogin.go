@@ -19,7 +19,7 @@ type PatientErrorJson struct {
 	PatientPassword string
 }
 
-var PatientFirstname, PatientLastname string
+var Pfname, Plname, PiD string
 
 var responsejson PatientErrorJson
 
@@ -48,9 +48,10 @@ func (this *PatientLogInController) Post() {
 	if exist == true && err == nil {
 		session := this.StartSession()
 		session.Set("UserID", h)
+		PiD = h
 		//retrieve the patient first name and last name
-		PatientFirstname = patient.FirstName
-		PatientLastname = patient.LastName
+		Pfname = patient.FirstName
+		Plname = patient.LastName
 		responsejson.Messages = "/phome" //redirect to patient home page
 		obj, _ := json.Marshal(responsejson)
 		this.Ctx.Output.Header("Content-Type", "application/json")
