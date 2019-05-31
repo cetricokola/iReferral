@@ -38,6 +38,7 @@ func init() {
 	beego.Router("management_signup", &controllers.MgnSignUpController{})
 	beego.Router("patient_signup", &controllers.PatSignUpController{})
 	beego.Router("staff_signup", &controllers.StaffSignUpController{})
+	beego.Router("contact_us", &controllers.EmailController{})
 	beego.Router("management_authentication", &controllers.MainController{}, "get,post:AdminAuth")
 	beego.Router("services", &controllers.ServiceController{}, "get,post:Listservices")
 	

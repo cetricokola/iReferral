@@ -21,7 +21,7 @@ func (this *MainController) Prepare() {
 		"/static/css/custom/login.css",
 		"/static/css/custom/jquery.datepick.css",
 		"/static/css/custom/chung-timepicker.css",
-	}
+			}
 
 	this.Data["HeadScripts"] = []string{
 		"/static/js/mdb-js/jquery-3.3.1.min.js",
@@ -38,6 +38,7 @@ func (this *MainController) Prepare() {
 		"/static/js/custom/chung-timepicker.js",
 		"/static/js/mdb-js/axios.min.js",
 		"/static/js/custom/login.js",
+		
 	}
 }
 
@@ -61,6 +62,15 @@ func (this *MainController) AdminAuth() {
 
 func (this *MainController) home(view string) {
 	this.Data["Title"] = "iReferral-Welcome"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["Header"] = "header.tpl"
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = view + ".html"
+}
+
+func (this *MainController) contactus(view string) {
+	this.Data["Title"] = "iReferral-Write to us"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	// this.LayoutSections["Header"] = "header.tpl"
