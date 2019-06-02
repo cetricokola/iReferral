@@ -42,12 +42,12 @@ func (this *EmailController) Post() {
 
 		m := gomail.NewMessage()
 		m.SetHeader("From", email)
-		m.SetHeader("To", "cetokola2015@gmail,com")
+		m.SetHeader("To", "cetokola2015@gmail.com")
 		m.SetAddressHeader("Cc", "okolacetric@gmail.com", name)
 		m.SetHeader("Subject", subject)
 		m.SetBody("text/html", message)
 		// m.Attach("/home/Alex/lolcat.jpg")
-		d := gomail.NewPlainDialer("smtp.example.com", 587, "cetokola2015@gmail.com", "password2015Gmail")
+		d := gomail.NewPlainDialer("smtp.gmail.com", 587, "cetokola2015@gmail.com", "password2015Gmail")
 		d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 		err := d.DialAndSend(m)
 		if err != nil {
