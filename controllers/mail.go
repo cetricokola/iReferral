@@ -23,7 +23,7 @@ type EmailJson struct {
 var emailRes EmailJson
 
 func (this *EmailController) Get() {
-	this.contactus("contactUs")
+	this.Contactus()
 }
 
 func (this *EmailController) Post() {
@@ -36,7 +36,9 @@ func (this *EmailController) Post() {
 	subject := dataform["subject"].(string)
 	message := dataform["message"].(string)
 
-	if EmailValid(email) == true && subject != "" && message != "" && name != "" {
+	fmt.Println(dataform)
+
+	if EmailValid(email) == true {
 
 		m := gomail.NewMessage()
 		m.SetHeader("From", email)
@@ -49,11 +51,16 @@ func (this *EmailController) Post() {
 		d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 		err := d.DialAndSend(m)
 		if err != nil {
+			fmt.Println("the error is", err)
+			emailRes.Contact = "/"
+			obj, _ := json.Marshal(emailRes)
+			this.Ctx.Output.Header("Content-Type", "application/json")
+			this.Ctx.Output.Body(obj)
 			panic(err)
 		}
 
 		if err == nil {
-			emailRes.Contact = "/contact_us"
+			emailRes.Contact = "/"
 			obj, _ := json.Marshal(emailRes)
 			this.Ctx.Output.Header("Content-Type", "application/json")
 			this.Ctx.Output.Body(obj)
@@ -78,5 +85,10 @@ func (this *EmailController) Post() {
 	if name == "" {
 		emailRes.ContactName = "invalid"
 	}
+
+	obj, _ := json.Marshal(emailRes)
+	this.Ctx.Output.SetStatus(300)
+	this.Ctx.Output.Header("Content-Type", "application/json")
+	this.Ctx.Output.Body(obj)
 
 }

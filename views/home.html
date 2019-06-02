@@ -11,7 +11,7 @@
          <ul class="navbar-nav ml-auto font-weight-bolder">
 
             <li class="nav-item mr-5">
-               <a class="nav-link" href="#">Help</a>
+               <a class="nav-link" href="#">Need Help?</a>
             </li>
 
             <li class="nav-item mr-5 ">
@@ -19,24 +19,58 @@
             </li>
 
             <li class="nav-item mr-5 ">
-               <a class="nav-link" href="#contact">Contact us</a>
+               <a class="nav-link" href="/contact">Contact us</a>
             </li>
 
          </ul>
-         <a href="/management_authentication"><button
-               class="btn btn-primary text-capitalize px-2 py-2">myAdmin</button></a>
+         <a href="/management_authentication"><button class="btn btn-primary text-capitalize px-2 py-2">Hospital
+               management</button></a>
 
       </div>
    </nav>
-   <div class="container-fluid">
-      <div class="mt-5">
-         <div class=" ml-5 row mt-5">
-            <div class="col-md-3">
+   <div class="container">
+      <div class="col-md-4 mt-6 py-5">
+         <h3>iReferral. Your full circle of care.</h3>
+         <div class=" mt-5">
+            <h6>Building a healthy community one individual at a time through us.</h6>
+            <h6>Look for a better health facility with much ease.Save cash and time.</h6>
+
+            <a href="" class="btn btn-primary py-2 text-capitalize mt-4" data-toggle="modal" data-target="#whatwedo">What do we do?</a>
+            <!-- what do we do modal -->
+            <div class="modal fade " id="whatwedo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+               aria-hidden="true">
+               <div class="modal-dialog card" role="document">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="text-success text-center font-weight-bolder">What we do at iReferral.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <div>
+                        <div class="p-5">
+                        <ul style="list-style-type:square">
+                           <li>Patient referral from one facility to another.</li>
+                           <li>Patient diagnosis medical report storage.</li>
+                           <li>Patient medical reports retrieval.</li>
+                        </ul>
+                     </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- what do we do -->
+         </div>
+      </div>
+         <div>
+            <h5 class="ml-1">To get started with iReferral click on the buttons below as a patient or a doctor.</h5>
+         </div>
+         <div class="row mt-5">
+            <div class="col-md-4">
                <div class="accordion" id="accordion1">
                   <div id="head1">
-                     <button class="btn  px-5 btn-rounded btn-primary text-capitalize  py-2" type="button"
-                        data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                        aria-controls="collapseOne">
+                     <button class="btn  btn-primary text-capitalize  py-2" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Patient Portal
                      </button>
                   </div>
@@ -44,19 +78,18 @@
                      <div class="card ml-3 p-3">
                         <a class="ml-1 mb-3" href="" data-toggle="modal" data-target="#patientlogin"><b>Sign in to
                               iReferral</b></a>
-                        <a href=" " data-toggle="modal" data-target="#patientSignup">
+                        <a href="" data-toggle="modal" data-target="#patientSignup">
                            <button class="btn btn-success ml-1 text-capitalize py-2 ">Create Account</button></a>
                      </div>
                   </div>
                </div>
             </div>
-            <div class="col-md-3 ">
+            <div class="ml-7 col-md-4">
                <div class="accordion" id="accordion2">
                   <div id="head2">
-                     <button class="btn px-5 btn-rounded btn-primary text-capitalize px-3 py-2" type="button"
-                        data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-                        aria-controls="collapseOne">
-                        Staff Portal
+                     <button class="btn btn-primary text-capitalize  py-2" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                        Doctor Portal
                      </button>
                   </div>
                   <div id="collapseTwo" class="collapse hide" aria-labelledby="head2" data-parent="#accordion2">
@@ -64,24 +97,14 @@
                         <a class="ml-1 mb-3" href="" data-toggle="modal" data-target="#stafflogin"><b>Sign in to
                               iReferral</b></a>
                         <a href="" data-toggle="modal" data-target="#staffSignup">
-                           <button class="btn btn-success ml-1 text-capitalize py-2">Create Password</button></a>
+                           <button class="btn btn-success ml-1 text-capitalize py-2">Create profile</button></a>
                      </div>
                   </div>
                </div>
             </div>
-
-         </div>
-      </div>
-      <div class="ml-5 col-md-4 mt-6 py-5">
-         <h3>iReferral. Your full circle of care</h3>
-         <div class=" mt-5">
-            <h6>Building a healthy community one individual at a time through us.</h6>
-            <h6>Look for a better health facility with much ease.Save cash and time.</h6>
-            <button class="btn px-5 py-2 mt-5 btn-success btn-floating text-capitalize">What we do</button>
          </div>
       </div>
    </div>
-
 </div>
 
 <div id="about">
@@ -94,7 +117,7 @@
 
       <div>
          <p>
-            iReferral delivers proven referral management, patient access, CRM, and e-consult solutions that help
+            iReferral delivers proven referral management, patient access solutions that help
             hospitals, health systems, networks, and payers streamline the referral process, decrease patient leakage
             and improve communication between providers and patients.
          </p>
@@ -108,101 +131,6 @@
          </p>
 
       </div>
-   </div>
-</div>
-<div id="contact" class="hosregbg1">
-   <!--Section: Contact v.2-->
-   <div class="p-1 container-fluid">
-      <section class="mb-4 mt-5 container">
-         <!--Section heading-->
-         <h2 class="h1-responsive font-weight-bold text-primary text-center my-4">Write to us</h2>
-         <!--Section description-->
-         <p class="text-center w-responsive mx-auto mb-5">Do you have any questions or need help? Please do not
-            hesitate to
-            contact us directly. Our team will come back to you within
-            a matter of hours to help you.Thank you!</p>
-
-         <div class="row">
-            <!--Grid column-->
-            <div class="col-md-7 ml-3 mb-md-0 mb-5">
-               <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-                  <!--Grid row-->
-                  <div class="row">
-                     <!--Grid column-->
-                     <div class="col-md-6">
-                        <div class="md-form mb-0">
-                           <input type="text" id="name" name="name" class="form-control">
-                           <label for="name" class="">Your name</label>
-                        </div>
-                     </div>
-                     <!--Grid column-->
-                     <!--Grid column-->
-                     <div class="col-md-6">
-                        <div class="md-form mb-0">
-                           <input type="text" id="email" name="email" class="form-control">
-                           <label for="email" class="">Your email</label>
-                        </div>
-                     </div>
-                     <!--Grid column-->
-                  </div>
-                  <!--Grid row-->
-
-                  <!--Grid row-->
-                  <div class="row">
-                     <div class="col-md-12">
-                        <div class="md-form mb-0">
-                           <input type="text" id="subject" name="subject" class="form-control">
-                           <label for="subject" class="">Subject</label>
-                        </div>
-                     </div>
-                  </div>
-                  <!--Grid row-->
-
-                  <!--Grid row-->
-                  <div class="row">
-
-                     <!--Grid column-->
-                     <div class="col-md-12">
-
-                        <div class="md-form">
-                           <textarea type="text" id="message" name="message" rows="2"
-                              class="form-control md-textarea"></textarea>
-                           <label for="message">Your message</label>
-                        </div>
-
-                     </div>
-                  </div>
-                  <!--Grid row-->
-                  <button class="btn btn-primary text-capitalize py-2 px-5" type="submit">send</button>
-               </form>
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-3 text-center">
-               <ul class="list-unstyled mb-0 m-4">
-                  <li>
-                     <h4 class="text-primary mb-4">Contacts</h4>
-                  </li>
-                  <li>
-                     <p class="text-success">Location</p>
-                     <p>Tower1 Nakuru, KENYA</p>
-                  </li>
-
-                  <li>
-                     <p class="text-success">Telephone</p>
-                     <p>+ 254 704 145 832</p>
-                  </li>
-
-                  <li>
-                     <p class="text-success">Email</p>
-                     <p>contact@iReferral.com</p>
-                  </li>
-               </ul>
-            </div>
-            <!--Grid column-->
-         </div>
-      </section>
-      <!--Section: Contact v.2-->
    </div>
 </div>
 <!-- patient log in modal -->
@@ -299,13 +227,15 @@
                      <!-- First name -->
                      <label class="text-primary" for="first">First name</label>
                      <input type="text" id="first" name="first" class="form-control">
-                     <small id="firstError" class="text-danger small-text" style="display: none;">Fill in first name</small>
+                     <small id="firstError" class="text-danger small-text" style="display: none;">Fill in first
+                        name</small>
                   </div>
                   <div class="col">
                      <!-- Last name -->
                      <label class="text-primary" for="last">Last name</label>
                      <input type="text" id="last" name="last" class="form-control">
-                     <small id="lastError" class="text-danger small-text" style="display: none;">Fill in last name</small>
+                     <small id="lastError" class="text-danger small-text" style="display: none;">Fill in last
+                        name</small>
 
                   </div>
                </div>
@@ -314,15 +244,18 @@
                      <!-- Huduma no-->
                      <label class="text-primary" for="hdm1">Huduma No</label>
                      <input type="text" id="hdm1" name="huduma" class="form-control">
-                     <small id="hdm1Error" class="text-danger small-text" style="display: none;">Huduma number already used.Choose another one</small>
-                     <small id="hdmError1" class="text-danger small-text" style="display: none;">Invalid huduma number</small>
+                     <small id="hdm1Error" class="text-danger small-text" style="display: none;">Huduma number already
+                        used.Choose another one</small>
+                     <small id="hdmError1" class="text-danger small-text" style="display: none;">Invalid huduma
+                        number</small>
 
                   </div>
                   <div class="col">
                      <!-- phone number -->
                      <label class="text-primary" for="phone1">Phone No</label>
                      <input type="text" id="phone1" name="phone1" class="form-control">
-                     <small id="phone1Error" class="text-danger small-text" style="display: none;">Invalid phone number</small>
+                     <small id="phone1Error" class="text-danger small-text" style="display: none;">Invalid phone
+                        number</small>
 
                   </div>
                </div>
@@ -332,7 +265,8 @@
                      <label class="text-primary" for="dob">Date of Birth</label>
                      <input type="text" id="dob" name="dob" class="form-control popupDatepicker" readonly="readonly"
                         style="background:white;">
-                        <small id="dobError" class="text-danger small-text" style="display: none;">Fill in date of birth field</small>
+                     <small id="dobError" class="text-danger small-text" style="display: none;">Fill in date of birth
+                        field</small>
 
                   </div>
                   <div class="col">
@@ -360,8 +294,10 @@
                   <small id="helpBlock" class="form-text text-success ml-auto mr-auto text-muted">
                      Use 8 or more characters including digits& both capital and small letters
                   </small>
-                  <small id="passError" class="text-danger small-text" style="display: none;">Password must contain 8 or more characters including digits& both capital and small letters</small>
-                  <small id="passError1" class="text-danger small-text" style="display: none;">Password and confirm password does not match</small>
+                  <small id="passError" class="text-danger small-text" style="display: none;">Password must contain 8 or
+                     more characters including digits& both capital and small letters</small>
+                  <small id="passError1" class="text-danger small-text" style="display: none;">Password and confirm
+                     password does not match</small>
 
                </div>
                <!-- Sign up button -->
@@ -371,7 +307,8 @@
                            data-target="#patientlogin" onclick='$(this).closest(".modal").modal("hide")'>Log in</a></p>
                   </div>
                   <div class="col ml-auto">
-                     <button class="btn btn-primary text-capitalize py-2 btn-block" id="patSubmit" type="submit">Register</button>
+                     <button class="btn btn-primary text-capitalize py-2 btn-block" id="patSubmit"
+                        type="submit">Register</button>
 
                   </div>
                </div>
@@ -402,8 +339,10 @@
                   <small id="helpBlock" class="form-text mr-auto mb-2 text-warning text-muted">
                      * Use your national id number used for your employment.
                   </small>
-                  <small id="empError" class="text-danger small-text" style="display: none;">Employee id already registered.</small>
-                     <small id="empError1" class="text-danger small-text" style="display: none;">Employee id does not exist</small>
+                  <small id="empError" class="text-danger small-text" style="display: none;">Employee id already
+                     registered.</small>
+                  <small id="empError1" class="text-danger small-text" style="display: none;">Employee id does not
+                     exist</small>
 
                </div>
                <div class="form-row md-form mt-0 md-outline">
@@ -411,14 +350,16 @@
                      <!-- date of birth -->
                      <input type="email" id="em" name="em" class="form-control">
                      <label for="em">Email</label>
-                     <small id="emError" class="text-danger small-text" style="display: none;">Invalid phone number</small>
+                     <small id="emError" class="text-danger small-text" style="display: none;">Invalid phone
+                        number</small>
 
                   </div>
                   <div class="col">
                      <!-- phone number -->
                      <input type="text" id="phone" name="phone" class="form-control">
                      <label for="phone">Phone No</label>
-                     <small id="phoneError" class="text-danger small-text" style="display: none;">Invalid phone number</small>
+                     <small id="phoneError" class="text-danger small-text" style="display: none;">Invalid phone
+                        number</small>
                   </div>
                </div>
 
@@ -436,8 +377,10 @@
                   <small id="helpBlock" class="form-text ml-auto mr-auto text-muted">
                      Use 8 or more characters including digits& both capital and small letters
                   </small>
-                  <small id="mypassError" class="text-danger small-text" style="display: none;">Password must contain 8 or more characters including digits& both capital and small letters</small>
-                  <small id="comypassError" class="text-danger small-text" style="display: none;">Password and confirm password does not match</small>
+                  <small id="mypassError" class="text-danger small-text" style="display: none;">Password must contain 8
+                     or more characters including digits& both capital and small letters</small>
+                  <small id="comypassError" class="text-danger small-text" style="display: none;">Password and confirm
+                     password does not match</small>
 
                </div>
                <!-- Sign up button -->
@@ -447,7 +390,8 @@
                            data-target="#stafflogin" onclick='$(this).closest(".modal").modal("hide")'>Log in</a></p>
                   </div>
                   <div class="col ml-auto">
-                     <button class="btn btn-primary text-capitalize py-2 btn-block " id="staffSubmit" type="submit">Create</button>
+                     <button class="btn btn-primary text-capitalize py-2 btn-block " id="staffSubmit"
+                        type="submit">Create</button>
                   </div>
                </div>
             </div>

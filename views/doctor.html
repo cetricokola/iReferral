@@ -10,8 +10,7 @@
                 <hr>
                 <ul style="list-style-type:square;">
                     <li><a href="#" class="text-white">Help</a></li>
-                    <li> <a href="#" class="text-white">About us</a></li>
-                    <li> <a href="#" class="text-white">Contact us</a></li>
+                    <li> <a href="contact" class="text-white">Contact us</a></li>
                     <li><a href="logout" class="text-white">Log out</a></li>
                 </ul>
                 <hr>
@@ -72,54 +71,56 @@
                         <div class="md-form mb-5">
                             <input type="text" id="huduma" name="huduma" class="form-control validate">
                             <label for="huduma">Patient Huduma No</label>
-                            <small id="hudumaError" class="text-danger small-text" style="display: none;">The patient does not exist</small>
+                            <small id="hudumaError" class="text-danger small-text" style="display: none;">The patient
+                                does not exist</small>
                         </div>
                         <div class="md-form mb-4">
                             <input type="text" id="service" name="service" class="form-control validate">
                             <label for="service">Service name</label>
-                            <small id="serviceError"  class="text-danger small-text" style="display: none;">Invalid service name</small>
+                            <small id="serviceError" class="text-danger small-text" style="display: none;">Invalid
+                                service name</small>
                         </div>
                     </div>
                     <div id="error_msg"></div>
                     <!-- <p>{{.flash.error}}</p> -->
                     <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" id="submit" class="btn btn-primary text-capitalize px-5" >Submit</button>
+                        <button type="submit" id="submit" class="btn btn-primary text-capitalize px-5">Submit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-       <script>
-        document.querySelector("#submit").onclick = (e)=>{
-           e.preventDefault()
+    <script>
+        document.querySelector("#submit").onclick = (e) => {
+            e.preventDefault()
 
-           document.querySelector("#huduma").classList.remove("border-danger")
-           document.querySelector("#hudumaError").style.display = "none"
-           document.querySelector("#service").classList.remove("border-danger")
-          document.querySelector("#serviceError").style.display = "none"
-           
-           axios.post("/referpatient",{
-               huduma : document.querySelector("#huduma").value,
-               service : document.querySelector("#service").value
-           })
-           .then(data=>{
-              window.location.href = data.data.Message
-           })
-           .catch(err=>{
-               var resp = err.response.data
-              
-               if(resp.Huduma == "invalid"){
-                   document.querySelector("#huduma").classList.add("border-danger")
-                   document.querySelector("#hudumaError").style.display = "block"
-               }
+            document.querySelector("#huduma").classList.remove("border-danger")
+            document.querySelector("#hudumaError").style.display = "none"
+            document.querySelector("#service").classList.remove("border-danger")
+            document.querySelector("#serviceError").style.display = "none"
 
-               if(resp.Service == "invalid"){
-                  document.querySelector("#service").classList.add("border-danger")
-                  document.querySelector("#serviceError").style.display = "block"
-               }
-           })
+            axios.post("/referpatient", {
+                huduma: document.querySelector("#huduma").value,
+                service: document.querySelector("#service").value
+            })
+                .then(data => {
+                    window.location.href = data.data.Message
+                })
+                .catch(err => {
+                    var resp = err.response.data
+
+                    if (resp.Huduma == "invalid") {
+                        document.querySelector("#huduma").classList.add("border-danger")
+                        document.querySelector("#hudumaError").style.display = "block"
+                    }
+
+                    if (resp.Service == "invalid") {
+                        document.querySelector("#service").classList.add("border-danger")
+                        document.querySelector("#serviceError").style.display = "block"
+                    }
+                })
 
         }
     </script>
-   
+
 </body>

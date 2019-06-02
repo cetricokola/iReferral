@@ -24,24 +24,20 @@ document.querySelector("#send").onclick = (e) => {
             var resp = err.response.data
 
             if (resp.ContactEmail == "invalid") {
-                alert("You cannot submit with an email field empty")
                 document.querySelector("#email").classList.add("border-danger")
                 document.querySelector("#emailerror").style.display = "block"
             }
 
             if (resp.ContactEmail == "incorrect") {
-                alert("Invalid email address")
                 document.querySelector("#email").classList.add("border-danger")
                 document.querySelector("#emailerror2").style.display = "block"
             }
 
             if (resp.ContactName == "invalid") {
-                alert("You cannot submit with an empty name field")
                 document.querySelector("#name").classList.add("border-danger")
                 document.querySelector("#nameerror").style.display = "block"
             }
             if (resp.ContactMessage == "invalid") {
-                alert("You cannot send an email without a message body")
                 document.querySelector("#message").classList.add("border-danger")
                 document.querySelector("#messageerror").style.display = "block"
             }

@@ -69,13 +69,13 @@ func (this *MainController) home(view string) {
 	this.TplName = view + ".html"
 }
 
-func (this *MainController) contactus(view string) {
+func (this *MainController) Contactus() {
 	this.Data["Title"] = "iReferral-Write to us"
 	this.Layout = "layout.tpl"
 	this.LayoutSections = make(map[string]string)
 	// this.LayoutSections["Header"] = "header.tpl"
 	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = view + ".html"
+	this.TplName = "contactUs.html"
 }
 
 func (this *MainController) Patient_Reg_Success() {
@@ -103,46 +103,46 @@ func (this *MainController) Emp_Reg_Success() {
 	this.TplName = "info/emp_regSuccess.html"
 }
 
-func (this *MainController) patient_logIn(view string) {
-	this.Data["Title"] = "Log in to iReferral"
-	this.Layout = "layout.tpl"
-	this.LayoutSections = make(map[string]string)
-	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "auth/" + view + ".html"
-}
+// func (this *MainController) patient_logIn(view string) {
+// 	this.Data["Title"] = "Log in to iReferral"
+// 	this.Layout = "layout.tpl"
+// 	this.LayoutSections = make(map[string]string)
+// 	this.LayoutSections["Footer"] = "footer.html"
+// 	this.TplName = "auth/" + view + ".html"
+// }
 
-func (this *MainController) staff_logIn(view string) {
-	this.Data["Title"] = "Log in to iReferral"
-	this.Layout = "layout.tpl"
-	this.LayoutSections = make(map[string]string)
-	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "auth/" + view + ".html"
-}
+// func (this *MainController) staff_logIn(view string) {
+// 	this.Data["Title"] = "Log in to iReferral"
+// 	this.Layout = "layout.tpl"
+// 	this.LayoutSections = make(map[string]string)
+// 	this.LayoutSections["Footer"] = "footer.html"
+// 	this.TplName = "auth/" + view + ".html"
+// }
 
 
 
-func (this *MainController) patient_signUp(view string) {
-	this.Data["Title"] = "Sign up to iReferral"
-	this.Layout = "layout.tpl"
-	this.LayoutSections = make(map[string]string)
-	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "registration/" + view + ".html"
-}
+// func (this *MainController) patient_signUp(view string) {
+// 	this.Data["Title"] = "Sign up to iReferral"
+// 	this.Layout = "layout.tpl"
+// 	this.LayoutSections = make(map[string]string)
+// 	this.LayoutSections["Footer"] = "footer.html"
+// 	this.TplName = "registration/" + view + ".html"
+// }
 
-func (this *MainController) staff_signUp(view string) {
-	this.Data["Title"] = "Sign up to iReferral"
-	this.Layout = "layout.tpl"
-	this.LayoutSections = make(map[string]string)
-	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = "registration/" + view + ".html"
-}
+// func (this *MainController) staff_signUp(view string) {
+// 	this.Data["Title"] = "Sign up to iReferral"
+// 	this.Layout = "layout.tpl"
+// 	this.LayoutSections = make(map[string]string)
+// 	this.LayoutSections["Footer"] = "footer.html"
+// 	this.TplName = "registration/" + view + ".html"
+// }
 func (this *MainController) hospital_reg(view string) {
 	//check if the user is logged in
 	session := this.StartSession()
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/a-login", 302)
+		this.Redirect("/management_authentication", 302)
 		return
 	}
 	this.Data["Title"] = "Create facility"
@@ -157,7 +157,7 @@ func (this *MainController) facility_mgn(view string) {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/a-login", 302)
+		this.Redirect("/management_authentication", 302)
 		return
 	}
 	this.Data["Title"] = "Manage facility"
@@ -172,7 +172,7 @@ func (this *MainController) diagnosis(view string) {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	this.Data["Title"] = "Patient medical reports update"
@@ -186,7 +186,7 @@ func (this *MainController) doctor_portal(view string) {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	this.Data["Title"] = "Doctors dashboard"
@@ -201,7 +201,7 @@ func (this *MainController) Referral() {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	this.Data["Title"] = "iReferral-updated report"
@@ -212,27 +212,27 @@ func (this *MainController) Referral() {
 	this.TplName = "healthIssue.html"
 }
 
-func (this *MainController) searchFacility(view string) {
-	session := this.StartSession()
-	userID := session.Get("UserID")
-	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
-		return
-	}
-	this.Data["Title"] = "iReferral-search for facilities"
-	this.Layout = "layout.tpl"
-	this.LayoutSections = make(map[string]string)
-	// this.LayoutSections["Header"] = "header.tpl"
-	this.LayoutSections["Footer"] = "footer.html"
-	this.TplName = view + ".html"
-}
+// func (this *MainController) searchFacility(view string) {
+// 	session := this.StartSession()
+// 	userID := session.Get("UserID")
+// 	if userID == nil {
+// 		this.Redirect("/auth/s_login", 302)
+// 		return
+// 	}
+// 	this.Data["Title"] = "iReferral-search for facilities"
+// 	this.Layout = "layout.tpl"
+// 	this.LayoutSections = make(map[string]string)
+// 	// this.LayoutSections["Header"] = "header.tpl"
+// 	this.LayoutSections["Footer"] = "footer.html"
+// 	this.TplName = view + ".html"
+// }
 
 
 func (this *MainController) patReferral(view string) {
 	session := this.StartSession()
 	userID := session.Get("UserID")
 	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	this.Data["Title"] = "iReferral-select the facility"
@@ -248,7 +248,7 @@ func (this *MainController) PostDetails() {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	this.Data["Title"] = "iReferral-Confirm that you want to refer the patient"
@@ -281,7 +281,7 @@ func (this *MainController) Phome() {
 	session := this.StartSession()
 	userID := session.Get("UserID")
 	if userID == nil {
-		this.Redirect("/patient_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	this.Data["Title"] = "iReferral-Welcome to patient portal"
@@ -321,7 +321,7 @@ func (this *MainController) AdminDash() {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/a-login", 302)
+		this.Redirect("/management_authentication", 302)
 		return
 	}
 	this.Data["Title"] = "Admin dashbord"
@@ -336,7 +336,7 @@ func (this *MainController) Unsuccessful() {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/a-login", 302)
+		this.Redirect("/management_authentication", 302)
 		return
 	}
 	this.Data["Title"] = "iReferral-unable to create a facility"
@@ -351,7 +351,7 @@ func (this *MainController) UnsuccessfulHos() {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/a-login", 302)
+		this.Redirect("/management_authentication", 302)
 		return
 	}
 	this.Data["Title"] = "iReferral-unable to manage facility"
