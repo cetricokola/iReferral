@@ -36,10 +36,29 @@ func (this *EmailController) Post() {
 	subject := dataform["subject"].(string)
 	message := dataform["message"].(string)
 
-	fmt.Println(dataform)
+	//fmt.Println(dataform)
+	var redirect string
+	session := this.StartSession()
+	userID := session.Get("UserID")
+	id := userID.(string)
+
+	if id == ""{
+		redirect = "/"
+	}
+
+	if id == PiD {
+		redirect = "/phome"
+	}
+
+	if id == ID {
+		redirect = "/adminhome"
+	}
+
+	if id == Sid {
+		redirect = "/doctor"
+	}
 
 	if EmailValid(email) == true {
-
 		m := gomail.NewMessage()
 		m.SetHeader("From", email)
 		m.SetHeader("To", "cetokola2015@gmail.com")
@@ -52,7 +71,7 @@ func (this *EmailController) Post() {
 		err := d.DialAndSend(m)
 		if err != nil {
 			fmt.Println("the error is", err)
-			emailRes.Contact = "/"
+			emailRes.Contact = redirect
 			obj, _ := json.Marshal(emailRes)
 			this.Ctx.Output.Header("Content-Type", "application/json")
 			this.Ctx.Output.Body(obj)
@@ -60,7 +79,7 @@ func (this *EmailController) Post() {
 		}
 
 		if err == nil {
-			emailRes.Contact = "/"
+			emailRes.Contact = redirect
 			obj, _ := json.Marshal(emailRes)
 			this.Ctx.Output.Header("Content-Type", "application/json")
 			this.Ctx.Output.Body(obj)
