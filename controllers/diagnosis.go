@@ -22,7 +22,7 @@ func (this *DiagnosisController) UpdateReport() {
 	userID := session.Get("UserID")
 
 	if userID == nil {
-		this.Redirect("/auth/s_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	this.Data["Huduma"] = Huduma

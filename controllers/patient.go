@@ -42,7 +42,7 @@ func (this *PatientController) Preport() {
 	session := this.StartSession()
 	userID := session.Get("UserID")
 	if userID == nil {
-		this.Redirect("/auth/p_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	myHd1 := userID.(string)
@@ -68,7 +68,7 @@ func (this *PatientController) Preferral() {
 	session := this.StartSession()
 	userID := session.Get("UserID")
 	if userID == nil {
-		this.Redirect("/auth/p_login", 302)
+		this.Redirect("/", 302)
 		return
 	}
 	myHd := userID.(string)

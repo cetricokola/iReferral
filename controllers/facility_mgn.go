@@ -23,7 +23,7 @@ func(this *FacilityController) Iscreated(){
 	session := this.StartSession()
 	userID := session.Get("UserID")
 	if userID == nil {
-		this.Redirect("/auth/a-login", 302)
+		this.Redirect("/management_authentication", 302)
 		return
 	}
 	fmt.Println("Logged in user is", userID)

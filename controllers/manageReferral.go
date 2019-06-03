@@ -2,6 +2,8 @@ package controllers
 
 import (
 	"fmt"
+	"iReferral/models"
+
 	"github.com/astaxie/beego/orm"
 )
 
@@ -10,10 +12,12 @@ type ServiceController struct {
 }
 
 //variable declaration
+var hos models.Hospital_account
 var Service string
-var Names []string
+var Names []orm.ParamsList
 var service string
-func (this *ServiceController) Listservices(){
+
+func (this *ServiceController) Listservices() {
 	Names = nil
 	session := this.StartSession()
 	userID := session.Get("UserID")
@@ -27,87 +31,77 @@ func (this *ServiceController) Listservices(){
 	} else {
 		service = Myservice
 	}
-		o := orm.NewOrm()
-		o.Using("default")
+	fmt.Println("The service is ****", service)
+	o := orm.NewOrm()
+	o.Using("default")
 
-		//find the hospital code of the employee
-		var hosCode string
-		o.Raw("select code from employee where emp_id=?", myId).QueryRow(&hosCode)
-		fmt.Println(hosCode)
+	//find the hospital code of the employee
+	var hosCode string
+	o.Raw("select code from employee where emp_id=?", myId).QueryRow(&hosCode)
+	fmt.Println(hosCode)
 
-		//find the district of the hospital
-		var mydistrict string
-		o.Raw("select district from hospital_account where code=?", hosCode).QueryRow(&mydistrict)
-		fmt.Println(mydistrict)
+	//find the district of the hospital
+	var mydistrict string
+	o.Raw("select district from hospital_account where code=?", hosCode).QueryRow(&mydistrict)
+	fmt.Println(mydistrict)
 
-		//find the region of the hospital
-		var myregion string
-		o.Raw("select region from hospital_account where code=?", hosCode).QueryRow(&myregion)
-		fmt.Println(myregion)
+	//find the region of the hospital
+	var myregion string
+	o.Raw("select region from hospital_account where code=?", hosCode).QueryRow(&myregion)
+	fmt.Println(myregion)
 
-		//find the country of the hospital
-		var mycountry string
-		o.Raw("select country from hospital_account where code=?", hosCode).QueryRow(&mycountry)
-		fmt.Println(mycountry)
+	//find the country of the hospital
+	var mycountry string
+	o.Raw("select country from hospital_account where code=?", hosCode).QueryRow(&mycountry)
+	fmt.Println(mycountry)
 
-		//Returns the number of hospital codes offerring the service
-		var count int
-		o.Raw("select COUNT(*) from services where name = ?", service).QueryRow(&count)
-		fmt.Println("The number of codes offerring the service", count)
+	// //returns the list of hospital codes offering the service
+	var lists []orm.ParamsList
+	o.Raw("select code from services where name=?", service).ValuesList(&lists)
+	fmt.Println("The length before the list having the codes@@@", lists)
+	fmt.Println("The length before the list having the codes", len(lists))
 
-		//returns the list of hospital codes offering the service
-		var lists []orm.ParamsList
-		o.Raw("select code from services where name=?", service).ValuesList(&lists)
-
-		//return hospital names offering the service requested in the same district
-		fmt.Println(len(Names))
-
-		var control bool
-		if control == false {
-			///var Names []string
-			for i := 0; i < len(lists); i++ {
-				var name string
-				fmt.Println(lists[i])
-				o.Raw("select name from hospital_account where code=? AND district=?", lists[i], mydistrict).QueryRow(&name)
-				fmt.Println(name)
-				Names = append(Names, name)
-			}
-			if len(Names) == 0 {
-				control = false
-			} else {
-				control = true
-			}
-
-			//return hospital names offering the service requested in the same region
-
-		} else if control == false {
-			for i := 0; i < len(lists); i++ {
-				var name string
-				fmt.Println(lists[i])
-				o.Raw("SELECT name FROM hospital_account WHERE code=? AND region=? EXCEPT SELECT name FROM hospital_account WHERE code=? AND district=?", lists[i], myregion, lists[i], mydistrict).QueryRow(&name)
-				fmt.Println(name)
-				Names = append(Names, name)
-			}
-			if len(Names) == 0 {
-				control = false
-			} else {
-				control = true
-			}
-		} else if control == false {
-			//return hospital names offering the service requested in the rest of the country parts
-			for i := 0; i < len(lists); i++ {
-				var name string
-				fmt.Println(lists[i])
-				o.Raw("SELECT name FROM hospital_account WHERE code=? AND country=? EXCEPT SELECT name FROM hospital_account WHERE code=? AND region=?", lists[i], mycountry, lists[i], myregion).QueryRow(&name)
-				fmt.Println(name)
-				Names = append(Names, name)
-			}
-		}
-		fmt.Println("After a check fro mthe same district:=", Names)
-		fmt.Println("the contro:", control)
-		fmt.Println(Names)
-		fmt.Println(len(Names))
-		Service = service
-		this.Redirect("/patientreferralform", 302)
-
+	var mylists []orm.ParamsList
+	_, err := o.QueryTable("hospital_account").Filter("code__in", lists).Filter("district", mydistrict).ValuesList(&mylists, "name")
+	if err != nil {
+		// No result
+		fmt.Printf("Not row found")
+		return
 	}
+	if err == nil && len(mylists) > 0 {
+		Names = mylists
+		fmt.Println("First query  %% my list are^^^^^^^^^^", Names)
+		this.Redirect("/patientreferralform", 302)
+		return
+	}
+
+	fmt.Println("the length of the list is", len(Names))
+	fmt.Println("The second query is now executing")
+
+	//return hospital names offering the service requested in the same region
+	_, err = o.QueryTable("hospital_account").Exclude("district", mydistrict).Filter("code__in", lists).Filter("region", myregion).ValuesList(&mylists, "name")
+	if err != nil {
+		// No result
+		fmt.Printf("Not row found")
+		return
+	}
+	if err == nil && len(mylists) > 0 {
+		Names = mylists
+		fmt.Println("Second query  %% my list are^^^^^^^^^^", mylists)
+		this.Redirect("/patientreferralform", 302)
+		return
+	}
+
+	_, err = o.QueryTable("hospital_account").Exclude("region", myregion).Filter("code__in", lists).ValuesList(&mylists, "name")
+	if err != nil {
+		// No result
+		fmt.Printf("Not row found")
+		return
+	}
+	if err == nil && len(mylists) > 0 {
+		Names = mylists
+		fmt.Println("Third query  %% my list are^^^^^^^^^^", mylists)
+		this.Redirect("/patientreferralform", 302)
+		Service = service
+	}
+}
