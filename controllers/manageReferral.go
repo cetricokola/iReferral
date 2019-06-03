@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-
 	"github.com/astaxie/beego/orm"
 	"iReferral/models"
 )
@@ -64,8 +63,7 @@ func (this *ServiceController) Listservices() {
 	if err == nil && len(mylists) > 0 {
 
 		Names = mylists
-		fmt.Println("First query  %% my list are^^^^^^^^^^", Names)
-		this.Redirect("/patientreferralform", 302)
+			this.Redirect("/patientreferralform", 302)
 		return
 	}
 
