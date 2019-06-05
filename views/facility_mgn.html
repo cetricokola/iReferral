@@ -99,38 +99,35 @@
             </div>
             <div class="mb-3 px-4 col-md-4 border-left border-primary">
                 <h3 class="text-center m-3">Register your employees.</h3>
-                <p class="text-danger">{{.err3.error}}</p>
-                <form action="/facility_mgn" method="POST" class="mb-3">
-                    <div class="row">
-                        <div class="col mt-2">
-                            <label class="text-primary" for="f">Firstname</label>
-                            <input type="text" name="first" id="f" class="form-control">
-                        </div>
-                        <div class="col mt-2">
-                            <label class="text-primary" for="l">Lastname</label>
-                            <input type="text" name="last" id="l" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mt-2">
-                            <label class="text-primary" for="pos">Position</label>
-                            <select name="position" class="form-control">
-                                <option value="Doctor">Doctor</option>
-                                <option value="Nurse">Nurse</option>
-                            </select>
-                        </div>
-                        <div class="col mt-2">
-                            <label class="text-primary" for="id">Employee Id</label>
-                            <input type="text" name="nId" class="form-control">
-                        </div>
-                    </div>
-                    <button class="btn btn-success py-2 px-4 mt-4 text-capitalize ml-auto" type="submit">Add
+
+                <form class="mb-3">
+
+                    <label class="text-primary" for="f">Firstname</label>
+                    <input type="text" name="first" id="f" class="form-control">
+                    <small id="ferror" class="text-danger small-text" style="display: none;">First name field is
+                        empty</small>
+
+                    <label class="text-primary" for="l">Lastname</label>
+                    <input type="text" name="last" id="l" class="form-control">
+                    <small id="lerror" class="text-danger small-text" style="display: none;">Last name field is
+                        empty</small>
+
+                    <label class="text-primary" for="id">Employee Id</label>
+                    <input type="text" name="nId" id="id" class="form-control">
+                    <small id="iderror" class="text-danger small-text" style="display: none;">You entered incorrect
+                        Employee id</small>
+                    <small id="iderror1" class="text-danger small-text" style="display: none;">Employee id already
+                        taken</small>
+                    <small id="iderror2" class="text-danger small-text" style="display: none;">Employee id field is
+                        empty</small>
+
+                    <button class="btn btn-success py-2 px-4 mt-4 text-capitalize ml-auto" id="sub" type="submit">Add
                         Employee</button>
                 </form>
             </div>
             <div class="col">
                 <h3 class="mt-5">Do you want to remove employee?</h3>
-                <p class="text-danger">{{.err4.error}}</p>
+
                 <div class="accordion mt-3" id="accordion2">
                     <div id="head3">
                         <button class="btn px-5 btn-success text-capitalize px-3 py-2" type="button"
@@ -142,13 +139,23 @@
                     <div id="collapseTwo" class="collapse hide" aria-labelledby="head3" data-parent="#accordion2">
                         <div class="card col-md-6 p-3">
                             <p class="text-primary">Search employee by Id number:</p>
-                            <form action="/facility_mgn" method="GET">
+                            <form>
                                 <div class="md-form mt-0 md-outline">
-                                    <input type="text" id="hdm" name="id" class="form-control">
-                                    <label for="hdm">Emp Id No</label>
+                                    <input type="text" id="hdm" name="empid" class="form-control">
+                                    <label for="hdm">Employee Id</label>
+
+                                    <small id="hdmerror" class="text-danger small-text" style="display: none;">Employee
+                                        Id does not exist</small>
+                                    <small id="hdmerror1" class="text-danger small-text" style="display: none;">Employee
+                                        id is incorrect</small>
+                                    <small id="hdmerror2" class="text-danger small-text" style="display: none;">Employee
+                                        id field is empty</small>
+                                    <small id="hdmerror3" class="text-danger small-text" style="display: none;">Employee
+                                        is not part of your staff</small>
+
                                 </div>
-                                <button type="submit"
-                                    class="btn btn-block btn-success text-capitalize py-2 ">Delete</button>
+                                <button type="submit" class="btn btn-block btn-success text-capitalize py-2 "
+                                    id="subdel">Delete</button>
                             </form>
                         </div>
                     </div>
@@ -165,72 +172,61 @@
             </div>
             <div class="mb-3 col-md-4 px-4 border-left border-primary ">
                 <h3 class="text-center m-3">Register the services offered at your facility.</h3>
-                <p class="text-danger">{{.err5.error}}</p>
-                <form action="/hosearch" method="POST" class="mb-3">
-                    <div class="row">
-                        <div class="col mt-2">
-                            <label class="text-primary" for="f">Service name</label>
-                            <input type="text" name="name" id="f" class="form-control">
-                        </div>
+                <form class="mb-3">
+                    <label class="text-primary" for="nam">Service name</label>
+                    <input type="text" name="name" id="nam" class="form-control">
+                    <small id="namerror" class="text-danger small-text" style="display: none;">Service name field cannot be empty</small>
 
-                        <div class="col mt-2">
-                            <label class="text-primary" for="cod">Service Code</label>
-                            <input type="text" name="code" id="cod" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mt-2">
-                            <label class="text-primary" for="id">Cost</label>
-                            <input type="text" name="cost" id="id" class="form-control">
-                        </div>
-                        <div class="col mt-2">
-                            <label class="text-primary" for="slot">Number of patient slots</label>
-                            <input type="text" name="slot" id="slot" class="form-control">
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <label class="text-primary" for="dept">Department</label>
-                        <select name="dep" id="dept" class="form-control">
-                            <option value="select Department">Select Department</option>
-                            <option value="Accident and emergency (A&E)"> Accident and emergency (A&E)</option>
-                            <option value="Anaesthetics">Anaesthetics</option>
-                            <option value="Breast screening">Breast screening</option>
-                            <option value="Cardiology">Cardiology</option>
-                            <option value="Chaplaincy">Chaplaincy</option>
-                            <option value="Critical care">Critical care</option>
-                            <option value="Diagnostic imaging">Diagnostic imaging</option>
-                            <option value="Discharge lounge">Discharge lounge</option>
-                            <option value="Ear nose and throat (ENT)">Ear nose and throat (ENT)</option>
-                            <option value="Elderly services department">Elderly services department</option>
-                            <option value="Gastroenterology">Gastroenterology</option>
-                            <option value="General surgery">General surgery</option>
-                            <option value="Gynaecology">Gynaecology</option>
-                            <option value="Haematology"> Haematology</option>
-                            <option value="Maternity departments">Maternity departments</option>
-                            <option value="Microbiology">Microbiology</option>
-                            <option value="Neonatal unit">Neonatal unit</option>
-                            <option value=" Nephrology"> Nephrology</option>
-                            <option value="Neurology">Neurology</option>
-                            <option value="Nutrition and dietetics">Nutrition and dietetics</option>
-                            <option value="Obstetrics and gynaecology units"> Obstetrics and gynaecology units</option>
-                            <option value="Occupational therapy">Occupational therapy</option>
-                            <option value="Oncology">Oncology</option>
-                            <option value="Ophthalmology">Ophthalmology</option>
-                            <option value="Orthopaedics">Orthopaedics</option>
-                            <option value="Pain management clinics">Pain management clinics</option>
-                            <option value="Pharmacy"> Pharmacy</option>
-                            <option value="Physiotherapy">Physiotherapy</option>
-                            <option value="Radiotherapy">Radiotherapy</option>
-                            <option value="Renal unit">Renal unit</option>
-                            <option value="Rheumatology">Rheumatology</option>
-                            <option value="Sexual health"> Sexual health</option>
-                            <option value="Urology">Urology</option>
+                    <label class="text-primary mt-2" for="cod">Service Code</label>
+                    <input type="text" name="code" id="cod" class="form-control">
+                    <small id="coderror1" class="text-danger small-text" style="display: none;">Service code is incorrect</small>
+                    <small id="coderror" class="text-danger small-text" style="display: none;">Service code already used</small>
 
-                        </select>
-                    </div>
+
+
+                    <label class="text-primary mt-2" for="dept">Department</label>
+                    <select name="dep" id="dept" class="form-control">
+                        <option>Select department</option>
+                        <option value="Accident and emergency (A&E)"> Accident and emergency (A&E)</option>
+                        <option value="Anaesthetics">Anaesthetics</option>
+                        <option value="Breast screening">Breast screening</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Chaplaincy">Chaplaincy</option>
+                        <option value="Critical care">Critical care</option>
+                        <option value="Diagnostic imaging">Diagnostic imaging</option>
+                        <option value="Discharge lounge">Discharge lounge</option>
+                        <option value="Ear nose and throat (ENT)">Ear nose and throat (ENT)</option>
+                        <option value="Elderly services department">Elderly services department</option>
+                        <option value="Gastroenterology">Gastroenterology</option>
+                        <option value="General surgery">General surgery</option>
+                        <option value="Gynaecology">Gynaecology</option>
+                        <option value="Haematology"> Haematology</option>
+                        <option value="Maternity departments">Maternity departments</option>
+                        <option value="Microbiology">Microbiology</option>
+                        <option value="Neonatal unit">Neonatal unit</option>
+                        <option value=" Nephrology"> Nephrology</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Nutrition and dietetics">Nutrition and dietetics</option>
+                        <option value="Obstetrics and gynaecology units"> Obstetrics and gynaecology units</option>
+                        <option value="Occupational therapy">Occupational therapy</option>
+                        <option value="Oncology">Oncology</option>
+                        <option value="Ophthalmology">Ophthalmology</option>
+                        <option value="Orthopaedics">Orthopaedics</option>
+                        <option value="Pain management clinics">Pain management clinics</option>
+                        <option value="Pharmacy"> Pharmacy</option>
+                        <option value="Physiotherapy">Physiotherapy</option>
+                        <option value="Radiotherapy">Radiotherapy</option>
+                        <option value="Renal unit">Renal unit</option>
+                        <option value="Rheumatology">Rheumatology</option>
+                        <option value="Sexual health"> Sexual health</option>
+                        <option value="Urology">Urology</option>
+
+                    </select>
+                    <small id="depterror" class="text-danger small-text" style="display: none;">Department is not selected</small>
+
                     <div class="row">
                         <div class="col"><button class="btn btn-success py-2 px-4 mt-4 text-capitalize ml-auto"
-                                type="submit">Add
+                                type="submit" id="servcreate">Add
                                 service</button></div>
                         <div class="col"><button class="btn btn-success py-2 px-4 mt-4 text-capitalize ml-auto">Update
                                 service</button></div>
@@ -239,8 +235,6 @@
             </div>
             <div class="col">
                 <h3 class="mt-5">Do you want to remove a service?</h3>
-                <!-- flash messages  -->
-                <p class="text-danger">{{.err6.error}}</p>
                 <div class="accordion mt-3" id="accordion2">
                     <div id="head3">
                         <button class="btn px-5 btn-success text-capitalize px-3 py-2" type="button"
@@ -257,8 +251,8 @@
                                     <input type="text" id="h" name="code" class="form-control">
                                     <label for="h">Service Code</label>
                                 </div>
-                                <button type="submit"
-                                    class="btn btn-block btn-success text-capitalize py-2 ">Delete</button>
+                                <button type="submit" class="btn btn-block btn-success text-capitalize py-2 "
+                                    id="servdel">Delete</button>
                             </form>
                         </div>
                     </div>
@@ -268,3 +262,7 @@
         <hr>
     </div>
 </div>
+<script src="/static/js/custom/empCreate.js"></script>
+<script src="/static/js/custom/empdel.js"></script>
+<script src="/static/js/custom/servicedel.js"></script>
+<script src="/static/js/custom/servicecreate.js"></script>

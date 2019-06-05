@@ -66,6 +66,24 @@ func NationalIdValid(id string) bool{
 	return true
 }
 
+//check the employee id should have a maximum of 6 digits
+func EmpIdValid(id string) bool{
+	re := regexp.MustCompile("^[0-9]{6}$")
+	if !re.MatchString(id){
+		return false
+	}
+	return true
+}//check the service code should have a maximum of 6 digits
+func ServiceValid(serv string) bool{
+	re := regexp.MustCompile("^[0-9]{6}$")
+	if !re.MatchString(serv){
+		return false
+	}
+	return true
+}
+
+
+
 //huduma validation
 func HudumaValid(id string) bool{
 	re := regexp.MustCompile("^[0-9]{11}$")

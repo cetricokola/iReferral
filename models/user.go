@@ -43,7 +43,6 @@ type Hospital_account struct {
 type Employee struct {
 	FirstName string
 	LastName  string
-	Position  string
 	EmpId     string `orm:"pk"`
 	Code      string
 }
@@ -52,8 +51,6 @@ type Services struct {
 	ServiceCode string `orm:"pk"`
 	Code        string
 	Name        string
-	Cost        string
-	Slot        string
 	Department  string
 }
 

@@ -16,11 +16,7 @@ func init() {
 		beego.Router("logout", &controllers.AccountController{}, "get,post:Logout")
 	beego.Router("hosreg", &controllers.HosregController{}, "get,post:Create")
 	beego.Router("checkvalidity", &controllers.HosregController{}, "get,post:CheckReg")
-	beego.Router("facility_mgn", &controllers.FacilityController{}, "post:Createemp")
-	beego.Router("facility_mgn", &controllers.FacilityController{}, "get:RemoveEmp")
 	beego.Router("facilityCreated", &controllers.FacilityController{}, "get,post:Iscreated")
-	beego.Router("hosearch", &controllers.FaController{}, "post:Createservice")
-	beego.Router("hosearch", &controllers.FaController{}, "get:Removeservice")
 	beego.Router("/doctor", &controllers.DocController{}, "get:FindPatient")
 	beego.Router("/report", &controllers.DiagnosisController{}, "get,post:UpdateReport")
 	beego.Router("/phome", &controllers.MainController{}, "get,post:Phome")
@@ -42,5 +38,11 @@ func init() {
 	beego.Router("contact_us", &controllers.EmailController{})
 	beego.Router("management_authentication", &controllers.MainController{}, "get,post:AdminAuth")
 	beego.Router("services", &controllers.ServiceController{}, "get,post:Listservices")
+	beego.Router("facility_management", &controllers.MainController{}, "get,post:Facility_management")
+	beego.Router("successful_update", &controllers.MainController{}, "get,post:EmpUpdate")
+	beego.Router("create_emp", &controllers.CreateEmpController{})
+	beego.Router("create_service", &controllers.CreateServController{})
+	beego.Router("del_emp", &controllers.DelEmpController{})
+	beego.Router("del_service", &controllers.DelServController{})
 	
 }

@@ -103,39 +103,7 @@ func (this *MainController) Emp_Reg_Success() {
 	this.TplName = "info/emp_regSuccess.html"
 }
 
-// func (this *MainController) patient_logIn(view string) {
-// 	this.Data["Title"] = "Log in to iReferral"
-// 	this.Layout = "layout.tpl"
-// 	this.LayoutSections = make(map[string]string)
-// 	this.LayoutSections["Footer"] = "footer.html"
-// 	this.TplName = "auth/" + view + ".html"
-// }
 
-// func (this *MainController) staff_logIn(view string) {
-// 	this.Data["Title"] = "Log in to iReferral"
-// 	this.Layout = "layout.tpl"
-// 	this.LayoutSections = make(map[string]string)
-// 	this.LayoutSections["Footer"] = "footer.html"
-// 	this.TplName = "auth/" + view + ".html"
-// }
-
-
-
-// func (this *MainController) patient_signUp(view string) {
-// 	this.Data["Title"] = "Sign up to iReferral"
-// 	this.Layout = "layout.tpl"
-// 	this.LayoutSections = make(map[string]string)
-// 	this.LayoutSections["Footer"] = "footer.html"
-// 	this.TplName = "registration/" + view + ".html"
-// }
-
-// func (this *MainController) staff_signUp(view string) {
-// 	this.Data["Title"] = "Sign up to iReferral"
-// 	this.Layout = "layout.tpl"
-// 	this.LayoutSections = make(map[string]string)
-// 	this.LayoutSections["Footer"] = "footer.html"
-// 	this.TplName = "registration/" + view + ".html"
-// }
 func (this *MainController) hospital_reg(view string) {
 	//check if the user is logged in
 	session := this.StartSession()
@@ -165,6 +133,38 @@ func (this *MainController) facility_mgn(view string) {
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = view + ".html"
+}
+
+func (this *MainController) Facility_management() {
+	//check if the user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+
+	if userID == nil {
+		this.Redirect("/management_authentication", 302)
+		return
+	}
+	this.Data["Title"] = "Manage the facility"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "facility_mgn.html"
+}
+
+func (this *MainController) EmpUpdate() {
+	//check if the user is logged in
+	session := this.StartSession()
+	userID := session.Get("UserID")
+
+	if userID == nil {
+		this.Redirect("/management_authentication", 302)
+		return
+	}
+	this.Data["Title"] = "employee successfully managed"
+	this.Layout = "layout.tpl"
+	this.LayoutSections = make(map[string]string)
+	this.LayoutSections["Footer"] = "footer.html"
+	this.TplName = "info/empreg.html"
 }
 func (this *MainController) diagnosis(view string) {
 	//check if the user is logged in
@@ -211,22 +211,6 @@ func (this *MainController) Referral() {
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "healthIssue.html"
 }
-
-// func (this *MainController) searchFacility(view string) {
-// 	session := this.StartSession()
-// 	userID := session.Get("UserID")
-// 	if userID == nil {
-// 		this.Redirect("/auth/s_login", 302)
-// 		return
-// 	}
-// 	this.Data["Title"] = "iReferral-search for facilities"
-// 	this.Layout = "layout.tpl"
-// 	this.LayoutSections = make(map[string]string)
-// 	// this.LayoutSections["Header"] = "header.tpl"
-// 	this.LayoutSections["Footer"] = "footer.html"
-// 	this.TplName = view + ".html"
-// }
-
 
 func (this *MainController) patReferral(view string) {
 	session := this.StartSession()
