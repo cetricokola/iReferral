@@ -7,12 +7,14 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav ml-auto">
-                <a class="nav-link nav-item mr-3" href="contact">Contact us</a>
+                <a href="/help" class="nav-link nav-item mr-3" target="blank">Get help</a>
+                <a class="nav-link nav-item mr-3" target="blank" href="contact_us">Contact us</a>
                 <p class="text-success nav-item mr-3 mt-2">{{.Name}}</p>
                 <a class="nav-link text-primary nav-item mr-5" href="logout">Log out</a>
         </div>
     </nav>
     <div class="container mt-5">
+
         <div class="mt-5">
             <div class="card-deck">
                 <div class="card mb-4">
@@ -40,7 +42,15 @@
                         <h4 class="card-title">Keep your facility up-to date.</h4>
                         <p class="card-text">Add new, change or remove services offered and the staff(doctors and
                             nurses).</p>
-                        <a href="facility_management" class="btn btn-success btn-md">update</a>
+                        <a href="exist" class="btn btn-success btn-md">update</a>
+                        <div class="row text-center">
+                            <div class="col">
+                                <a href="/viewservices" class="text-primary">View Services</a>
+                            </div>
+                            <div class="col">
+                                <a href="/viewdoctors" class="text-primary">View Doctors</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -54,7 +64,7 @@
                         <h4 class="card-title">View referrals at your facility.</h4>
                         <p class="card-text">View the latest referrals directed to your hospital facility.Filter using
                             dates to see more.</p>
-                        <a href="/viewreferrals" class="btn btn-success btn-md">Referrals</a>
+                        <a href="/view_referrals" class="btn btn-success btn-md">Referrals</a>
                     </div>
                 </div>
             </div>

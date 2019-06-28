@@ -101,3 +101,8 @@ func PhoneValid(id string) bool{
 	}
 	return true
 }
+
+func Footer() string{
+	footer := "iReferral-Full circle of care"
+	return footer
+}

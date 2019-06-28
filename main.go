@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/astaxie/beego/session"
+	// "os/exec"
 	
 )
 
@@ -24,4 +25,5 @@ func main() {
 	beego.GlobalSessions, _ = session.NewManager("memory", sessionconf)
 	go beego.GlobalSessions.GC()
 	beego.Run()
+	// exec.Command("xdg-open", "http://localhost:8080/").beego.Run()
 }

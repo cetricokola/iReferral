@@ -361,3 +361,43 @@ func (this *MainController) Conta(){
 	this.LayoutSections["Footer"] = "footer.html"
 	this.TplName = "info/contacts.html"
 }
+func (this *MainController) AdAuth(){
+	
+	this.Data["Title"] = "iReferral-Admin auth"
+	this.Layout = "layout.tpl"
+	
+	this.TplName = "admin/login.html"
+}
+
+func (this *MainController) AdDash(){
+	session := this.StartSession()
+	userID := session.Get("UserID")
+
+	if userID == nil {
+		this.Redirect("/login-admin", 302)
+		return
+	}
+	this.Data["Title"] = "iReferral-Admin Dash"
+	this.Layout = "layout.tpl"
+	this.TplName = "admin/adminDash.html"
+}
+
+func (this *MainController) Help(){
+	this.Data["Title"] = "iReferral-get help"
+	this.Layout = "layout.tpl"
+	this.TplName = "help.html"
+}
+func (this *MainController) ViewDoctors(){
+	this.Data["Title"] = "iReferral-doctors at your facility"
+	this.Data["Emp"] = Emps
+	this.Data["Len"] = Len0
+	this.Layout = "layout.tpl"
+	this.TplName = "viewdoctors.html"
+}
+func (this *MainController) ViewServices(){
+	this.Data["Title"] = "iReferral-services at your facility"
+	this.Data["Services"] = Serv
+	this.Data["Len"] = Len2
+	this.Layout = "layout.tpl"
+	this.TplName = "viewservices.html"
+}

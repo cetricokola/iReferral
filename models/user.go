@@ -79,8 +79,14 @@ type Referrals struct {
 	Phone     string
 }
 
+type Admin struct{
+	Id string `orm:"pk"`
+	Username string `orm:"unique"`
+	Password string
+}
+
 /********/
 func init() {
 	orm.RegisterModel(new(Patient_account), new(Employee_account),
-		new(Admin_account), new(Hospital_account), new(Services), new(Employee), new(Patient_diagnosis), new(Referrals))
+		new(Admin_account), new(Hospital_account), new(Services), new(Employee), new(Admin), new(Patient_diagnosis), new(Referrals))
 }

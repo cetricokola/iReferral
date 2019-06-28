@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact us</a>
+                    <a class="nav-link" href="/contact_us" target="blank">Contact us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link ml-5" href="/mymedicalrecords">Patient Medical Report</a>
@@ -34,20 +34,17 @@
             <div>
                 <form method="POST">
                     <h4 class="text-primary mb-3">Patient Details</h4>
-                    <div class="row">
+                    <div class="row col-md-8 ">
 
-                        <div class="col-md-4">
+                        <div class="col">
                             <label class="text-success">Patient Huduma No:</label>
                             <p class="text-black">{{.Huduma}}</p>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col ml-auto">
                             <label class="text-success">Patient Name:</label>
                             <p class="text-black">{{.FName}} {{.LName}}</p>
                         </div>
-                        <div class="col-md-4">
-                            <label class="text-success">Patient Age:</label>
-                            <p class="text-black">{{.Age}}</p>
-                        </div>
+                       
                     </div>
                     <hr>
                     <h4 class="text-primary mb-3">Medical Triage Details</h4>
