@@ -52,7 +52,7 @@ func (this *HosregController) Create() {
 			return
 		}
 		fmt.Print("successfull registration FACILITY")
-		this.Redirect("/facility_mgn", 302)
+		this.Redirect("/facility_management", 302)
 
 	}
 }
